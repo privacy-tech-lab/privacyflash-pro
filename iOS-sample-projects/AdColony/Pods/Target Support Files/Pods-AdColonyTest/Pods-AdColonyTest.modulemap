@@ -1,0 +1,6 @@
+framework module Pods_AdColonyTest {
+  umbrella header "Pods-AdColonyTest-umbrella.h"
+
+  export *
+  module * { export * }
+}

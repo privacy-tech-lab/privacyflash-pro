@@ -1,0 +1,9 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$(PODS_ROOT)/AdColony" "${PODS_ROOT}/AdColony"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AdColony"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited)  -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AdColony"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"z" -framework "AVFoundation" -framework "AdColony" -framework "AdSupport" -framework "AudioToolbox" -framework "CoreTelephony" -framework "EventKit" -framework "MediaPlayer" -framework "MessageUI" -framework "Social" -framework "StoreKit" -framework "SystemConfiguration" -weak_framework "JavaScriptCore" -weak_framework "WebKit"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}/Pods
