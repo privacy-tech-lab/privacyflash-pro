@@ -8,7 +8,7 @@ Download privacyflash-pro.zip Unzip it. Open the folder and then open PrivacyFla
 
 ## iOS Sample Projects
 
-* `iOs-sample-projects`: Includes sample projects for PrivacyFlash Pro to analyze and test. For example, start PrivacyFlash Pro, select the AdColony directory in PrivacyFlash Pro's directory picker, and click OK.
+`iOS-sample-projects`: Includes sample projects for PrivacyFlash Pro to analyze and test. For example, start PrivacyFlash Pro, select the AdColony directory in PrivacyFlash Pro's directory picker, and click OK.
 
 ## Third Party Libraries
 
