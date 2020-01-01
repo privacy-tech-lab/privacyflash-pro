@@ -1,4 +1,6 @@
-<img src="./logo.svg" align="right" width="200px" height="200px" title="PrivacyFlash Pro logo">
+<p align="center">
+  <img src="./logo.svg" width="200px" height="200px" title="PrivacyFlash Pro logo">
+<p>
 
 # PrivacyFlash Pro
 
