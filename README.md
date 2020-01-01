@@ -4,7 +4,7 @@ PrivacyFlash Pro analyzes the code of iOS Swift projects to generate a privacy p
 
 ## Installing and Running PrivacyFlash Pro
 
-Download privacyflash-pro.zip Unzip it. Open the folder and then open PrivacyFlash Pro. You will have to agree to open PrivacyFlash Pro in your MacOS security settings. Then, after a few seconds, PrivacyFlash Pro should run in your default browser.
+Download privacyflash-pro.zip. Unzip the file. Open the folder and then open PrivacyFlash Pro. You will have to agree to open PrivacyFlash Pro in your [macOS security settings](https://support.apple.com/en-us/HT202491). Then, after a few seconds, PrivacyFlash Pro should run in your default browser.
 
 ## Demo Video
 
