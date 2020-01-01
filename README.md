@@ -73,3 +73,7 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 - [Six](https://github.com/benjaminp/six)
 - [Smooth Scroll](https://github.com/iamdustan/smoothscroll)
 - [smooth-scroll-into-view-if-needed](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
+
+<p align="center">
+  <img src="https://github.com/privacy-tech-lab/privacy-tech-lab.github.io/blob/master/images/plt_logo.png" width="200px" height="200px" title="privacy-tech-lab logo">
+<p>
