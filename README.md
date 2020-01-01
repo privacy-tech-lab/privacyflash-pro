@@ -6,9 +6,13 @@ PrivacyFlash Pro analyzes the code of iOS Swift projects to generate a privacy p
 
 Download privacyflash-pro.zip Unzip it. Open the folder and then open PrivacyFlash Pro. You will have to agree to open PrivacyFlash Pro in your MacOS security settings. Then, after a few seconds, PrivacyFlash Pro should run in your default browser.
 
+## Demo Video
+
+[![Watch the Demo](https://privacy-tech-lab.github.io/images/PrivacyFlash_Pro_Movie.png)](https://privacy-tech-lab.github.io/images/PrivacyFlash_Pro_Movie.mp4)
+
 ## iOS Sample Projects
 
-`iOS-sample-projects`: Includes sample projects for PrivacyFlash Pro to analyze and test. For example, start PrivacyFlash Pro, select the AdColony directory in PrivacyFlash Pro's directory picker, and click OK.
+`iOS-sample-projects`: Includes sample projects for PrivacyFlash Pro to analyze and test. For example, start PrivacyFlash Pro, select the AdColony directory in PrivacyFlash Pro's directory picker, and click OK to start the analysis.
 
 ## Third Party Libraries
 
