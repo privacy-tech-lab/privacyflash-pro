@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="./logo.svg" width="200px" height="200px" title="PrivacyFlash Pro logo">
-<p>
+<img src="./logo.svg" align="right" width="200px" height="200px" title="PrivacyFlash Pro logo">
 
 # PrivacyFlash Pro
 
@@ -11,7 +9,7 @@ PrivacyFlash Pro analyzes the code of iOS Swift projects to generate a privacy p
 
 PrivacyFlash Pro covers provisions of the California Consumer Privacy Act (CCPA), California Online Privacy Protection Act (CalOPPA), Children's Online Privacy Protection (COPPA), and General Data Protection Regulation (GDPR).
 
-PrivacyFlash Pro was written by @davebaraka, @rgoldstein01, @sj-in, and @SebastianZimmeck as an academic project of the [privacy-tech-lab](https://privacy-tech-lab.github.io/) at [Wesleyan University](https://www.wesleyan.edu/).
+PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacy-tech-lab.github.io/) at [Wesleyan University](https://www.wesleyan.edu/).
 
 ## Installing and Running PrivacyFlash Pro
 
