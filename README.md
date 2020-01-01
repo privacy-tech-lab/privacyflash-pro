@@ -1,5 +1,6 @@
-![PrivacyFlash Pro logo](./logo.svg)
-<img src="./logo.svg">
+<p align="center">
+  <img src="./logo.svg" width="100" height="100" title="PrivacyFlash Pro logo">
+<p>
 
 # PrivacyFlash Pro
 
@@ -40,7 +41,7 @@ The specification for the privacy practice analysis is contained in `spec/privac
 
 ### Third Party Library Analysis
 
-The specification for the third party library analysis is contained in `spec/third_parties.yaml`. PrivacyFlash Pro is using this specification for determining the purpose of a library. A library name is given by its name on [CocoaPods](https://cocoapods.org/). For example, `AdColony` has the purpose `Advertising`. PrivacyFlash Pro currently identifies the purposes of 300 libraries with the following purposes:
+The specification for the third party library analysis is contained in `spec/third_parties.yaml`. PrivacyFlash Pro is using this specification for determining the purpose of a library. A library name is given by its name on [CocoaPods](https://cocoapods.org/). For example, `AdColony` has the purpose `Advertising`. PrivacyFlash Pro currently classifies 300 libraries using the following purposes:
 - `Authentication`
 - `Advertising`
 - `Analytics`
