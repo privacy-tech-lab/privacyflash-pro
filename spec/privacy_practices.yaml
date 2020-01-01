@@ -1,0 +1,3219 @@
+#   PrivacyFlash Pro is licensed under the MIT License
+#   Copyright (c) 2019 David Baraka, Rafael Goldstein, Sarah Jin, Sebastian Zimmeck
+#
+#   The detection of a privacy practice is based on the following criteria:
+#
+#   - PLIST: plist value from the Info.plist file of the app
+#   - FRAMEWORK: framework imports in source code files
+#   - CLASS: class instance declarations in source code files
+#   - AUTHORIZATION_METHOD: instance method declarations in source code files
+#     for authorization methods (e.g., requestAlwaysAuthorization) and access
+#     methods (e.g., requestAccess)
+#   - ADDITIONAL_EVIDENCE: instance method or instance property declarations
+#     are used in place of an AUTHORIZATION_METHOD that is already present
+#     elsewhere in the code
+#   - ENTITLEMENT: entitlement value from the <app_name>.entitlements file of
+#     the app
+#   - Parameters: parameters used in the instance methods; they are necessary
+#     in some cases to disambiguate the detection (e.g., both CAMERA and
+#     and MICROPHONE have a requestAccess method)
+#
+#   The following are the requirements according to which a privacy practice
+#   is declared to be present:
+#
+#   For first parties:
+#     PLIST and FRAMEWORK and CLASS and AUTHORIZATION_METHOD where
+#       ADDITIONAL_EVIDENCE can be used in place of AUTHORIZATION_METHOD
+#       if and only if AUTHORIZATION_METHOD is present in some third party code
+#       (which is very unlikely, but still technically possible)
+#
+#   For third parties:
+#    PLIST (from first party) and FRAMEWORK and CLASS and AUTHORIZATION_METHOD
+#       where ADDITIONAL_EVIDENCE can be used in place of AUTHORIZATION_METHOD
+#       if and only if AUTHORIZATION_METHOD is present in first party code.
+#
+#   Some practices (e.g., HEALTH) also require a value from ENTITLEMENT in
+#   order to be declared present.
+# ------------------------------------------------------------------------------
+
+PLIST:
+  LOCATION:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user’s location information at all times.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationalwaysandwheninuseusagedescription
+  - NSLocationAlwaysAndWhenInUseUsageDescription
+
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user’s location information while the app is running in
+    #   the foreground.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationwheninuseusagedescription
+  - NSLocationWhenInUseUsageDescription
+
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user's location at all times. Deprecated
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationalwaysusagedescription
+  - NSLocationAlwaysUsageDescription
+
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user's location information. Deprecated
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nslocationusagedescription
+  - NSLocationUsageDescription
+
+  CAMERA:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the device’s camera.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nscamerausagedescription
+  - NSCameraUsageDescription
+
+  MICROPHONE:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the device’s microphone.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsmicrophoneusagedescription
+  - NSMicrophoneUsageDescription
+
+  PHOTOS:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user’s photo library.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryusagedescription
+  - NSPhotoLibraryUsageDescription
+
+    # Description: A message that tells the user why the app is requesting
+    #   write-only access to the user’s photo library.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsphotolibraryaddusagedescription
+  - NSPhotoLibraryAddUsageDescription
+
+  CONTACTS:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user’s contacts.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nscontactsusagedescription
+  - NSContactsUsageDescription
+
+  CALENDAR:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user’s calendar data.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nscalendarsusagedescription
+  - NSCalendarsUsageDescription
+
+  HEALTH:
+    # Description: A message to the user that explains why the app requested
+    #   permission to read samples from the HealthKit store.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthshareusagedescription
+  - NSHealthShareUsageDescription
+
+    # Description: A message to the user that explains why the app requested
+    #   permission to save samples to the HealthKit store.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthupdateusagedescription
+  - NSHealthUpdateUsageDescription
+
+    # Description: A message to the user that explains why the app requested
+    #   permission to read clinical records.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthclinicalhealthrecordsshareusagedescription
+  - NSHealthClinicalHealthRecordsShareUsageDescription
+
+    # Description: The clinical record data types that your app must get
+    #   permission to read.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nshealthrequiredreadauthorizationtypeidentifiers
+  - NSHealthRequiredReadAuthorizationTypeIdentifiers
+
+  BLUETOOTH:
+    # Description: A message that tells the user why the app needs access
+    #   to Bluetooth.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothalwaysusagedescription
+  - NSBluetoothAlwaysUsageDescription
+
+    # Description: A message that tells the user why the app is requesting the
+    #   ability to connect to Bluetooth peripherals. Deprecated.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsbluetoothperipheralusagedescription
+  - NSBluetoothPeripheralUsageDescription
+
+  REMINDERS:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user’s reminders.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsremindersusagedescription
+  - NSRemindersUsageDescription
+
+  MUSIC:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user’s media library.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsapplemusicusagedescription
+  - NSAppleMusicUsageDescription
+
+  HOMEKIT:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the user’s HomeKit configuration data.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nshomekitusagedescription
+  - NSHomeKitUsageDescription
+
+  SPEECH:
+    # Description: A message that tells the user why the app is requesting
+    #   to send user data to Apple’s speech recognition servers.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsspeechrecognitionusagedescription
+  - NSSpeechRecognitionUsageDescription
+
+  MOTION:
+    # Description: A message that tells the user why the app is requesting
+    #   access to the device’s accelerometer.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsmotionusagedescription
+  - NSMotionUsageDescription
+
+  FACEBOOK: []
+
+  GOOGLE: []
+
+  PURCHASES: []
+
+  IDFA: []
+
+FRAMEWORK:
+  SWIFT:
+    LOCATION:
+      # Description: Obtain the geographic location and orientation of a device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation
+    - CoreLocation
+
+      # Description: Display map or satellite imagery from your app's
+      #   interface, call out points of interest, and determine placemark
+      #   information for map coordinates.
+      # We are looking for CoreLocation in code. MapKit also imports the
+      #   CoreLocation framework. When MapKit is detected, this is
+      #   enough to use the classes and methods from CoreLocation. In other
+      #   words, MapKit also includes the necessary classes and methods. You
+      #   can think of MapKit, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mapkit
+    - MapKit
+
+    CAMERA:
+      # Description: Work with audiovisual assets, control device cameras,
+      #   process audio, and configure system audio interactions.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation
+    - AVFoundation
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for AVFoundation in code. Photos also imports the
+      #   AVFoundation framework. When Photos is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, Photos also includes the necessary classes and methods. You
+      #   can think of Photos, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - Photos
+
+      # Description: Integrate iOS device camera and motion features to produce
+      #   augmented reality experiences in your app or game.
+      # We are looking for AVFoundation in code. ARKit also imports the
+      #   AVFoundation framework. When ARKit is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, ARKit also includes the necessary classes and methods. You
+      #   can think of ARKit, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/arkit
+    - ARKit
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for AVFoundation in code. PhotosUI also imports the
+      #   AVFoundation framework. When PhotosUI is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, PhotosUI also includes the necessary classes and methods. You
+      #   can think of PhotosUI, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - PhotosUI
+
+      # Description: Construct and manage a graphical, event-driven user
+      #   interface for your iOS or tvOS app.
+      # This framework includes the UIImagePickerController class. See CLASS
+      #   to learn more.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit
+    - UIKit
+
+    MICROPHONE:
+      # Description: Work with audiovisual assets, control device cameras,
+      #   process audio, and configure system audio interactions.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation
+    - AVFoundation
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for AVFoundation in code. Photos also imports the
+      #   AVFoundation framework. When Photos is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, Photos also includes the necessary classes and methods. You
+      #   can think of Photos, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - Photos
+
+      # Description: Integrate iOS device camera and motion features to produce
+      #   augmented reality experiences in your app or game.
+      # We are looking for AVFoundation in code. ARKit also imports the
+      #   AVFoundation framework. When ARKit is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, ARKit also includes the necessary classes and methods. You
+      #   can think of ARKit, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/arkit
+    - ARKit
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for AVFoundation in code. PhotosUI also imports the
+      #   AVFoundation framework. When PhotosUI is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, PhotosUI also includes the necessary classes and methods. You
+      #   can think of PhotosUI, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - PhotosUI
+
+      # Description: Construct and manage a graphical, event-driven user
+      #   interface for your iOS or tvOS app.
+      # This framework includes the UIImagePickerController class. See CLASS
+      #   to learn more.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit
+    - UIKit
+
+    PHOTOS:
+      # Description: Work with image and video assets managed by the Photos
+      #   app, including those from iCloud Photos and Live Photos.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - Photos
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for Photos in code. PhotosUI also imports the
+      #   Photos framework. When PhotosUI is detected, this is
+      #   enough to use the classes and methods from Photos. In other
+      #   words, PhotosUI also includes the necessary classes and methods. You
+      #   can think of PhotosUI, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - PhotosUI
+
+      # Description: Construct and manage a graphical, event-driven user
+      #   interface for your iOS or tvOS app.
+      # This framework includes the UIImagePickerController class. See CLASS
+      #   to learn more.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit
+    - UIKit
+
+    CONTACTS:
+      # Description: Access the user's contacts and format and localize contact
+      #   information.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/contacts
+    - Contacts
+
+    CALENDAR:
+      # Descritpion: Create, view, and edit calendar and reminder events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit
+    - EventKit
+
+      # Description: Display an interface for viewing, selecting, and editing
+      #   calendar events and reminders.
+      # We are looking for EventKit in code. EventKitUI also imports the
+      #   EventKit framework. When EventKitUI is detected, this is
+      #   enough to use the classes and methods from EventKit. In other
+      #   words, EventKitUI also includes the necessary classes and methods.
+      #   You can think of EventKitUI, in this case, as a package of more
+      #   frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkitui
+    - EventKitUI
+
+    HEALTH:
+      # Description: Access and share health and fitness data while maintaining
+      #   the user’s privacy and control.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/healthkit
+    - HealthKit
+
+    # Description: This guide show you how to set up your mobile app to enable
+    #   people to sign into your app with Facebook Login. When people log into
+    #   your app with Facebook they can grant permissions to your app so that
+    #   you can retrieve information or perform actions on the Facebook
+    #   platform on their behalf.
+    # Language: Swift Only
+    # Documentation: https://developers.facebook.com/docs/swift/login/
+    FACEBOOK:
+    - FacebookLogin
+    - FacebookCore
+
+    PURCHASES:
+      # Description: Support in-app purchases and interactions with the App
+      #   Store.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit
+    - StoreKit
+
+    IDFA:
+      # Description: Provide apps with access to an advertising identifier and
+      #   a flag indicating whether a device is using limited ad tracking.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/adsupport
+    - AdSupport
+
+    GOOGLE:
+      # Description: Add Firebase to your iOS project.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/ios/setup
+    - Firebase
+
+      # Description: Authenticate Using Google Sign-In on iOS.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/google-signin
+    - GoogleSignIn
+
+      # Description: Manages authentication for Firebase apps. This class is
+      #   thread-safe.
+      # Language: Swift Only
+      # Documentation: https://firebase.google.com/docs/reference/swift/firebaseauth/api/reference/Classes/Auth
+    - FirebaseAuth
+
+    BLUETOOTH:
+      # Description: Communicate with Bluetooth 4.0 low energy devices.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth
+    - CoreBluetooth
+
+    REMINDERS:
+      # Description: Create, view, and edit calendar and reminder events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit
+    - EventKit
+
+      # Description: Display an interface for viewing, selecting, and editing
+      #   calendar events and reminders.
+      # We are looking for EventKit in code. EventKitUI also imports the
+      #   EventKit framework. When EventKitUI is detected, this is
+      #   enough to use the classes and methods from EventKit. In other
+      #   words, EventKitUI also includes the necessary classes and methods.
+      #   You can think of EventKitUI, in this case, as a package of more
+      #   frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkitui
+    - EventKitUI
+
+    MUSIC:
+      # Description: Find and play songs, audio podcasts, audio books, and more
+      #   from within your app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer
+    - MediaPlayer
+
+    HOMEKIT:
+      # Description: Allow users to communicate with and control connected
+      #   accessories in their home using your app. With the HomeKit framework,
+      #   you can provide a way to configure accessories and create actions to
+      #   control them. Users can even group actions together and trigger them
+      #   using Siri.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit
+    - HomeKit
+
+    SPEECH:
+      # Description: Perform speech recognition on live or prerecorded audio,
+      #   receive transcriptions, alternative interpretations, and confidence
+      #   levels of the results.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech
+    - Speech
+
+    MOTION:
+      # Description: Process accelerometer, gyroscope, pedometer, and
+      #   environment-related events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion
+    - CoreMotion
+
+  OBJECTIVE-C:
+    LOCATION:
+      # Description: Obtain the geographic location and orientation of a device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation
+    - CoreLocation
+
+      # Description: Display map or satellite imagery from your app's
+      #   interface, call out points of interest, and determine placemark
+      #   information for map coordinates.
+      # We are looking for CoreLocation in code. MapKit also imports the
+      #   CoreLocation framework. When MapKit is detected, this is
+      #   enough to use the classes and methods from CoreLocation. In other
+      #   words, MapKit also includes the necessary classes and methods. You
+      #   can think of MapKit, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mapkit
+    - MapKit
+
+    CAMERA:
+      # Description: Work with audiovisual assets, control device cameras,
+      #   process audio, and configure system audio interactions.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation
+    - AVFoundation
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for AVFoundation in code. Photos also imports the
+      #   AVFoundation framework. When Photos is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, Photos also includes the necessary classes and methods. You
+      #   can think of Photos, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - Photos
+
+      # Description: Integrate iOS device camera and motion features to produce
+      #   augmented reality experiences in your app or game.
+      # We are looking for AVFoundation in code. ARKit also imports the
+      #   AVFoundation framework. When ARKit is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, ARKit also includes the necessary classes and methods. You
+      #   can think of ARKit, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/arkit
+    - ARKit
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for AVFoundation in code. PhotosUI also imports the
+      #   AVFoundation framework. When PhotosUI is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, PhotosUI also includes the necessary classes and methods. You
+      #   can think of PhotosUI, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - PhotosUI
+
+      # Description: Construct and manage a graphical, event-driven user
+      #   interface for your iOS or tvOS app.
+      # This framework includes the UIImagePickerController class. See CLASS
+      #   to learn more.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit
+    - UIKit
+
+    MICROPHONE:
+      # Description: Work with audiovisual assets, control device cameras,
+      #   process audio, and configure system audio interactions.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation
+    - AVFoundation
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for AVFoundation in code. Photos also imports the
+      #   AVFoundation framework. When Photos is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, Photos also includes the necessary classes and methods. You
+      #   can think of Photos, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - Photos
+
+      # Description: Integrate iOS device camera and motion features to produce
+      #   augmented reality experiences in your app or game.
+      # We are looking for AVFoundation in code. ARKit also imports the
+      #   AVFoundation framework. When ARKit is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, ARKit also includes the necessary classes and methods. You
+      #   can think of ARKit, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/arkit
+    - ARKit
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for AVFoundation in code. PhotosUI also imports the
+      #   AVFoundation framework. When PhotosUI is detected, this is
+      #   enough to use the classes and methods from AVFoundation. In other
+      #   words, PhotosUI also includes the necessary classes and methods. You
+      #   can think of PhotosUI, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - PhotosUI
+
+      # Description: Construct and manage a graphical, event-driven user
+      #   interface for your iOS or tvOS app.
+      # This framework includes the UIImagePickerController class. See CLASS
+      #   to learn more.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit
+    - UIKit
+
+    PHOTOS:
+      # Description: Work with image and video assets managed by the Photos
+      #   app, including those from iCloud Photos and Live Photos.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - Photos
+
+      # Description: Work with image and video assets managed by the Photos app,
+      #   including those from iCloud Photos and Live Photos.
+      # We are looking for Photos in code. PhotosUI also imports the
+      #   Photos framework. When PhotosUI is detected, this is
+      #   enough to use the classes and methods from Photos. In other
+      #   words, PhotosUI also includes the necessary classes and methods. You
+      #   can think of PhotosUI, in this case, as a package of multiple frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit
+    - PhotosUI
+
+      # Description: Construct and manage a graphical, event-driven user
+      #   interface for your iOS or tvOS app.
+      # This framework includes the UIImagePickerController class. See CLASS
+      #   to learn more.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit
+    - UIKit
+
+    CONTACTS:
+      # Description: Access the user's contacts and format and localize contact
+      #   information.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/contacts
+    - Contacts
+
+    CALENDAR:
+      # Descritpion: Create, view, and edit calendar and reminder events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit
+    - EventKit
+
+      # Description: Display an interface for viewing, selecting, and editing
+      #   calendar events and reminders.
+      # We are looking for EventKit in code. EventKitUI also imports the
+      #   EventKit framework. When EventKitUI is detected, this is
+      #   enough to use the classes and methods from EventKit. In other
+      #   words, EventKitUI also includes the necessary classes and methods.
+      #   You can think of EventKitUI, in this case, as a package of more
+      #   frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkitui
+    - EventKitUI
+
+    HEALTH:
+      # Description: Access and share health and fitness data while maintaining
+      #   the user’s privacy and control.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/healthkit
+    - HealthKit
+
+    # Description: When people log into your app with Facebook, they can grant
+    #   permissions to your app so you can retrieve information or perform
+    #   actions on Facebook on their behalf. The following steps are for adding
+    #   Facebook Login to your iOS Objective-C project.
+    # Language: Objective-C Only
+    # Documentation: https://developers.facebook.com/docs/facebook-login/ios
+    FACEBOOK:
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+
+    PURCHASES:
+      # Description: Support in-app purchases and interactions with the App
+      #   Store.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit
+    - StoreKit
+
+    IDFA:
+      # Description: Provide apps with access to an advertising identifier and
+      #   a flag indicating whether a device is using limited ad tracking.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/adsupport
+    - AdSupport
+
+    GOOGLE:
+      # Description: Add Firebase to your iOS project.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/ios/setup
+    - Firebase
+
+      # Description: Authenticate Using Google Sign-In on iOS.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/google-signin
+    - GoogleSignIn
+
+    BLUETOOTH:
+      # Description: Communicate with Bluetooth 4.0 low energy devices.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth
+    - CoreBluetooth
+
+    REMINDERS:
+      # Description: Create, view, and edit calendar and reminder events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit
+    - EventKit
+
+      # Description: Display an interface for viewing, selecting, and editing
+      #   calendar events and reminders.
+      # We are looking for EventKit in code. EventKitUI also imports the
+      #   EventKit framework. When EventKitUI is detected, this is
+      #   enough to use the classes and methods from EventKit. In other
+      #   words, EventKitUI also includes the necessary classes and methods.
+      #   You can think of EventKitUI, in this case, as a package of more
+      #   frameworks.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkitui
+    - EventKitUI
+
+    MUSIC:
+      # Description: Find and play songs, audio podcasts, audio books, and more
+      #   from within your app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer
+    - MediaPlayer
+
+    HOMEKIT:
+      # Description: Allow users to communicate with and control connected
+      #   accessories in their home using your app. With the HomeKit framework,
+      #   you can provide a way to configure accessories and create actions to
+      #   control them. Users can even group actions together and trigger them
+      #   using Siri.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit
+    - HomeKit
+
+    SPEECH:
+      # Description: Perform speech recognition on live or prerecorded audio,
+      #   receive transcriptions, alternative interpretations, and confidence
+      #   levels of the results.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech
+    - Speech
+
+    MOTION:
+      # Description: Process accelerometer, gyroscope, pedometer, and
+      #   environment-related events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion
+    - CoreMotion
+
+CLASS:
+  SWIFT:
+    LOCATION:
+      # Description: The object that you use to start and stop the delivery
+      #   of location-related events to your app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager
+    - CLLocationManager
+
+    CAMERA:
+      # Description: A device that provides input (such as audio or video) for
+      #   capture sessions and offers controls for hardware-specific capture
+      #   features.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice
+    - AVCaptureDevice
+
+      # Description: A capture output for still image, Live Photo, and other
+      #   photography workflows.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturephotooutput
+    - AVCapturePhotoOutput
+
+      # Description: A capture output that records video and provides access
+      #   to video frames for processing.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturevideodataoutput
+    - AVCaptureVideoDataOutput
+
+      # Description: A capture input that provides media from a capture device
+      #   to a capture session.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
+    - AVCaptureDeviceInput
+
+      # Description: A view controller that manages the system interfaces for
+      #   taking pictures, recording movies, and choosing items from the user's
+      #   media library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller
+    - UIImagePickerController
+
+    MICROPHONE:
+      # Description: An intermediary object that communicates to the system how
+      #   you intend to use audio in your app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avaudiosession
+    - AVAudioSession
+
+      # Description: A device that provides input (such as audio or video) for
+      #   capture sessions and offers controls for hardware-specific capture
+      #   features.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice
+    - AVCaptureDevice
+
+      # Description: A capture input that provides media from a capture device
+      #   to a capture session.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
+    - AVCaptureDeviceInput
+
+      # Description: A view controller that manages the system interfaces for
+      #   taking pictures, recording movies, and choosing items from the user's
+      #   media library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller
+    - UIImagePickerController
+
+    PHOTOS:
+      # Description: A shared object that manages access and changes to the
+      #   user’s shared photo library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phphotolibrary
+    - PHPhotoLibrary
+
+      # Description: A representation of an image, video, or Live Photo in the
+      #   Photos library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset
+    - PHAsset
+
+      # Description: The abstract superclass for Photos asset collections and
+      #   collection lists.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollection
+    - PHCollection
+
+      # Description: A representation of a Photos asset grouping, such as a
+      #   moment, user-created album, or smart album.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection
+    - PHAssetCollection
+
+      # Description: A group containing Photos asset collections, such as
+      #   Moments, Years, or folders of user-created albums.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollectionlist
+    - PHCollectionList
+
+      # Description: A view controller that manages the system interfaces for
+      #   taking pictures, recording movies, and choosing items from the user's
+      #   media library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller
+    - UIImagePickerController
+
+    CONTACTS:
+      # Description: The object that fetches and saves contacts, groups, and
+      #   containers from the user's contacts database.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore
+    - CNContactStore
+
+    CALENDAR:
+      # Description: An object that accesses the user’s calendar and reminder
+      #   events and supports the scheduling of new events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore
+    - EKEventStore
+
+    HEALTH:
+      # Description: The access point for all data managed by HealthKit.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore
+    - HKHealthStore
+
+    # Description: This guide show you how to set up your mobile app to enable
+    #   people to sign into your app with Facebook Login. When people log into
+    #   your app with Facebook they can grant permissions to your app so that
+    #   you can retrieve information or perform actions on the Facebook
+    #   platform on their behalf.
+    # Language: Swift Only
+    # Documentation: https://developers.facebook.com/docs/swift/login/
+    FACEBOOK:
+    - LoginButton
+    - LoginManager
+
+    PURCHASES:
+      # Description: Information about a product previously registered in App
+      #   Store Connect.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skproduct
+    - SKProduct
+
+      # Description: A set of methods that are implemented by the delegate to
+      #   receive requested product information.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequestdelegate
+    - SKProductsRequestDelegate
+
+    IDFA:
+      # Description: An object containing an identifier to be used for serving
+      #   advertisements, and a flag indicating whether a user has limited ad
+      #   tracking.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager
+    - ASIdentifierManager
+
+    GOOGLE:
+      # Description: You can customize the sign-in screens by subclassing
+      #   FirebaseUI's view controllers and specifying them in FUIAuth's
+      #   delegate methods.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+    - FUIAuth
+
+      # Description: This class signs the user in with Google.
+      # Language: Swift & Objective-C
+      # Documentation: https://developers.google.com/identity/sign-in/ios/reference/Classes/GIDSignIn
+    - GIDSignIn
+
+    BLUETOOTH:
+      # Description: An object that scans for, discovers, connects to, and
+      #   manages peripherals.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbcentralmanager
+    - CBCentralManager
+
+      # Description: A remote peripheral device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheral
+    - CBPeripheral
+
+      # Description: An object that manages and advertises peripheral services
+      #   exposed by this app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager
+    - CBPeripheralManager
+
+    REMINDERS:
+      # Description: A class that represents a reminder added to a calendar.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekreminder
+    - EKReminder
+
+    MUSIC:
+      # Description: An object used to play audio media items from the device's
+      #   Music app library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller
+    - MPMusicPlayerController
+
+      # Description: An object that represents the state of synced media items
+      #   on a device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmedialibrary
+    - MPMediaLibrary
+
+      # Description: A specialized view controller that provides a graphical
+      #   interface for selecting media items.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediapickercontroller
+    - MPMediaPickerController
+
+      # Description: A collection of properties that represents a single item
+      #   contained in the media library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediaitem
+    - MPMediaItem
+
+      # Description: An immutable queue containing the media items to be played
+      #   by an application queue media player.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontrollerqueue
+    - MPMusicPlayerControllerQueue
+
+    HOMEKIT:
+      # Description: A network browser you can use to discover new accessories
+      #   in a home.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmaccessorybrowser
+    - HMAccessoryBrowser
+
+      # Description: The manager for a collection of one or more of a user’s
+      #   homes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmhomemanager
+    - HMHomeManager
+
+      # Description: A home automation accessory, like a garage door opener or a
+      #   thermostat.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmaccessory
+    - HMAccessory
+
+      # Description: A specific characteristic of a service, like the brightness
+      #   of a dimmable light, or its color temperature.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmcharacteristic
+    - HMCharacteristic
+
+    SPEECH:
+      # Description: An object you use to check for the availability of the
+      #   speech recognition service, and to initiate the speech recognition
+      #   process.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer
+    - SFSpeechRecognizer
+
+      # Description: A task object that you use to monitor the speech
+      #   recognition progress.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitiontask
+    - SFSpeechRecognitionTask
+
+      # Description: An object containing the partial or final results of a
+      #   speech recognition request.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionresult
+    - SFSpeechRecognitionResult
+
+    MOTION:
+      # Description: An object that manages access to the motion data stored by
+      #   the device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager
+    - CMMotionActivityManager
+
+      # Description: The object for starting and managing motion services.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionmanager
+    - CMMotionManager
+
+      # Description: Encapsulated measurements of the attitude, rotation rate,
+      #   and acceleration of a device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmdevicemotion
+    - CMDeviceMotion
+
+  OBJECTIVE-C:
+    LOCATION:
+      # Description: The object that you use to start and stop the delivery
+      #   of location-related events to your app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager
+    - CLLocationManager
+
+    CAMERA:
+      # Description: A device that provides input (such as audio or video) for
+      #   capture sessions and offers controls for hardware-specific capture
+      #   features.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice
+    - AVCaptureDevice
+
+      # Description: A capture output for still image, Live Photo, and other
+      #   photography workflows.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturephotooutput
+    - AVCapturePhotoOutput
+
+      # Description: A capture output that records video and provides access
+      #   to video frames for processing.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturevideodataoutput
+    - AVCaptureVideoDataOutput
+
+      # Description: A capture input that provides media from a capture device
+      #   to a capture session.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
+    - AVCaptureDeviceInput
+
+      # Description: A view controller that manages the system interfaces for
+      #   taking pictures, recording movies, and choosing items from the user's
+      #   media library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller
+    - UIImagePickerController
+
+    MICROPHONE:
+      # Description: An intermediary object that communicates to the system how
+      #   you intend to use audio in your app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avaudiosession
+    - AVAudioSession
+
+      # Description: A device that provides input (such as audio or video) for
+      #   capture sessions and offers controls for hardware-specific capture
+      #   features.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice
+    - AVCaptureDevice
+
+      # Description: A capture input that provides media from a capture device
+      #   to a capture session.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
+    - AVCaptureDeviceInput
+
+      # Description: A view controller that manages the system interfaces for
+      #   taking pictures, recording movies, and choosing items from the user's
+      #   media library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller
+    - UIImagePickerController
+
+    PHOTOS:
+      # Description: A shared object that manages access and changes to the
+      #   user’s shared photo library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phphotolibrary
+    - PHPhotoLibrary
+
+      # Description: A representation of an image, video, or Live Photo in the
+      #   Photos library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset
+    - PHAsset
+
+      # Description: The abstract superclass for Photos asset collections and
+      #   collection lists.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollection
+    - PHCollection
+
+      # Description: A representation of a Photos asset grouping, such as a
+      #   moment, user-created album, or smart album.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection
+    - PHAssetCollection
+
+      # Description: A group containing Photos asset collections, such as
+      #   Moments, Years, or folders of user-created albums.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollectionlist
+    - PHCollectionList
+
+      # Description: A view controller that manages the system interfaces for
+      #   taking pictures, recording movies, and choosing items from the user's
+      #   media library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller
+    - UIImagePickerController
+
+    CONTACTS:
+      # Description: The object that fetches and saves contacts, groups, and
+      #   containers from the user's contacts database.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore
+    - CNContactStore
+
+    CALENDAR:
+      # Description: An object that accesses the user’s calendar and reminder
+      #   events and supports the scheduling of new events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore
+    - EKEventStore
+
+    HEALTH:
+      # Description: The access point for all data managed by HealthKit.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore
+    - HKHealthStore
+
+    # Description: When people log into your app with Facebook, they can grant
+    #   permissions to your app so you can retrieve information or perform
+    #   actions on Facebook on their behalf. The following steps are for adding
+    #   Facebook Login to your iOS Objective-C project.
+    # Language: Objective-C Only
+    # Documentation: https://developers.facebook.com/docs/facebook-login/ios
+    FACEBOOK:
+    - LoginButton
+    - FBSDKAcessToken
+
+    PURCHASES:
+      # Description: Information about a product previously registered in App
+      #   Store Connect.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skproduct
+    - SKProduct
+
+      # Description: A set of methods that are implemented by the delegate to
+      #   receive requested product information.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequestdelegate
+    - SKProductsRequestDelegate
+
+    IDFA:
+      # Description: An object containing an identifier to be used for serving
+      #   advertisements, and a flag indicating whether a user has limited ad
+      #   tracking.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager
+    - ASIdentifierManager
+
+    GOOGLE:
+      # Description: You can customize the sign-in screens by subclassing
+      #   FirebaseUI's view controllers and specifying them in FUIAuth's
+      #   delegate methods.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+    - FUIAuth
+
+      # Description: This class signs the user in with Google.
+      # Language: Swift & Objective-C
+      # Documentation: https://developers.google.com/identity/sign-in/ios/reference/Classes/GIDSignIn
+    - GIDSignIn
+
+    BLUETOOTH:
+      # Description: An object that scans for, discovers, connects to, and
+      #   manages peripherals.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbcentralmanager
+    - CBCentralManager
+
+      # Description: A remote peripheral device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheral
+    - CBPeripheral
+
+      # Description: An object that manages and advertises peripheral services
+      #   exposed by this app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager
+    - CBPeripheralManager
+
+    REMINDERS:
+      # Description: A class that represents a reminder added to a calendar.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekreminder
+    - EKReminder
+
+    MUSIC:
+      # Description: An object used to play audio media items from the device's
+      #   Music app library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller
+    - MPMusicPlayerController
+
+      # Description: An object that represents the state of synced media items
+      #   on a device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmedialibrary
+    - MPMediaLibrary
+
+      # Description: A specialized view controller that provides a graphical
+      #   interface for selecting media items.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediapickercontroller
+    - MPMediaPickerController
+
+      # Description: A collection of properties that represents a single item
+      #   contained in the media library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediaitem
+    - MPMediaItem
+
+      # Description: An immutable queue containing the media items to be played
+      #   by an application queue media player.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontrollerqueue
+    - MPMusicPlayerControllerQueue
+
+    HOMEKIT:
+      # Description: A network browser you can use to discover new accessories
+      #   in a home.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmaccessorybrowser
+    - HMAccessoryBrowser
+
+      # Description: The manager for a collection of one or more of a user’s
+      #   homes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmhomemanager
+    - HMHomeManager
+
+      # Description: A home automation accessory, like a garage door opener or a
+      #   thermostat.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmaccessory
+    - HMAccessory
+
+      # Description: A specific characteristic of a service, like the brightness
+      #   of a dimmable light, or its color temperature.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmcharacteristic
+    - HMCharacteristic
+
+    SPEECH:
+      # Description: An object you use to check for the availability of the
+      #   speech recognition service, and to initiate the speech recognition
+      #   process.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer
+    - SFSpeechRecognizer
+
+      # Description: A task object that you use to monitor the speech
+      #   recognition progress.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitiontask
+    - SFSpeechRecognitionTask
+
+      # Description: An object containing the partial or final results of a
+      #   speech recognition request.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionresult
+    - SFSpeechRecognitionResult
+
+    MOTION:
+      # Description: An object that manages access to the motion data stored by
+      #   the device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager
+    - CMMotionActivityManager
+
+      # Description: The object for starting and managing motion services.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionmanager
+    - CMMotionManager
+
+      # Description: Encapsulated measurements of the attitude, rotation rate,
+      #   and acceleration of a device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmdevicemotion
+    - CMDeviceMotion
+
+AUTHORIZATION_METHOD:
+  SWIFT:
+    LOCATION:
+      # Description: Requests permission to use location services whenever
+      #   the app is running.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620551-requestalwaysauthorization
+      requestAlwaysAuthorization: []
+
+      # Description: Requests permission to use location services while the
+      #  app is in the foreground.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620562-requestwheninuseauthorization
+      requestWhenInUseAuthorization: []
+
+    CAMERA:
+      # Description: Requests the user’s permission, if needed, for recording
+      #   a specified media type.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice/1624584-requestaccess
+      requestAccess:
+      - video
+      - for
+      - completionHandler
+
+      # Description: The source to use when picking an image or when
+      #   determining available media types.
+      # Language: Swift Only
+      # From UIImagePicker
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller/sourcetype
+      sourceType:
+      - camera
+
+    MICROPHONE:
+      # Description: Requests the user’s permission for audio recording.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avaudiosession/1616601-requestrecordpermission
+      requestRecordPermission: []
+
+      # Description: Requests the user’s permission, if needed, for recording
+      #   a specified media type.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice/1624584-requestaccess
+      requestAccess:
+      - audio
+
+      # Description: The source to use when picking an image or when
+      #   determining available media types.
+      # Language: Swift Only
+      # From UIImagePicker
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller/sourcetype
+      sourceType:
+      - camera
+
+    PHOTOS:
+      # Description: Requests the user’s permission, if needed, to access the
+      #   photo library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phphotolibrary/1620736-requestauthorization
+      requestAuthorization: []
+
+      # Description: Asynchronously runs a block that requests changes to be
+      #   performed in the photo library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phphotolibrary/1620743-performchanges
+      performChanges: []
+
+      # Description: Synchronously runs a block that requests changes to be
+      #   performed in the photo library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phphotolibrary/1620747-performchangesandwait
+      performChangesAndWait: []
+
+      # Description: Retrieves assets from the specified asset collection.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624757-fetchassets
+      fetchAssets:
+      - in
+      - options
+
+      # Description: Retrieves assets with the specified media type.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624725-fetchassets
+      fetchAssets:
+      - with
+      - options
+
+      # Description: Retrieves assets with the specified media type.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624732-fetchassets
+      fetchAssets:
+      - withLocalIdentifiers
+      - options
+
+      # Description: Retrieves assets marked as key assets in the specified
+      #   asset collection.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624778-fetchkeyassets
+      fetchKeyAssets:
+      - in
+      - options
+
+      # Description: Retrieves all assets matching the specified options.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624783-fetchassets
+      fetchAssets:
+      - with
+
+      # Description: Retrieves assets with the specified burst photo sequence
+      #   identifier.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624723-fetchassets
+      fetchAssets:
+      - withBurstIdentifier
+      - options
+
+      # Description: Retrieves collections from the specified collection list.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollection/1618515-fetchcollections
+      fetchCollections:
+      - in
+      - options
+
+      # Description: Retrieves collections from the root of the photo
+      #   library’s hierarchy of user-created albums and folders.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollection/1618513-fetchtoplevelusercollections
+      fetchTopLevelUserCollections:
+      - with
+
+      # Description: Retrieves asset collections with the specified unique
+      #   identifiers.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection/1618510-fetchassetcollections
+      fetchAssetCollections:
+      - withLocalIdentifiers
+      - options
+
+      # Description: Retrieves asset collections of the specified type and
+      #   subtype.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection/1618544-fetchassetcollections
+      fetchAssetCollections:
+      - with
+      - subtype
+      - options
+
+      # Description: Retrieves asset collections of the specified type
+      #   containing the specified asset.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection/1618530-fetchassetcollectionscontaining
+      fetchAssetCollectionsContaining:
+      - with
+      - options
+
+      # Description: Retrieves asset collections using URLs provided by the
+      #   Assets Library framework.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection/1618533-fetchassetcollections
+      fetchAssetCollections:
+      - withALAssetGroupURLs
+      - options
+
+      # Description: Retrieves collection lists that contain the specified
+      #   collection.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollectionlist/1618523-fetchcollectionlistscontaining
+      fetchCollectionListsContaining:
+      - options
+
+      # Description: Retrieves collection lists with the specified local
+      #   -device-specific unique identifiers.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollectionlist/1618525-fetchcollectionlists
+      fetchCollectionLists:
+      - withLocalIdentifiers
+      - options
+
+      # Description: Retrieves collection lists of the specified type.
+      # Language: Swift Only.
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollectionlist/1618520-fetchcollectionlists
+      fetchCollectionLists:
+      - with
+      - subtype
+      - options
+
+      # Description: The source to use when picking an image or when
+      #   determining available media types.
+      # Language: Swift Only
+      # From UIImagePicker
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontroller/sourcetype
+      sourceType:
+      - photoLibrary
+      - savedPhotosAlbum
+
+    CONTACTS:
+      # Description: Requests access to the user's contacts.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1402873-requestaccess
+      requestAccess:
+      - contacts
+      - for
+      - completionHandler
+
+      # Description: An object that defines the options to use when fetching
+      #   contacts.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactfetchrequest
+      CNContactFetchRequest:
+      - keysToFetch
+
+    CALENDAR:
+      # Description: Prompts the user to grant or deny access to event or
+      #   reminder data.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507547-requestaccess
+      requestAccess:
+      - to
+      - completion
+
+    HEALTH:
+      # Description: Requests permission to save and read the specified data
+      #   types.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614152-requestauthorization
+      requestAuthorization:
+      - HKObjectType
+      - HKSampleType
+      - HKCategoryType
+      - HKWorkoutType
+      - HKCorrelationType
+      - HKCharacteristicType
+      - toShare
+      - read
+
+    FACEBOOK: []
+
+    PURCHASES:
+      # Description: Indicates whether the user is allowed to make payments.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue/1506139-canmakepayments
+      canMakePayments: []
+
+      # Description: An object that can retrieve localized information from the
+      #   App Store about a specified list of products.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequest
+      SKProductsRequest: []
+
+    IDFA: []
+
+    GOOGLE:
+      didSignInWith: []
+
+      # Description: Then, configure FirebaseUI to use the sign-in methods you
+      #   want to support:
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+      FUIGoogleAuth: []
+
+      # Description: Then, configure FirebaseUI to use the sign-in methods you
+      #   want to support:
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+      providers: []
+
+      # Description: Then, register your sign-in screen's view controller with
+      #   the shared GIDSignIn object.
+      # Language: Swift & Objective-C
+      # Documentation: https://developers.google.com/identity/sign-in/ios
+      GIDSignIn: []
+
+      shared: []
+
+      # Description: The sign-in flow has finished and was successful if error
+      #   is nil.
+      # Language: Swift Only
+      # Documentation: https://developers.google.com/identity/sign-in/ios/reference/Protocols/GIDSignInDelegate
+      didSignInFor: []
+
+    BLUETOOTH:
+      # Description: Tells the delegate the central manager’s state updated.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate
+      centralManagerDidUpdateState: []
+
+      # Description: Scans for peripherals that are advertising services.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518986-scanforperipherals
+      scanForPeripherals: []
+
+      # Description: Returns the app’s authorization status for sharing data while in the background. Deprecated.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/1616317-authorizationstatus
+      authorizationStatus: []
+
+    REMINDERS:
+      # Description: Prompts the user to grant or deny access to event or
+      #   reminder data.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507547-requestaccess
+      requestAccess:
+      - to
+      - completion
+
+    MUSIC:
+      # Description: Called when a user has selected a set of media items.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediapickercontrollerdelegate/1614657-mediapicker
+      mediaPicker: []
+
+      # Description: Prepares a media player for playback.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediaplayback/1616251-preparetoplay
+      prepareToPlay: []
+
+      # Description: Displays a user interface so that the user can authorize
+      #   whether your app may view the media library's contents.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/1621276-requestauthorization
+      requestAuthorization:
+      - status
+
+    HOMEKIT:
+      # Description: The possible home-access states.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmhomemanagerauthorizationstatus
+      HMHomeManagerAuthorizationStatus: []
+
+      # Description: The current state of the app’s access to home data.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmhomemanager/3333260-authorizationstatus
+      authorizationStatus: []
+
+    SPEECH:
+      # Description: Asks the user to allow your app to perform speech
+      #   recognition.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer/1649892-requestauthorization
+      requestAuthorization: []
+
+      # Description: A request to recognize speech from captured audio content,
+      #   such as audio from the device's microphone.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechaudiobufferrecognitionrequest
+      SFSpeechAudioBufferRecognitionRequest: []
+
+    MOTION:
+      # Description: Returns a Boolean indicating whether motion data is
+      #   available on the current device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/1616116-isactivityavailable
+      isActivityAvailable: []
+
+  OBJECTIVE-C:
+    LOCATION:
+      # Description: Requests permission to use location services whenever
+      #   the app is running.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620551-requestalwaysauthorization
+      requestAlwaysAuthorization: []
+
+      # Description: Requests permission to use location services while the
+      #  app is in the foreground.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620562-requestwheninuseauthorization
+      requestWhenInUseAuthorization: []
+
+    CAMERA:
+      # Description: Requests the user’s permission, if needed, for recording
+      #   a specified media type.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice/1624584-requestaccessformediatype?language=objc
+      requestAccessForMediaType:
+      - AVMediaTypeVideo
+
+      # Description: The source to use when picking an image or when
+      #   determining available media types.
+      # Language: Objective-C Only
+      # From UIImagePicker
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontrollersourcetype?language=objc
+      UIImagePickerControllerSourceType:
+      - UIImagePickerControllerSourceTypeCamera
+
+    MICROPHONE:
+      # Description: Requests the user’s permission for audio recording.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avaudiosession/1616601-requestrecordpermission
+      requestRecordPermission: []
+
+      # Description: Requests the user’s permission, if needed, for recording
+      #   a specified media type.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedevice/1624584-requestaccessformediatype?language=objc
+      requestAccessForMediaType:
+      - AVMediaTypeAudio
+
+      # Description: The source to use when picking an image or when
+      #   determining available media types.
+      # Language: Objective-C Only
+      # From UIImagePicker
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontrollersourcetype?language=objc
+      UIImagePickerControllerSourceType:
+      - UIImagePickerControllerSourceTypeCamera
+
+    PHOTOS:
+      # Description: Requests the user’s permission, if needed, to access the
+      #   photo library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phphotolibrary/1620736-requestauthorization
+      requestAuthorization: []
+
+      # Description: Asynchronously runs a block that requests changes to be
+      #   performed in the photo library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phphotolibrary/1620743-performchanges
+      performChanges: []
+
+      # Description: Synchronously runs a block that requests changes to be
+      #   performed in the photo library.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/photokit/phphotolibrary/1620747-performchangesandwait
+      performChangesAndWait: []
+
+      # Description: Retrieves assets from the specified asset collection.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624757-fetchassetsinassetcollection?language=objc
+      fetchAssetsInAssetCollection: []
+
+      # Description: Retrieves assets with the specified media type.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624725-fetchassetswithmediatype?language=objc
+      fetchAssetsWithMediaType: []
+
+      # Description: Retrieves assets with the specified local-device-specific
+      #   unique identifiers.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624732-fetchassetswithlocalidentifiers?language=objc
+      fetchAssetsWithLocalIdentifiers: []
+
+      # Description: Retrieves assets marked as key assets in the specified
+      #   asset collection.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624778-fetchkeyassetsinassetcollection?language=objc
+      fetchKeyAssetsInAssetCollection: []
+
+      # Description: Retrieves all assets matching the specified options.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624783-fetchassetswithoptions?language=objc
+      fetchAssetsWithOptions: []
+
+      # Description: Retrieves assets with the specified burst photo sequence
+      #   identifier.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phasset/1624723-fetchassetswithburstidentifier?language=objc
+      fetchAssetsWithBurstIdentifier: []
+
+      # Description: Retrieves collections from the specified collection list.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollection/1618515-fetchcollectionsincollectionlist?language=objc
+      fetchCollectionsInCollectionList: []
+
+      # Description: Retrieves collections from the root of the photo
+      #   library’s hierarchy of user-created albums and folders.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollection/1618513-fetchtoplevelusercollectionswith?language=objc
+      fetchTopLevelUserCollectionsWithOptions: []
+
+      # Description: Retrieves asset collections with the specified unique
+      #   identifiers.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection/1618510-fetchassetcollectionswithlocalid?language=objc
+      fetchAssetCollectionsWithLocalIdentifiers: []
+
+      # Description: Retrieves asset collections of the specified type and
+      #   subtype.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection/1618544-fetchassetcollectionswithtype?language=objc
+      fetchAssetCollectionsWithType: []
+
+      # Description: Retrieves asset collections of the specified type
+      #   containing the specified asset.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection/1618530-fetchassetcollectionscontaininga?language=objc
+      fetchAssetCollectionsContainingAsset: []
+
+      # Description: Retrieves asset collections using URLs provided by the
+      #   Assets Library framework.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phassetcollection/1618533-fetchassetcollectionswithalasset?language=objc
+      fetchAssetCollectionsWithALAssetGroupURLs: []
+
+      # Description: Retrieves collection lists that contain the specified
+      #   collection.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollectionlist/1618523-fetchcollectionlistscontainingco?language=objc
+      fetchCollectionListsContainingCollection: []
+
+      # Description: Retrieves collection lists with the specified local
+      #   -device-specific unique identifiers.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollectionlist/1618525-fetchcollectionlistswithlocalide?language=objc
+      fetchCollectionListsWithLocalIdentifiers: []
+
+      # Description: Retrieves collection lists of the specified type.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/photokit/phcollectionlist/1618520-fetchcollectionlistswithtype?language=objc
+      fetchCollectionListsWithType: []
+
+      # Description: The source to use when picking an image or when
+      #   determining available media types.
+      # Language: Objective-C Only
+      # From UIImagePicker
+      # Documentation: https://developer.apple.com/documentation/uikit/uiimagepickercontrollersourcetype?language=objc
+      UIImagePickerControllerSourceType:
+      - UIImagePickerControllerSourceTypePhotoLibrary
+      - UIImagePickerControllerSourceTypeSavedPhotosAlbum
+
+    CONTACTS:
+      # Description: Requests access to the user's contacts.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1402873-requestaccessforentitytype?language=occ
+      requestAccessForEntityType:
+      - CNEntityTypeContacts
+
+      # Description: An object that defines the options to use when fetching
+      #   contacts.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactfetchrequest
+      CNContactFetchRequest:
+      - keysToFetch
+
+    CALENDAR:
+      # Description: Prompts the user to grant or deny access to event or
+      #   reminder data.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507547-requestaccesstoentitytype?language=objc
+      requestAccessToEntityType: []
+
+    HEALTH:
+      # Description: Requests permission to save and read the specified data
+      #   types.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614152-requestauthorizationtosharetypes?language=objc
+      requestAuthorizationToShareTypes:
+      - HKObjectType
+      - HKSampleType
+      - HKQuantityType
+      - HKCategoryType
+      - HKWorkoutType
+      - HKCorrelationType
+      - HKCharacteristicType
+
+    FACEBOOK: []
+
+    PURCHASES:
+      # Description: Indicates whether the user is allowed to make payments.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue/1506139-canmakepayments
+      canMakePayments: []
+
+      # Description: An object that can retrieve localized information from the
+      #   App Store about a specified list of products.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequest
+      SKProductsRequest: []
+
+    IDFA: []
+
+    GOOGLE:
+      # Description: Then, configure FirebaseUI to use the sign-in methods you
+      #   want to support.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+      FUIGoogleAuth: []
+
+      # Description: Then, configure FirebaseUI to use the sign-in methods you
+      #   want to support.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+      providers: []
+
+      # Description: Then, register your sign-in screen's view controller with
+      #   the shared GIDSignIn object.
+      # Language: Swift & Objective-C
+      # Documentation: https://developers.google.com/identity/sign-in/ios
+      GIDSignIn: []
+
+      # Description: You can trigger the above didTapDisconnect method from a
+      #   button that you add to your app. You can then respond to the
+      #   successful disconnection within the didDisconnectWithUser method and
+      #   trigger any appropriate logic in your app or your back-end code.
+      # Language: Objective-C Only
+      # Documentation: https://developers.google.com/identity/sign-in/ios/disconnect
+      didDisconnectWithUser: []
+
+    BLUETOOTH:
+      # Description: Tells the delegate the central manager’s state updated.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518888-centralmanagerdidupdatestate
+      centralManagerDidUpdateState: []
+
+      # Description: Scans for peripherals that are advertising services.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbcentralmanager/1518986-scanforperipheralswithservices?language=objc
+      scanForPeripheralsWithServices: []
+
+      # Description: Returns the app’s authorization status for sharing data while in the background. Deprecated.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheralmanager/1616317-authorizationstatus
+      authorizationStatus: []
+
+    REMINDERS:
+      # Description: Prompts the user to grant or deny access to event or
+      #   reminder data.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507547-requestaccesstoentitytype?language=objc
+      requestAccessToEntityType: []
+
+    MUSIC:
+      # Description: Called when a user has selected a set of media items.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediapickercontrollerdelegate/1614657-mediapicker
+      mediaPicker: []
+
+      # Description: Prepares a media player for playback.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediaplayback/1616251-preparetoplay
+      prepareToPlay: []
+
+      # Description: Displays a user interface so that the user can authorize
+      #   whether your app may view the media library's contents.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmedialibrary/1621276-requestauthorization
+      requestAuthorization:
+      - status
+
+    HOMEKIT:
+      # Description: The possible home-access states.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmhomemanagerauthorizationstatus
+      HMHomeManagerAuthorizationStatus: []
+
+      # Description: The current state of the app’s access to home data.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmhomemanager/3333260-authorizationstatus
+      authorizationStatus: []
+
+    SPEECH:
+      # Description: Asks the user to allow your app to perform speech
+      #   recognition.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer/1649892-requestauthorization
+      requestAuthorization: []
+
+      # Description: A request to recognize speech from captured audio content,
+      #   such as audio from the device's microphone.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechaudiobufferrecognitionrequest
+      SFSpeechAudioBufferRecognitionRequest: []
+
+    MOTION:
+      # Description: Returns a Boolean indicating whether motion data is
+      #   available on the current device.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/1616116-isactivityavailable
+      isActivityAvailable: []
+
+ADDITIONAL_EVIDENCE:
+  SWIFT:
+    LOCATION:
+      # Description: Starts the generation of updates that report the user’s
+      #   current location.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423750-startupdatinglocation
+      startUpdatingLocation: []
+
+      # Description: Stops the generation of location updates.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423695-stopupdatinglocation
+      stopUpdatingLocation: []
+
+      # Description: Requests the one-time delivery of the user’s current
+      #   location.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620548-requestlocation
+      requestLocation: []
+
+      # Description: Starts the generation of updates based on significant
+      #   location changes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423531-startmonitoringsignificantlocati
+      startMonitoringSignificantLocationChanges: []
+
+      # Description: Stops the delivery of location events based on
+      #   significant location changes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423679-stopmonitoringsignificantlocatio
+      stopMonitoringSignificantLocationChanges: []
+
+      # Description: Starts the generation of updates that report the user’s
+      #   current heading.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620558-startupdatingheading
+      startUpdatingHeading: []
+
+      # Description: Stops the generation of heading updates.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620569-stopupdatingheading
+      stopUpdatingHeading: []
+
+      # Description: Starts the delivery of visit-related events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1618692-startmonitoringvisits
+      startMonitoringVisits: []
+
+      # Description: Stops the delivery of visit-related events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1618693-stopmonitoringvisits
+      stopMonitoringVisits: []
+
+      # Description: Starts the delivery of notifications for the specified
+      #   beacon constraints.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/3240607-startrangingbeacons?changes=_3
+      startRangingBeacons:
+      - satisfying
+
+      # Description: Stops the delivery of notifications for the specified
+      #   beacon constraints.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/3240608-stoprangingbeacons
+      stopRangingBeacons:
+      - satisfying
+
+      # Description: Retrieves the state of a region asynchronously.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423804-requeststate
+      requestState:
+      - for
+
+      # Description: Starts monitoring the specified region.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423656-startmonitoring
+      startMonitoring:
+      - for
+
+      # Description: Stops monitoring the specified region.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423840-stopmonitoring
+      stopMonitoring:
+      - for
+
+    CAMERA:
+      # Description: Initiates a photo capture using the specified settings.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/1648765-capturephoto
+      capturePhoto:
+      - with
+
+      # Description: Notifies the delegate that a new video frame was written.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturevideodataoutputsamplebufferdelegate/1385775-captureoutput
+      captureOutput: []
+
+      # Description: A capture input that provides media from a capture device
+      #   to a capture session.
+      # Language: Swift Only
+      # This is a class instance. Device inputs are passed through objects of
+      #   this class. It is a direct copy of what is in CLASS, but with the
+      #   added arguments.
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
+      AVCaptureDeviceInput:
+      - video
+
+    MICROPHONE:
+      # Description: Starts or resumes recording.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avaudiorecorder/1388252-record
+      record: []
+
+      # Description: A capture input that provides media from a capture device
+      #   to a capture session.
+      # Language: Swift Only
+      # This is a class instance. Device inputs are passed through objects of
+      #   this class. It is a direct copy of what is in CLASS, but with the
+      #   added arguments.
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
+      AVCaptureDeviceInput:
+      - audio
+
+    # This is empty because most of the methods for accessing photos also
+    #   request permissions access. As a result, those methods are
+    #   included in AUTHORIZATION_METHOD.
+    PHOTOS: []
+
+    CONTACTS:
+      # Description: Returns a Boolean value that indicates whether the
+      #   enumeration of all contacts matching a contact fetch request
+      #   executed successfully.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1402849-enumeratecontacts
+      enumerateContacts:
+      - with
+      - usingBlock
+
+      # Description: Fetches the unified contact that is the "me" card.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1402987-unifiedmecontactwithkeys
+      unifiedMeContactWithKeys:
+      - toFetch
+
+      # Description: Fetches a unified contact for the specified contact
+      #   identifier.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403256-unifiedcontact
+      unifiedContact:
+      - withIdentifier
+      - keysToFetch
+
+      # Description: Fetches all unified contacts matching the specified
+      #   predicate.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403266-unifiedcontacts
+      unifiedContact:
+      - matching
+      - keysToFetch
+
+      # Description: A default container is where the user wants new contacts
+      #   to be added implicitly.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403159-defaultcontaineridentifier
+      defaultContainerIdentifier: []
+
+      # Description: Fetches all groups matching the specified predicate.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403121-groups
+      groups:
+      - matching
+
+      # Description: Fetches all containers matching the specified predicate.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403238-containers
+      containers:
+      - matching
+
+      # Description: Executes a save request and returns success or failure.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403230-execute
+      execute: []
+
+    CALENDAR:
+      # Description: Commits all unsaved changes to the event store.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507424-commit
+      commit: []
+
+      # Description: Returns the event store to its saved state.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507345-reset
+      reset: []
+
+      # Description: Pulls new data from remote sources if necessary.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507421-refreshsourcesifnecessary
+      refreshSourcesIfNecessary: []
+
+      # Description: Returns either the event’s first occurrence or the
+      #   reminder with the specified identifier.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507433-calendaritem
+      calendarItem:
+      - withIdentifier
+
+      # Description: Returns either the event’s first occurrences or the
+      #   reminders with the specified external identifier.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507281-calendaritems
+      calendarItems:
+      - withExternalIdentifier
+
+      # Description: Returns the calendar with the specified identifier.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507484-calendar
+      calendar:
+      - withIdentifier
+
+      # Description: Returns an array of calendars that support a given
+      #   entity type, such as reminders or events.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507128-calendars
+      calendars:
+      - for
+
+      # Description: The calendar that events are added to by default, as
+      #   specified by user settings.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507543-defaultcalendarfornewreminders
+      defaultCalendarForNewReminders: []
+
+      # Description: Finds all events that match a given predicate and calls a given callback for each event found.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507518-enumerateevents
+      enumerateEvents:
+      - matching
+      - using
+
+      # Description: Returns the first occurrence of an event with a given
+      #   identifier.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507490-event
+      event:
+      - withIdentifier
+
+      # Description: Returns all events that match a given predicate.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507183-events
+      events:
+      - matching
+
+      # Description: Fetches completed reminders in a set of calendars within
+      #   an optional range.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507447-predicateforcompletedreminders
+      predicateForCompletedReminders:
+      - withCompletionDateStarting
+      - ending
+      - calendars
+
+      # Description: Creates and returns a predicate for finding events in
+      #   the event store that fall within a given date range.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507479-predicateforevents
+      predicateForEvents:
+      - withStart
+      - end
+      - calendars
+
+      # Description: Fetches incomplete reminders in a set of calendars
+      #   within an optional range.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507143-predicateforincompletereminders
+      predicateForIncompleteReminders:
+      - withDueDateStarting
+      - ending
+      - calendars
+
+      # Description: Fetches all reminders in a set of calendars.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507086-predicateforreminders
+      predicateForReminders:
+      - in
+
+      # Description: Removes a calendar from the event store by either
+      #   batching or committing the changes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507523-removecalendar
+      removeCalendar: []
+
+      # Description: Removes an event from the event store.
+      # Language: Swift Only
+      # There is another method like this, but different parameters.
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1615882-remove
+      remove:
+      - span
+
+      # Description: Saves a calendar to the event store by either committing
+      #   or batching the changes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507080-savecalendar
+      saveCalendar: []
+
+      # Description: Saves changes to an event permanently.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1615881-save
+      save:
+      - span
+
+      # Description: The calendar’s title.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekcalendar/1507487-title
+      title: []
+
+      # Description: The notes associated with the calendar item.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekcalendaritem/1507507-notes
+      notes: []
+
+    HEALTH:
+      # Description: Reads the user’s biological sex from the HealthKit store.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614171-biologicalsex
+      biologicalSex: []
+
+      # Description: Reads the user’s blood type from the HealthKit store.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614164-bloodtype
+      bloodType: []
+
+      # Description: Reads the user’s date of birth from the HealthKit store.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1648357-dateofbirthcomponents
+      dateOfBirthComponents: []
+
+      # Description: Reads the user’s Fitzpatrick Skin Type from the
+      #   HealthKit store.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614161-fitzpatrickskintype
+      fitzpatrickSkinType: []
+
+      # Description: Reads the user’s wheelchair use from the HealthKit store.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1648356-wheelchairuse
+      wheelchairUse: []
+
+      # Description: Deletes the specified object from the HealthKit store.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614155-delete
+      delete:
+      - withCompletion
+
+      # Description: Deletes objects saved by this application that match the
+      #   provided type and predicate.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614162-deleteobjects
+      deleteObjects:
+      - of
+      - predicate
+      - withCompletion
+
+      # Description: Returns the earliest date permitted for samples.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614166-earliestpermittedsampledate
+      earliestPermittedSampleDate: []
+
+      # Description: Saves the provided object to the HealthKit store.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614168-save
+      save:
+      - withCompletion
+
+      # Description: Associates the provided samples with the specified
+      #   workout.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614165-add
+      add:
+      - to
+      - completion
+
+      # Description: Recovers an active workout session.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/2962889-recoveractiveworkoutsession
+      recoverActiveWorkoutSession:
+      - completion
+
+      # Description: Starts executing the provided query.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614179-execute
+      execute: []
+
+      # Description: Stops a long-running query.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614173-stop
+      stop: []
+
+      # Description: Returns the user’s preferred units for the given
+      #   quantity types.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614172-preferredunits
+      preferredUnits: []
+
+      # Description: Enables the background delivery of updates.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614175-enablebackgrounddelivery
+      enableBackgroundDelivery:
+      - for
+      - frequency
+      - with
+      - completion
+
+      # Description: Disables background deliveries of update notifications
+      #   for the specified data type
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614177-disablebackgrounddelivery
+      disableBackgroundDelivery:
+      - for
+      - withCompletion
+
+      # Description: Disables all background deliveries of update
+      #   notifications.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614158-disableallbackgrounddelivery
+      disableAllBackgroundDelivery:
+      - completion
+
+      # Description: Launches or wakes the Watch app to create a new workout
+      #   session.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1648358-startwatchapp
+      startWatchApp:
+      - with
+      - completion
+
+    # Description: This guide show you how to set up your mobile app to enable
+    #   people to sign into your app with Facebook Login. When people log into
+    #   your app with Facebook they can grant permissions to your app so that
+    #   you can retrieve information or perform actions on the Facebook
+    #   platform on their behalf.
+    # Language: Swift Only
+    # Documentation: https://developers.facebook.com/docs/swift/login/
+    FACEBOOK:
+      logIn: []
+      current: []
+
+    PURCHASES:
+      # Description: Adds a payment request to the queue.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue/1506036-add
+      add: []
+
+      # Description: Completes a pending transaction.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue/1506003-finishtransaction
+      finishTransaction: []
+
+    IDFA:
+      # Description: A Boolean value that indicates whether the user has limited
+      #   ad tracking.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614148-isadvertisingtrackingenabled
+      isAdvertisingTrackingEnabled: []
+
+      # Description: An alphanumeric string unique to each device, used only for
+      #   serving advertisements.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614151-advertisingidentifier
+      advertisingIdentifier: []
+
+    GOOGLE:
+      # Description: Then, configure FirebaseUI to use the sign-in methods you
+      #   want to support.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+      FUIAuthProvider: []
+
+      # Description: You need to adopt a FUIAuthDelegate protocol to receive
+      #   callback.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+      FUIAuthDelegate: []
+
+    BLUETOOTH:
+      # Description: Tells the delegate that peripheral service discovery
+      #   succeeded.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral
+      peripheral:
+      - didDiscoverServices
+
+      # Description: Tells the delegate that the peripheral found
+      #   characteristics for a service.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518821-peripheral
+      peripheral:
+      - didDiscoverCharacteristicsFor
+
+      # Description: Tells the delegate that the central manager connected to a
+      #   peripheral.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager
+      centralManager:
+      - didConnect
+
+    REMINDERS:
+      # Description: No overview available.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekreminder/1507173-priority
+      priority: []
+
+      # Description: The calendar that events are added to by default, as
+      #   specified by user settings.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507543-defaultcalendarfornewreminders
+      defaultCalendarForNewReminders: []
+
+      # Description: Adds an alarm to the receiver.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekcalendaritem/1507397-addalarm
+      addAlarm: []
+
+    MUSIC:
+      # Description: Starts the generation of playback notifications.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/1624199-begingeneratingplaybacknotificat
+      beginGeneratingPlaybackNotifications: []
+
+      # Description: Returns the system music player, which controls the Music
+      #   app’s state.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/1624179-systemmusicplayer
+      systemMusicPlayer: []
+
+      # Description: The currently-playing media item, or the media item, within
+      #   a queue, that you have designated to begin playback with.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/1624245-nowplayingitem
+      nowPlayingItem: []
+
+      # Description: The playback duration of the media item.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediaitem/1621732-playbackduration
+      playbackDuration: []
+
+    HOMEKIT:
+      # Description: Adds a new home to this home manager.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/homekit/hmhomemanager/1616747-addhome
+      addHome:
+      - withName
+      - completionHandler
+
+      # Description: Starts searching for accessories not yet associated with a
+      #   home.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmaccessorybrowser/1622405-startsearchingfornewaccessories
+      startSearchingForNewAccessories: []
+
+      # Description: The power state of the accessory.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmcharacteristictypepowerstate
+      HMCharacteristicTypePowerState: []
+
+      # Description: The current door state.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmcharacteristictypecurrentdoorstate
+      HMCharacteristicTypeCurrentDoorState: []
+
+      # Description: The current state of the locking mechanism.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmcharacteristictypecurrentlockmechanismstate
+      HMCharacteristicTypeCurrentLockMechanismState: []
+
+    SPEECH:
+      # Description: The transcription with the highest confidence level.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionresult/1648280-besttranscription
+      bestTranscription: []
+
+      # Description: An array of potential transcriptions, sorted in descending
+      #   order of confidence.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionresult/1648282-transcriptions
+      transcriptions: []
+
+      # Description: A Boolean value that indicates whether the speech
+      #   recognizer is currently available.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer/1649885-isavailable
+      isAvailable: []
+
+      # Description: Executes the speech recognition request and delivers the
+      #   results to the specified handler block.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer/1649883-recognitiontask
+      recognitionTask:
+      - with
+      - resultHandler
+
+    MOTION:
+      # Description: Starts the delivery of current motion data updates to your
+      #   app.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/1615945-startactivityupdates
+      startActivityUpdates:
+      - to
+      - withHandler
+
+      # Description: The confidence that the motion data is accurate.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivityconfidence
+      CMMotionActivityConfidence: []
+
+      # Description: Gathers and returns historical motion data for the
+      #   specified time period.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/1615929-queryactivitystarting
+      queryActivityStarting:
+      - from
+      - to
+      - to
+      - withHandler
+
+  OBJECTIVE-C:
+    LOCATION:
+      # Description: Starts the generation of updates that report the user’s
+      #   current location.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423750-startupdatinglocation
+      startUpdatingLocation: []
+
+      # Description: Stops the generation of location updates.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423695-stopupdatinglocation
+      stopUpdatingLocation: []
+
+      # Description: Requests the one-time delivery of the user’s current
+      #   location.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620548-requestlocation
+      requestLocation: []
+
+      # Description: Starts the generation of updates based on significant
+      #   location changes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423531-startmonitoringsignificantlocati
+      startMonitoringSignificantLocationChanges: []
+
+      # Description: Stops the delivery of location events based on
+      #   significant location changes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423679-stopmonitoringsignificantlocatio
+      stopMonitoringSignificantLocationChanges: []
+
+      # Description: Starts the generation of updates that report the user’s
+      #   current heading.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620558-startupdatingheading
+      startUpdatingHeading: []
+
+      # Description: Stops the generation of heading updates.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1620569-stopupdatingheading
+      stopUpdatingHeading: []
+
+      # Description: Starts the delivery of visit-related events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1618692-startmonitoringvisits
+      startMonitoringVisits: []
+
+      # Description: Stops the delivery of visit-related events.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1618693-stopmonitoringvisits
+      stopMonitoringVisits: []
+
+      # Description: Starts the delivery of notifications for the specified
+      #   beacon constraints.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/3240607-startrangingbeaconssatisfyingcon?language=objc
+      startRangingBeaconsSatisfyingConstraint: []
+
+      # Description: Stops the delivery of notifications for the specified
+      #   beacon constraints.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/3240608-stoprangingbeaconssatisfyingcons?language=objc
+      stopRangingBeaconsSatisfyingConstraint: []
+
+      # Description: Retrieves the state of a region asynchronously.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423804-requeststateforregion?language=objc
+      requestStateForRegion: []
+
+      # Description: Starts monitoring the specified region.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423656-startmonitoringforregion?language=objc
+      startMonitoringForRegion: []
+
+      # Description: Stops monitoring the specified region.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/corelocation/cllocationmanager/1423840-stopmonitoringforregion?language=objc
+      stopMonitoringForRegion: []
+
+    CAMERA:
+      # Description: Initiates a photo capture using the specified settings.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturephotooutput/1648765-capturephotowithsettings?language=objc
+      capturePhotoWithSettings:
+
+      # Description: Notifies the delegate that a new video frame was written.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturevideodataoutputsamplebufferdelegate/1385775-captureoutput
+      captureOutput: []
+
+      # Description: A capture input that provides media from a capture device
+      #   to a capture session.
+      # Language: Objective-C Only
+      # This is a class instance. Device inputs are passed through objects of
+      #   this class. It is a direct copy of what is in CLASS, but with the
+      #   added arguments.
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
+      AVCaptureDeviceInput:
+      - AVMediaTypeVideo
+
+    MICROPHONE:
+      # Description: Starts or resumes recording.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avaudiorecorder/1388252-record
+      record: []
+
+      # Description: A capture input that provides media from a capture device
+      #   to a capture session.
+      # Language: Objective-C Only
+      # This is a class instance. Device inputs are passed through objects of
+      #   this class. It is a direct copy of what is in CLASS, but with the
+      #   added arguments.
+      # Documentation: https://developer.apple.com/documentation/avfoundation/avcapturedeviceinput
+      AVCaptureDeviceInput:
+      - AVMediaTypeAudio
+
+    # This is empty because most of the methods for accessing photos also
+    #   request permissions access. As a result, those methods are
+    #   included in AUTHORIZATION_METHOD.
+    PHOTOS: []
+
+    CONTACTS:
+      # Description: Returns a Boolean value that indicates whether the
+      #   enumeration of all contacts matching a contact fetch request
+      #   executed successfully.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1402849-enumeratecontactswithfetchreques?language=objc
+      enumerateContactsWithFetchRequest: []
+
+      # Description: Fetches the unified contact that is the "me" card.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1402987-unifiedmecontactwithkeystofetch?language=objc
+      unifiedMeContactWithKeysToFetch: []
+
+      # Description: Fetches a unified contact for the specified contact
+      #   identifier.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403256-unifiedcontactwithidentifier?language=objc
+      unifiedContactWithIdentifier: []
+
+      # Description: Fetches all unified contacts matching the specified
+      #   predicate.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403266-unifiedcontactsmatchingpredicate?language=objc
+      unifiedContactsMatchingPredicate: []
+
+      # Description: A default container is where the user wants new contacts
+      #   to be added implicitly.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403159-defaultcontaineridentifier
+      defaultContainerIdentifier: []
+
+      # Description: Fetches all groups matching the specified predicate.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403121-groupsmatchingpredicate?language=objc
+      groupsMatchingPredicate: []
+
+      # Description: Fetches all containers matching the specified predicate.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403238-containersmatchingpredicate?language=objc
+      containersMatchingPredicate: []
+
+      # Description: Executes a save request and returns success or failure.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/contacts/cncontactstore/1403230-executesaverequest?language=objc
+      executeSaveRequest: []
+
+    CALENDAR:
+      # Description: Commits all unsaved changes to the event store.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507424-commit
+      commit: []
+
+      # Description: Returns the event store to its saved state.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507345-reset
+      reset: []
+
+      # Description: Pulls new data from remote sources if necessary.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507421-refreshsourcesifnecessary
+      refreshSourcesIfNecessary: []
+
+      # Description: Returns either the event’s first occurrence or the
+      #   reminder with the specified identifier.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507433-calendaritemwithidentifier?language=objc
+      calendarItemWithIdentifier: []
+
+      # Description: Returns either the event’s first occurrences or the
+      #   reminders with the specified external identifier.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507281-calendaritemswithexternalidentif?language=objc
+      calendarItemsWithExternalIdentifier: []
+
+      # Description: Returns the calendar with the specified identifier.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507484-calendarwithidentifier?language=objc
+      calendarWithIdentifier: []
+
+      # Description: Returns an array of calendars that support a given
+      #   entity type, such as reminders or events.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507128-calendarsforentitytype?language=objc
+      calendarsForEntityType: []
+
+      # Description: The calendar that events are added to by default, as
+      #   specified by user settings.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507543-defaultcalendarfornewreminders
+      defaultCalendarForNewReminders: []
+
+      # Description: Finds all events that match a given predicate and
+      #   calls a given callback for each event found.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507518-enumerateeventsmatchingpredicate?language=objc
+      enumerateEventsMatchingPredicate: []
+
+      # Description: Returns the first occurrence of an event with
+      #   a given identifier.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507490-eventwithidentifier?language=objc
+      eventWithIdentifier: []
+
+      # Description: Returns all events that match a given predicate.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507183-eventsmatchingpredicate?language=objc
+      eventsMatchingPredicate: []
+
+      # Description: Fetches completed reminders in a set of calendars within
+      #   an optional range.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507447-predicateforcompletedreminderswi?language=objc
+      predicateForCompletedRemindersWithCompletionDateStarting: []
+
+      # Description: Creates and returns a predicate for finding events in
+      #   the event store that fall within a given date range.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507479-predicateforeventswithstartdate?language=objc
+      predicateForEventsWithStartDate: []
+
+      # Description: Fetches incomplete reminders in a set of calendars
+      #   within an optional range.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507143-predicateforincompleteremindersw?language=objc
+      predicateForIncompleteRemindersWithDueDateStarting: []
+
+      # Description: Fetches all reminders in a set of calendars.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507086-predicateforremindersincalendars?language=objc
+      predicateForRemindersInCalendars: []
+
+      # Description: Removes a calendar from the event store by either
+      #   batching or committing the changes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507523-removecalendar
+      removeCalendar: []
+
+      # Description: Removes an event from the event store.
+      # Language: Objective-C Only
+      # There is another method like this, but different parameters.
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1615882-removeevent?language=objc
+      removeEvent: []
+
+      # Description: Saves a calendar to the event store by either committing
+      #   or batching the changes.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507080-savecalendar
+      saveCalendar: []
+
+      # Description: Saves changes to an event permanently.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1615881-saveevent?language=objc
+      saveEvent: []
+
+      # Description: The calendar’s title.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekcalendar/1507487-title
+      title: []
+
+      # Description: The notes associated with the calendar item.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekcalendaritem/1507507-notes
+      notes: []
+
+    HEALTH:
+      # Description: Reads the user’s biological sex from the HealthKit store.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614171-biologicalsexwitherror?language=objc
+      biologicalSexWithError: []
+
+      # Description: Reads the user’s blood type from the HealthKit store.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614164-bloodtypewitherror?language=objc
+      bloodTypeWithError: []
+
+      # Description: Reads the user’s date of birth from the HealthKit store.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1648357-dateofbirthcomponentswitherror?language=objc
+      dateOfBirthComponentsWithError: []
+
+      # Description: Reads the user’s Fitzpatrick Skin Type from the
+      #   HealthKit store.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614161-fitzpatrickskintypewitherror?language=objc
+      fitzpatrickSkinTypeWithError: []
+
+      # Description: Reads the user’s wheelchair use from the HealthKit store.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1648356-wheelchairusewitherror?language=objc
+      wheelchairUseWithError: []
+
+      # Description: Deletes the specified object from the HealthKit store.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614155-deleteobject?language=objc
+      deleteObject: []
+
+      # Description: Deletes objects saved by this application that match the
+      #   provided type and predicate.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614162-deleteobjectsoftype?language=objc
+      deleteObjectsOfType: []
+
+      # Description: Returns the earliest date permitted for samples.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614166-earliestpermittedsampledate
+      earliestPermittedSampleDate: []
+
+      # Description: Saves the provided object to the HealthKit store.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614168-saveobject?language=objc
+      saveObject: []
+
+      # Description: Associates the provided samples with the specified
+      #   workout.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614165-addsamples?language=objc
+      addSamples: []
+
+      # Description: Recovers an active workout session.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/2962889-recoveractiveworkoutsessionwithc?language=objc
+      recoverActiveWorkoutSessionWithCompletion: []
+
+      # Description: Starts executing the provided query.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614179-executequery?language=objc
+      executeQuery: []
+
+      # Description: Stops a long-running query.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614173-stopquery?language=objc
+      stopQuery: []
+
+      # Description: Returns the user’s preferred units for the given
+      #   quantity types.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614172-preferredunitsforquantitytypes?language=objc
+      preferredUnitsForQuantityTypes: []
+
+      # Description: Enables the background delivery of updates.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614175-enablebackgrounddeliveryfortype?language=objc
+      enableBackgroundDeliveryForType: []
+
+      # Description: Disables background deliveries of update notifications
+      #   for the specified data type
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614177-disablebackgrounddeliveryfortype?language=objc
+      disableBackgroundDeliveryForType: []
+
+      # Description: Disables all background deliveries of update
+      #   notifications.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1614158-disableallbackgrounddeliverywith?language=objc
+      disableAllBackgroundDeliveryWithCompletion: []
+
+      # Description: Launches or wakes the Watch app to create a new workout
+      #   session.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/healthkit/hkhealthstore/1648358-startwatchappwithworkoutconfigur?language=objc
+      startWatchAppWithWorkoutConfiguration: []
+
+    # Description: When people log into your app with Facebook, they can grant
+    #   permissions to your app so you can retrieve information or perform
+    #   actions on Facebook on their behalf. The following steps are for adding
+    #   Facebook Login to your iOS Objective-C project.
+    # Language: Objective-C Only
+    # Documentation: https://developers.facebook.com/docs/facebook-login/ios
+    FACEBOOK:
+      currentAccessToken: []
+
+    PURCHASES:
+      # Description: Adds a payment request to the queue.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue/1506036-addpayment?language=objc
+      add: []
+
+      # Description: Completes a pending transaction.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue/1506003-finishtransaction
+      finishTransaction: []
+
+    IDFA:
+      # Description: A Boolean value that indicates whether the user has limited
+      #   ad tracking.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614148-advertisingtrackingenabled?language=objc
+      advertisingTrackingEnabled: []
+
+      # Description: An alphanumeric string unique to each device, used only for
+      #   serving advertisements.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614151-advertisingidentifier
+      advertisingIdentifier: []
+
+    GOOGLE:
+      # Description: Then, configure FirebaseUI to use the sign-in methods you
+      #   want to support.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+      FUIAuthProvider: []
+
+      # Description: You need to adopt a FUIAuthDelegate protocol to receive
+      #   callback.
+      # Language: Swift & Objective-C
+      # Documentation: https://firebase.google.com/docs/auth/ios/firebaseui
+      FUIAuthDelegate: []
+
+      # Description: Authenticate Using Google Sign-In on iOS.
+      # Language: Objective-C Only
+      # Documentation: https://firebase.google.com/docs/auth/ios/google-signin
+      credentialWithIDToken: []
+
+      # Description: Represents a credential.
+      # Language: Objective-C Only
+      # Documentation: https://firebase.google.com/docs/reference/ios/firebaseauth/api/reference/Classes/FIRAuthCredential
+      FIRAuthCredential: []
+
+      # Description: Utility class for constructing Google Sign In credentials.
+      # Language: Objective-C Only
+      # Documentation: https://firebase.google.com/docs/reference/ios/firebaseauth/api/reference/Classes/FIRGoogleAuthProvider
+      FIRGoogleAuthProvider: []
+
+    BLUETOOTH:
+      # Description: Tells the delegate that peripheral service discovery
+      #   succeeded.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518744-peripheral
+      peripheral:
+      - didDiscoverServices
+
+      # Description: Tells the delegate that the peripheral found
+      #   characteristics for a service.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbperipheraldelegate/1518821-peripheral?language=objc#parameters
+      peripheral:
+      - didDiscoverCharacteristicsForService
+
+      # Description: Tells the delegate that the central manager connected to a
+      #   peripheral.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/corebluetooth/cbcentralmanagerdelegate/1518969-centralmanager
+      centralManager:
+      - didConnect
+
+    REMINDERS:
+      # Description: No overview available.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekreminder/1507173-priority
+      priority: []
+
+      # Description: The calendar that events are added to by default, as
+      #   specified by user settings.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekeventstore/1507543-defaultcalendarfornewreminders
+      defaultCalendarForNewReminders: []
+
+      # Description: Adds an alarm to the receiver.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/eventkit/ekcalendaritem/1507397-addalarm
+      addAlarm: []
+
+    MUSIC:
+      # Description: Starts the generation of playback notifications.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/1624199-begingeneratingplaybacknotificat
+      beginGeneratingPlaybackNotifications: []
+
+      # Description: Returns the system music player, which controls the Music
+      #   app’s state.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/1624179-systemmusicplayer
+      systemMusicPlayer: []
+
+      # Description: The currently-playing media item, or the media item, within
+      #   a queue, that you have designated to begin playback with.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmusicplayercontroller/1624245-nowplayingitem
+      nowPlayingItem: []
+
+      # Description: The playback duration of the media item.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/mediaplayer/mpmediaitem/1621732-playbackduration
+      playbackDuration: []
+
+    HOMEKIT:
+      # Description: Adds a new home to this home manager.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/homekit/hmhomemanager/1616747-addhomewithname?language=objc
+      addHomeWithName: []
+
+      # Description: Starts searching for accessories not yet associated with a
+      #   home.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmaccessorybrowser/1622405-startsearchingfornewaccessories
+      startSearchingForNewAccessories: []
+
+      # Description: The power state of the accessory.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmcharacteristictypepowerstate
+      HMCharacteristicTypePowerState: []
+
+      # Description: The current door state.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmcharacteristictypecurrentdoorstate
+      HMCharacteristicTypeCurrentDoorState: []
+
+      # Description: The current state of the locking mechanism.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/homekit/hmcharacteristictypecurrentlockmechanismstate
+      HMCharacteristicTypeCurrentLockMechanismState: []
+
+    SPEECH:
+      # Description: The transcription with the highest confidence level.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionresult/1648280-besttranscription
+      bestTranscription: []
+
+      # Description: An array of potential transcriptions, sorted in descending
+      #   order of confidence.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognitionresult/1648282-transcriptions
+      transcriptions: []
+
+      # Description: A Boolean value that indicates whether the speech
+      #   recognizer is currently available.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer/1649885-isavailable
+      isAvailable: []
+
+      # Description: Executes the speech recognition request and delivers the
+      #   results to the specified handler block.
+      # Language: Swift Only
+      # Documentation: https://developer.apple.com/documentation/speech/sfspeechrecognizer/1649883-recognitiontask
+      recognitionTask:
+      - with
+      - resultHandler
+
+    MOTION:
+      # Description: Starts the delivery of current motion data updates to your
+      #   app.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/1615945-startactivityupdatestoqueue?language=objc
+      startActivityUpdatesToQueue: []
+
+      # Description: The confidence that the motion data is accurate.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivityconfidence
+      CMMotionActivityConfidence: []
+
+      # Description: Gathers and returns historical motion data for the
+      #   specified time period.
+      # Language: Objective-C Only
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/1615929-queryactivitystartingfromdate?language=objc
+      queryActivityStartingFromDate: []
+
+ENTITLEMENT:
+  LOCATION: []
+
+  CAMERA: []
+
+  MICROPHONE: []
+
+  PHOTOS: []
+
+  CONTACTS: []
+
+  CALENDAR: []
+
+  HEALTH:
+    # Description: A Boolean value that indicates whether the app may request
+    #   user authorization to access health and activity data that appears in
+    #   the Health app.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_healthkit
+  - com.apple.developer.healthkit
+
+  FACEBOOK: []
+
+  PURCHASES:
+    # Description: A list of merchant IDs your app uses for Apple Pay support.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_in-app-payments
+  - com.apple.developer.in-app-payments
+
+  IDFA: []
+
+  GOOGLE: []
+
+  BLUETOOTH: []
+
+  REMINDERS: []
+
+  MUSIC: []
+
+  HOMEKIT:
+    # Description: A Boolean value that indicates whether users of the app may
+    #   manage HomeKit-compatible accessories.
+    # Language: Swift & Objective-C
+    # Documentation: https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_homekit
+  - com.apple.developer.homekit
+
+  SPEECH: []
+
+  MOTION: []
