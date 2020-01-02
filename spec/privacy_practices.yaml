@@ -1653,6 +1653,16 @@ AUTHORIZATION_METHOD:
       # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/1616116-isactivityavailable
       isActivityAvailable: []
 
+      # Description: The authorization status for motion-related features
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmauthorizationstatus
+      CMAuthorizationStatus: []
+
+      # Description: Returns a value indicating whether the app is authorized to retrieve stored motion data.
+      # Language: Swift & Objetive-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/2913744-authorizationstatus?language=objc
+      authorizationStatus: []
+
   OBJECTIVE-C:
     LOCATION:
       # Description: Requests permission to use location services whenever
@@ -1966,6 +1976,16 @@ AUTHORIZATION_METHOD:
       # Language: Swift & Objective-C
       # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/1616116-isactivityavailable
       isActivityAvailable: []
+
+      # Description: The authorization status for motion-related features
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmauthorizationstatus
+      CMAuthorizationStatus: []
+
+      # Description: Returns a value indicating whether the app is authorized to retrieve stored motion data.
+      # Language: Swift & Objetive-C
+      # Documentation: https://developer.apple.com/documentation/coremotion/cmmotionactivitymanager/2913744-authorizationstatus?language=objc
+      authorizationStatus: []
 
 ADDITIONAL_EVIDENCE:
   SWIFT:
