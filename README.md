@@ -2,12 +2,14 @@
   <img src="./logo.svg" width="200px" height="200px" title="PrivacyFlash Pro logo">
 <p>
 
+Participate in our [user study](https://forms.gle/r8SHNYQJRqX5rSR47)!
+
 # PrivacyFlash Pro
 
-PrivacyFlash Pro analyzes the code of iOS Swift projects to generate a privacy policy. The goals of PrivacyFlash Pro are to:
-- Assist app developers in understanding the privacy practices used by their apps and third party libraries
-- Create a privacy policy covering those practices to notify users and help achieving privacy compliance
-- Establish standardized privacy policies in the app ecosystem
+PrivacyFlash Pro analyzes the code of iOS Swift projects to generate a privacy policy. The goals of PrivacyFlash Pro are:
+- Assisting app developers in understanding the privacy practices used by their apps and third party libraries
+- Creating a privacy policy covering those practices to notify users and help developers achieving privacy compliance
+- Establishing standardized privacy policies in the iOS app ecosystem
 
 PrivacyFlash Pro covers provisions of the California Consumer Privacy Act (CCPA), California Online Privacy Protection Act (CalOPPA), Children's Online Privacy Protection (COPPA), and General Data Protection Regulation (GDPR).
 
@@ -38,6 +40,10 @@ The specification for the privacy practice analysis is contained in `spec/privac
 - FRAMEWORK import (e.g., `CoreLocation`)
 - CLASS instantiation (e.g., `CLLocationManager`)
 - AUTHORIZATION METHOD call (e.g., `requestWhenInUseAuthorization`)
+
+For the analysis of the app code, the AUTHORIZATION METHOD can also be in a library as long as there is ADDITIONAL EVIDENCE (e.g., `startUpdatingLocation`) in the app code. For the analysis of a library, the AUTHORIZATION METHOD can also be in the app code as long as there is ADDITIONAL EVIDENCE (e.g., `startUpdatingLocation`) in the library.
+
+Also, for some practices, for example, Health, an ENTITLEMENT (e.g., com.apple.developer.healthkit) is required. For more details see the [privacy_practices.yaml](https://github.com/privacy-tech-lab/privacyflash-pro/blob/master/spec/privacy_practices.yaml).
 
 ### Third Party Library Analysis
 
