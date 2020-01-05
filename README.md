@@ -11,7 +11,11 @@ PrivacyFlash Pro analyzes the code of iOS Swift projects to generate a privacy p
 - Creating a privacy policy covering those practices to notify users and help developers achieving privacy compliance
 - Establishing standardized privacy policies in the iOS app ecosystem
 
-PrivacyFlash Pro covers provisions of the California Consumer Privacy Act (CCPA), California Online Privacy Protection Act (CalOPPA), Children's Online Privacy Protection (COPPA), and General Data Protection Regulation (GDPR).
+PrivacyFlash Pro covers provisions of the following laws:
+- California Consumer Privacy Act (CCPA)
+- California Online Privacy Protection Act (CalOPPA)
+- Children's Online Privacy Protection (COPPA)
+- General Data Protection Regulation (GDPR).
 
 PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacy-tech-lab.github.io/) at [Wesleyan University](https://www.wesleyan.edu/).
 
@@ -41,7 +45,7 @@ The specification for the privacy practice analysis is contained in `spec/privac
 - CLASS instantiation (e.g., `CLLocationManager`)
 - AUTHORIZATION METHOD call (e.g., `requestWhenInUseAuthorization`)
 
-For the analysis of the app code, the AUTHORIZATION METHOD can also be in a library as long as there is ADDITIONAL EVIDENCE (e.g., `startUpdatingLocation`) in the app code. For the analysis of a library, the AUTHORIZATION METHOD can also be in the app code as long as there is ADDITIONAL EVIDENCE (e.g., `startUpdatingLocation`) in the library.
+For the analysis of the app code, the AUTHORIZATION METHOD can also be in a library as long as there is ADDITIONAL EVIDENCE (e.g., `startUpdatingLocation`) in the app code. Vice versa, for the analysis of a library, the AUTHORIZATION METHOD can also be in the app code as long as there is ADDITIONAL EVIDENCE (e.g., `startUpdatingLocation`) in the library.
 
 Also, for some practices, for example, Health, an ENTITLEMENT (e.g., com.apple.developer.healthkit) is required. For more details see the [privacy_practices.yaml](https://github.com/privacy-tech-lab/privacyflash-pro/blob/master/spec/privacy_practices.yaml).
 
