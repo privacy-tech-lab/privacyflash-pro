@@ -21,7 +21,7 @@ PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@r
 
 ## Installing and Running PrivacyFlash Pro
 
-Click [**here**](https://github.com/privacy-tech-lab/privacyflash-pro/releases/download/v1.0.1/privacyflash-pro.zip) to download PrivacyFlash Pro. Unzip the file `privacyflash-pro.zip` and then click the PrivacyFlash Pro icon. You will have to agree to open PrivacyFlash Pro in your [macOS security settings](https://support.apple.com/en-us/HT202491). After a few seconds PrivacyFlash Pro should run in your default browser. Using PrivacyFlash Pro's directory navigation, navigate to your iOS Swift project directory (the directory that contains your `.xcodeproj` and other project directories and files), and click OK to start the analysis. Depending on the size of your codebase, the analysis results should be available within a minute. You will now be guided through a wizard. Once you have finalized the wizard questionnaire, you can export the privacy policy for your app.
+You will find the releases of PrivacyFlash Pro in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases). Download the latest [**here**](https://github.com/privacy-tech-lab/privacyflash-pro/releases/download/v1.0.1/privacyflash-pro.zip). Unzip the file `privacyflash-pro.zip` and then click the PrivacyFlash Pro icon. You will have to agree to open PrivacyFlash Pro in your [macOS security settings](https://support.apple.com/en-us/HT202491). After a few seconds PrivacyFlash Pro should run in your default browser. Using PrivacyFlash Pro's directory navigation, navigate to your iOS Swift project directory (the directory that contains your `.xcodeproj`), and click OK to start the analysis. Depending on the size of your codebase, the analysis results should be available within a minute. You will now be guided through a wizard. Once you have finalized the wizard questionnaire, you can export the privacy policy for your app.
 
 You can test PrivacyFlash Pro on the projects in the [iOS-sample-projects](https://github.com/privacy-tech-lab/privacyflash-pro/tree/master/iOS-sample-projects). For example, you can analyze the AdColony sample project. Start PrivacyFlash Pro, navigate to the AdColony directory using PrivacyFlash Pro's directory navigation, and click OK to start the analysis. The analysis results should be available within a minute.
 
@@ -63,8 +63,8 @@ Note that even if a library is is not contained in `spec/third_parties.yaml`, Pr
 
 ## Files and Directories in this Repo
 
+- The latest release of PrivacyFlash Pro is contained in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases).
 - `iOS-sample-projects`: Sample projects for PrivacyFlash Pro to analyze and test.
-- `privacyflash-pro.zip`: The PrivacyFlash Pro app.
 - `spec`: Third party and privacy practices specifications.
 - `spec/third_parties.yaml`: Specification for ad networks and other third parties.
 - `spec/privacy_practices.yaml`: Specification for detecting privacy practice usage.
