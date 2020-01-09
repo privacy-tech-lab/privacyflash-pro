@@ -1,0 +1,1829 @@
+<!-- PrivacyFlash Pro is licensed under the MIT License
+Copyright (c) 2019 David Baraka, Rafael Goldstein, Sarah Jin, Sebastian Zimmeck -->
+
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8"/>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1 shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/libs/bootstrap.min.css"/>
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="css/libs/animate.min.css"/>
+
+    <!-- Dark Mode CSS -->
+    <link rel="stylesheet" href="css/libs/dark-mode.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/libs/pretty-checkbox.min.css"/>
+
+    <title>PrivacyFlash Pro - Privacy Policy Generator</title>
+
+  </head>
+
+  <body class="bg-light">
+
+  <!-- Boot Screen -->
+  <section style="display: none;" id="boot">
+      <div class="d-flex align-items-center justify-content-center min-vh-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <img
+            src="img/logo.svg"
+            height="400px"
+            width="400px"/>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section style="display: none;" id="disclaimer">
+    <div
+      class="d-flex align-items-center justify-content-center min-vh-100"
+      style="margin-left: 25%; margin-right: 25%;">
+      <div class="container">
+        <div class="row">
+          <h1>Disclaimer</h1>
+        </div>
+        <div class="row">
+          <div class="overflow-auto">
+            <p>
+                We are researchers at Wesleyan University. PrivacyFlash Pro (PFP)
+                is based on academic research. PFP as well as any generated privacy
+                policy are provided as is and do not constitute legal advice. You
+                are free to use the generated policy for your app. However, please
+                note that it may be insufficient to ensure your app's compliance
+                with all applicable laws, regulations, and other requirements. We
+                cannot assume any responsibility or liability for your use of PFP
+                and any generated policy. If you would like to ensure compliance,
+                we recommend that you hire a lawyer. We hope that you like PFP. We
+                would love to hear from you if you have any questions or comments.<br><br>
+                The PrivacyFlash Pro Team<br>
+                Sebastian Zimmeck (szimmeck@wesleyan.edu)
+            </p>
+            <div>
+              <div class="alert alert-info" role="alert">
+                No data will leave your device when you use PrivacyFlash Pro.
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row justify-content-end">
+          <button
+            type="button"
+            class="btn btn-info"
+            id="disclaimer-btn">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Directory Picker-->
+  <section style="display: none;" id="directoryPicker">
+    <div
+      class="d-flex align-items-center justify-content-center min-vh-100"
+      style="margin-left: 25%; margin-right: 25%;">
+      <div class="container">
+        <div class="row">
+          <h1 style="cursor:default; color: #66bb6a">iOS Swift Project</h1>
+        </div>
+        <div
+          class="row mt-3">
+          <input
+            class="font-weight-bold"
+            type="text"
+            placeholder="Click here to select an iOS Swift project directory."
+            readonly data-toggle="modal" data-target="#directory-picker-modal"
+            style="width:100%;"
+            id="path"/>
+        </div>
+        <div
+          class="row d-flex justify-content-start align-items-center pt-2"
+          style="cursor: default;">
+          <img
+            class="pr-2 validation d-none"
+            src="img/alert-circle-outline.svg"
+            height="32px"
+            width="32px"/>
+          <span class="text-danger validation d-none">Invalid Directory</span>
+        </div>
+        <div
+          class="row d-flex justify-content-start pt-3"
+          style="cursor: default;">
+            <button type="button"
+            class="btn btn-light btn-outline-secondary"
+            id="generate">
+                Start Analysis
+            <img
+              src="img/flash-black.svg"
+              height="18px"
+              width="18px"/>
+            </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Directory Picker Modal -->
+  <section>
+    <div
+      class="modal fade"
+      id="directory-picker-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="directoryPickerModal"
+      aria-hidden="true">
+      <div
+        class="modal-dialog modal-dialog-scrollable modal-lg"
+        role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm delay wrapper-helper" id="enclosingDir"
+                data-toggle="tooltip"
+                data-delay='{ "show": 500, "hide": 0 }'
+                data-placement="left"
+                title="Directory Level Up">
+                <img
+                src="img/chevron-up.svg"
+                height="18px"
+                width="18px"/>
+              </button> &nbsp;&nbsp;
+              <div class="flexContainer" id="selectedPath">
+                  <div class="flexLabel"></div>>
+              </div>
+              <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+                  <div class="close-char">
+                      <span aria-hidden="true">&times;</span>
+                  </div>
+              </button>
+          </div>
+          <div class="modal-body" id="subdirectories">
+            <!-- Sub-directories will be inserted here -->
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+              <div class="font-weight-bold">Please select an iOS Swift project directory.</div>
+              <button type="button" class="btn btn-info" data-dismiss="modal" id="selectPath">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spinner -->
+  <section style="display: none;" id="spinner">
+    <div
+      class="d-flex align-items-center justify-content-center min-vh-100" style="cursor:default;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <img
+          src="img/logo.svg"
+          height="300px"
+          width="300px"/>
+        </div>
+        <div class="row justify-content-center">
+          <div class="spinner-border text-secondary" role="status"></div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+          <strong id="process">Loading Data...</strong>
+        </div>
+        <div class="row justify-content-center" style="opacity: .5;">
+          <small>This may take a minute ...</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wizard, Policy, and Footer Division -->
+  <section style="display: none;" id="main">
+
+    <!-- Wizard -->
+    <section class= "container bg-light p-5" id="wizard">
+    <h1>
+        PrivacyFlash Pro<br>Wizard
+    </h1>
+    <br>
+
+      <!-- Section-0W -->
+      <div class="container">
+        <div class="row">
+            <h2>
+                0. Let's Go ...
+                <img data-toggle="tooltip"
+                data-html="true"
+                title="<p>ProTip:</p>
+                <p>Include a link to this privacy policy
+                <ul>
+                  <li>on the App Store page of your app, </li>
+                  <li>on your app's website, and </li>
+                  <li>inside your app (for example, in an &quot;about&quot; section).</li>
+                </ul>
+                 The link text must contain the word &quot;privacy.&quot;</p>
+                <p>The privacy policy generated by PrivacyFlash Pro covers provisions of the California Consumer Privacy Act (CCPA), California Online Privacy Protection Act (CalOPPA), Children's Online Privacy Protection Act (COPPA), and General Data Protection Regulation (GDPR). See the Privacy Laws page below for details. Depending on where you and your users are located, which personal information you are collecting and sharing, and for which purposes you are collecting and sharing the information, you may need to comply with additional laws.</p>
+                <p>If you have an Android app with different privacy practices or if you are collecting or sharing personal information on your website or offline, you will need to modify the policy exported from PrivacyFlash Pro or create separate privacy policies covering those practices.</p>"
+                     class="align-self-center ml-1"
+                     src="img/info.svg"
+                     height="18px"
+                     width="18px"/>
+            </h2>
+        </div>
+        <div class="row d-flex flex-column pb-3">
+          <div class="d-flex flex-row">
+            <p class="m-0">
+              <a onclick="this.click();" href="#mod-0p">What's the name of your app?</a>
+              <img class="m-0"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                   <p>Use the same app name that you are using on the App Store.<sup>*</sup></p>
+                   <p>If you have multiple apps, you can include multiple app names (e.g., &quot;My App 1, My App 2, and My App 3&quot;). If your apps have different privacy practices, you can generate multiple privacy policies.</p>
+                   <p><sup>*</sup> The app name is required.</p>"
+                   class="align-self-center ml-1"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"/>
+            </p>
+          </div>
+            <input
+            class="font-weight-bold"
+            type="text"
+            placeholder="Ex. My App."
+            id="mod-0w-app">
+        </div>
+        <div class="row d-flex flex-column">
+            <div class="d-flex flex-row">
+                <p class="m-0">
+                   <a onclick="this.click();" href="#mod-0p">Do you have a website where you store previous versions of your privacy policy?</a>
+                   <img class="m-0"
+                        data-toggle="tooltip"
+                        data-html="true"
+                        title="<p>ProTip:</p>
+                        <p>Link to a website where you store previous versions of your privacy policy.<sup>*</sup> Your app's privacy will be governed by the policy version at the time of usage. Thus, it is a good idea to keep track of the effective periods of different versions of your policy and be transparent about those.</p>
+                        <p>If the California Consumer Privacy Act (CCPA) is applicable to your app, you are required to update your policy at least once every 12 months.</p>
+                        <p><sup>*</sup> URL must begin with <em>http://</em> or <em>https://</em></p>
+                        "
+                        class="align-self-center ml-1"
+                        src="img/info.svg"
+                        height="18px"
+                        width="18px"/>
+                </p>
+            </div>
+          <input
+            class="font-weight-bold"
+            type="text"
+            placeholder="URL to website with previous policy versions."
+            id="mod-0w-url">
+        </div>
+      </div>
+
+      <!-- Section-1W -->
+      <div class="container mt-5">
+        <div class="row">
+          <h2 id="mod-1w-title">1. Personal Information Collection and Use
+              <img class="align-self-center ml-1"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                         <p>Adjust your app's personal information collection practices and their purposes.<sup>*</sup> PrivacyFlash Pro flags a practice if it identifies the app's use of a relevant
+                         <ul>
+                            <li>PLIST value (e.g., NSLocationWhenInUseUsageDescription)</li>
+                            <li>FRAMEWORK import (e.g., CoreLocation)</li>
+                            <li>CLASS instantiation (e.g., CLLocationManager), and</li>
+                            <li>AUTHORIZATION METHOD call (e.g., requestWhenInUseAuthorization).</li>
+                         </ul>
+                         The AUTHORIZATION METHOD can also be in a third party library as long as there is ADDITIONAL EVIDENCE (e.g., startUpdatingLocation) in your code. Also, for some practices, for example, Health, an ENTITLEMENT (e.g., com.apple.developer.healthkit) is required. For more details see the privacy_practices.yaml in our PrivacyFlash Pro GitHub repo (linked at the bottom).</p>
+                         <p>
+                            <img
+                            src='img/checkmark-square-2.svg'
+                            height='18px'
+                            width='18px'/>: Practice used in your app and included in the policy
+                            <br>
+                            <img
+                            src='img/minus-square-outline.svg'
+                            height='18px'
+                            width='18px'/>: Practice not used in your app and excluded from the policy
+                         </p>
+                         <p>
+                            <sup>*</sup> Purposes are required.
+                         </p>"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"/>
+          </h2>
+        </div>
+        <div class="row d-flex flex-column">
+          <div class="m-0">
+              <a onclick="this.click();"
+                href="#personal_information_collection">
+                We have pre-selected your app's permissions. Adjust as necessary.
+              </a>
+          </div>
+          <div class="d-flex flex-row justify-content-between mt-1">
+            <h3>&rarr;Permissions</h3>
+            <a
+              href="#"
+              class="ml-2 mb-2 badge badge-info badge-pill align-self-center"
+              id="mod-1w-add">
+              + Add Category
+            </a>
+          </div>
+          <div class="d-flex flex-row flex-wrap" id="mod-1w-permissions">
+            <!-- Permission buttons injected here -->
+          </div>
+          <div style="width: 100%;" class="collapse mt-2" id="mod-1w-collapse">
+            <div class="card card-body" id="mod-1w-evidence">
+              <!-- Evidence for each permission injected here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section-2W -->
+      <div id="section-2" class="container mt-5">
+        <div class="row">
+          <h2>
+            2. Personal Information Sharing
+              <img class="align-self-center ml-1"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                     <p>Adjust your app's practices of sharing personal information with third parties' and their purposes.<sup>*</sup> PrivacyFlash Pro flags a practice if it identifies third party use of a relevant
+                     <ul>
+                        <li>PLIST value (e.g., NSLocationWhenInUseUsageDescription)</li>
+                        <li>FRAMEWORK import (e.g., CoreLocation)</li>
+                        <li>CLASS instantiation (e.g., CLLocationManager), and</li>
+                        <li>AUTHORIZATION METHOD call (e.g., requestWhenInUseAuthorization).</li>
+                     </ul>
+                     The AUTHORIZATION METHOD can also be in your code as long as there is ADDITIONAL EVIDENCE (e.g., startUpdatingLocation) in a third party library's code. Also, for some practices, for example, Health, an ENTITLEMENT (e.g., com.apple.developer.healthkit) is required. For more details see the privacy_practices.yaml in our PrivacyFlash Pro GitHub repo (linked at the bottom).</p>
+                    <p>
+                      <img
+                      src='img/checkmark-square-2-alt.svg'
+                      height='18px'
+                      width='18px'/>: Third party with whom your app is sharing personal information and included in the policy
+                      <br>
+                      <img
+                      src='img/checkmark-square-2.svg'
+                      height='18px'
+                      width='18px'/>: Category of personal information shared with a third party and included in the policy
+                      <br>
+                      <img
+                      src='img/minus-square-outline.svg'
+                      height='18px'
+                      width='18px'/>: Third party or category of personal information not shared with a third party and excluded from the policy
+                    </p>
+                    <p>
+                      <sup>*</sup> Purposes are required.
+                    </p>"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"/>
+          </h2>
+        </div>
+        <div class="row d-flex flex-column">
+          <p class="m-0 mb-1">
+              <a onclick="this.click();" href="#personal_information_sharing">We have pre-selected third party permissions. Adjust as necessary.</a>
+          </p>
+          <div class="d-flex flex-row justify-content-between">
+            <h3>&rarr;Third Parties</h3>
+            <a
+              style="background: #7e57c2;"
+              href="#"
+              class="ml-2 badge badge-info badge-pill align-self-center"
+              id="mod-2w-add">
+              + Add Third Party
+            </a>
+          </div>
+          <div
+            style="width: 100%;"
+            class="d-flex flex-row flex-nowrap overflow-auto align-items-center"
+            id="mod-2w-sdks">
+            <!-- Third parties injected here -->
+          </div>
+          <div style="width: 100%;" class="collapse mt-2" id="mod-2w-collapse-sdks">
+            <div class="card card-body" id="mod-2w-collapse-sdks-data">
+              <!--  -->
+            </div>
+          </div>
+          <div class="d-flex flex-row mt-4">
+            <h3>&rarr;Permissions -- All Third Parties</h3>
+          </div>
+            <div class="d-flex flex-row flex-wrap" id="mod-2w-permissions">
+                <!-- Permission buttons injected here -->
+            </div>
+            <div style="width: 100%;" class="collapse mt-2" id="mod-2w-collapse">
+              <div class="card card-body" id="mod-2w-collapse-data">
+                <!-- Evidence for each permission injected here -->
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- Section-3W -->
+      <div class="container mt-5">
+        <div class="row">
+          <h2 id="sec-title-3W">
+            3. Tracking Technologies
+            <img class="align-self-center ml-1"
+                 data-toggle="tooltip"
+                 data-html="true"
+                 title="<p>ProTip:</p>
+            <p>Adjust your app's and third parties' use of tracking technologies and their purposes.<sup>*</sup> Common tracking technologies are advertising identifiers, IP addresses, device identifiers (e.g., MAC addresses), cookies, and user agent strings (which can be used for device fingerprinting).</p>
+            <p>In addition to the use of tracking technologies, this section of the policy should also clarify your app's response to Do-Not_Track (DNT) signals. The California Online Privacy Protection Act (CalOPPA) requires such statement. By default, native apps are not responsive to DNT signals.</p>
+            <p>
+              <img
+              src='img/checkmark-square-2.svg'
+              height='18px'
+              width='18px'/>: Tracking technology used in your app and included in the policy
+              <br>
+              <img
+              src='img/minus-square-outline.svg'
+              height='18px'
+              width='18px'/>: Tracking technology not used in your app and excluded from the policy
+            </p>
+            <p><sup>*</sup> Purposes are required.</p>"
+                 src="img/info.svg"
+                 height="18px"
+                 width="18px"/>
+          </h2>
+        </div>
+        <div class="row d-flex flex-column">
+          <p class="m-0">
+            <a onclick="this.click();" href="#mod-2p-practices-alt">We have pre-selected tracking technologies. Adjust as necessary.</a>
+          </p>
+          <div class="d-flex flex-row justify-content-between mt-1">
+            <h3 class="m-0">&rarr;Tracking Technologies</h3>
+            <a
+            href="#"
+            class="ml-2 badge badge-info badge-pill align-self-center"
+            id="mod-3w-add">+ Add Tracking Technology
+            </a>
+          </div>
+          <div
+            style="width: 100%;"
+            class="d-flex flex-row flex-nowrap overflow-auto pb-2 pt-1 align-items-center"
+            id="mod-3w-tracking">
+          </div>
+          <div style="width: 100%;" class="collapse" id="mod-3w-collapse"></div>
+        </div>
+      </div>
+
+      <!-- Section-4W -->
+      <div class="container mt-5">
+        <div class="row">
+          <h2 id="sec-title-4W">
+              4. Social Logins
+              <img data-toggle="tooltip"
+                data-html="true"
+                title="<p>ProTip:</p>
+                <p>Explain the privacy practices of any social logins integrated in your app. You may collect personal information about your users from the login providers (e.g., in case of Facebook, a user's likes, birthday, or gender). In turn, the providers will also receive information about your users from your app (e.g., in case of Facebook, metadata about a user's device or that a user is using your app).</p>
+                <p>If necessary, you can include additional social login providers and their practices manually in the exported policy.</p>"
+                class="align-self-center ml-1"
+                src="img/info.svg"
+                height="18px"
+                width="18px"/>
+          </h2>
+        </div>
+        <div class="row d-flex flex-column">
+          <p class="m-0">We have pre-selected your app's use of Facebook Login and Google Sign-In. Adjust as necessary.
+          </p>
+          <p class="m-0 mt-2">
+              <a onclick="this.click();" href="#social_login">Does your app use Facebook Login?</a>
+          </p>
+          <div class="d-flex flex-row mt-2">
+            <div class="pretty p-default p-round p-fill p-bigger">
+                <input type="radio" name="mod-4w-r0" id="mod-4w-r0-yes" />
+                <div class="state p-info">
+                    <label>Yes</label>
+                </div>
+            </div>
+            <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                <input type="radio" name="mod-4w-r0" id="mod-4w-r0-no"/>
+                <div class="state p-info">
+                    <label>No</label>
+                </div>
+            </div>
+          </div>
+            <p class="m-0 mt-4">
+                <a onclick="this.click();" href="#social_login">Does your app use Google Sign-In?</a>
+            </p>
+            <div class="d-flex flex-row mt-2">
+                <div class="pretty p-default p-round p-fill p-bigger">
+                    <input type="radio" name="mod-4w-r1" id="mod-4w-r1-yes" />
+                    <div class="state p-info">
+                        <label>Yes</label>
+                    </div>
+                </div>
+                <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                    <input type="radio" name="mod-4w-r1" id="mod-4w-r1-no"/>
+                    <div class="state p-info">
+                        <label>No</label>
+                    </div>
+                </div>
+              </div>
+        </div>
+      </div>
+
+      <!-- Section-5W -->
+      <div class="container mt-5">
+        <div class="row">
+          <h2 id="sec-title-5W">
+              5. In-app Purchase Information
+              <img data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                   <p>If your app is processing any in-app purchase information, it is assumed that you are using Apple's App Store API (in which case you will not be storing any payment information). However, if you are processing payments in other ways, you have to describe your process and the personal information you are collecting or sharing in the policy accordingly.</p>"
+                   class="align-self-center ml-1"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"/>
+          </h2>
+        </div>
+          <div class="row d-flex flex-column">
+            <p class="m-0">We have pre-selected your app's use of in-app purchase information. Adjust as necessary.</p>
+            <p class="m-0 mt-2">
+                <a onclick="this.click();" href="#in-app_purchase">Does your app use in-app purchase information?</a>
+              </p>
+            <div class="d-flex flex-row mt-2">
+                <div class="pretty p-default p-round p-fill p-bigger">
+                    <input type="radio" name="mod-5w-r0" id="mod-5w-r0-yes"/>
+                    <div class="state p-info">
+                        <label>Yes</label>
+                    </div>
+                </div>
+                <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                    <input type="radio" name="mod-5w-r0" id="mod-5w-r0-no"/>
+                    <div class="state p-info">
+                        <label>No</label>
+                    </div>
+                </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Section-6W -->
+      <div class="container mt-5">
+          <div class="row">
+            <h2 id="sec-title-6W">
+                6. Privacy Rights of California Residents
+                <img data-toggle="tooltip"
+                     data-html="true"
+                     title="<p>ProTip:</p>
+                     <p>If the California Consumer Privacy Act (CCPA) is applicable to your app, California residents can exercise various privacy rights that you must describe and implement.</p>
+                     <p>Also, the California Online Privacy Protection Act (CalOPPA) requires that you describe any process you may have for California residents to review and request changes to their personally identifiable information.</p>"
+                     class="align-self-center ml-1"
+                     src="img/info.svg"
+                     height="18px"
+                     width="18px"/>
+            </h2>
+          </div>
+          <div class="row d-flex flex-column">
+           <p class="m-0 mt-2">
+               <a onclick="this.click();" href="#california_privacy_rights">(a) Do you operate as a legal entity for profit?</a>
+               <img class="align-self-center ml-1"
+               data-toggle="tooltip"
+               data-html="true"
+               title="<p>ProTip:</p>
+               <p>Many app developers are operating as a legal entity for profit. Especially, individual developers may often qualify as sole proprietors. In the United States a sole proprietorship is a legal entity for profit owned and run by an individual with no distinction between the business and the individual. There are no formal requirements for setting up a sole proprietorship. For example, if an individual developer is offering a paid app or is monetizing an app via ads, he or she may be considered a sole proprietor.</p>"
+               src="img/info.svg"
+               height="18px"
+               width="18px"/>
+           </p>
+          <div class="d-flex flex-row mt-2">
+              <div class="pretty p-default p-round p-fill p-bigger">
+                  <input type="radio" name="mod-6w-r0" id="mod-6w-r0-yes"/>
+                  <div class="state p-info">
+                    <label>Yes</label>
+                  </div>
+              </div>
+              <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                <input type="radio" name="mod-6w-r0" id="mod-6w-r0-no"/>
+                <div class="state p-info">
+                  <label>No</label>
+                </div>
+            </div>
+          </div>
+            <p class="m-0 mt-4">
+                <a onclick="this.click();" href="#california_privacy_rights">(b) Do you collect personal information from consumers in California?</a>
+              <img class="align-self-center ml-1"
+              data-toggle="tooltip"
+              data-html="true"
+              title="<p>ProTip:</p>
+              <p>The CCPA defines personal information broadly. It generally covers all information related to a consumer's interaction with an app. For example, advertising identifiers, IP addresses, and location information all qualify as personal information per the CCPA.</p>
+              <p>Note that the CCPA can apply even if your business is not located in California. If your app is used by California residents, it may be subject to the CCPA (assuming that all other requirements for the applicability of the CCPA are met).</p>"
+              src="img/info.svg"
+              height="18px"
+              width="18px"/>
+            </p>
+          <div class="d-flex flex-row mt-2">
+            <div class="pretty p-default p-round p-fill p-bigger">
+              <input type="radio" name="mod-6w-r1" id="mod-6w-r1-yes" />
+              <div class="state p-info">
+                  <label>Yes</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round p-fill p-bigger ml-3">
+              <input type="radio" name="mod-6w-r1" id="mod-6w-r1-no"/>
+              <div class="state p-info">
+                  <label>No</label>
+              </div>
+            </div>
+          </div>    
+            <p class="m-0 mt-4">
+                <a onclick="this.click();" href="#california_privacy_rights">(c) Do you determine the purposes and means of processing personal information?</a>
+              <img class="align-self-center ml-1"
+              data-toggle="tooltip"
+              data-html="true"
+              title="<p>ProTip</p>
+              <p>Is it your responsibility --- possibly, shared with others --- to determine the purposes and means of personal information collection or sharing for your app? For example, are you involved in deciding whether to integrate an ad network that receives personal information from your app's users for monetization purposes? This requirement is not satisfied if you developed an app as a freelance developer for someone else and that person is making all decisions for monetizing the app you developed.</p>"
+              src="img/info.svg"
+              height="18px"
+              width="18px"/>
+            </p>
+          <div class="d-flex flex-row mt-2">
+            <div class="pretty p-default p-round p-fill p-bigger">
+              <input type="radio" name="mod-6w-r2" id="mod-6w-r2-yes" />
+              <div class="state p-info">
+                <label>Yes</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round p-fill p-bigger ml-3">
+              <input type="radio" name="mod-6w-r2" id="mod-6w-r2-no"/>
+              <div class="state p-info">
+                <label>No</label>
+              </div>
+            </div>
+          </div>
+          <p class="m-0 mt-4">
+            <a onclick="this.click();" href="#california_privacy_rights">(d) Is one of the following options applicable to you?</a>
+            <img class="align-self-center ml-1"
+            data-toggle="tooltip"
+            data-html="true"
+            title="<p>ProTip</p>
+            <p>Note that only <em>one</em> of the options needs to be satisfied.</p>
+            <p>It is not clear at this point whether the thresholds --- i. twenty-five million dollars, ii. 50,000 or more consumers, households, or devices, and iii. 50 percent or more of annual revenues --- only relate to consumers residing in California or to all users of an app. A conservative approach would be to assume that it relates to all users of an app.<p>
+            <p>For option iii. &quot;selling&quot; is broadly defined in the CCPA and will likely be interpreted to cover sharing of personal information with ad networks to target advertising for ad revenue. Making personal information available to analytics services for purposes other than monetization will likely not be considered a sale in many cases.</p>"
+            src="img/info.svg"
+            height="18px"
+            width="18px"/>
+          <ol type="i" class="m-0">
+            <li>You have annual gross revenues of more than twenty-five million dollars</li>
+            <li>You process personal information of 50,000 or more consumers, households, or devices annually, or</li>
+            <li>You derive 50 percent or more of your annual revenues from selling consumers' personal information.</li>
+          </ol>
+          <div class="d-flex flex-row mt-2">
+            <div class="pretty p-default p-round p-fill p-bigger">
+              <input type="radio" name="mod-6w-r3" id="mod-6w-r3-yes" />
+              <div class="state p-info">
+                  <label>Yes</label>
+              </div>
+            </div>
+            <div class="pretty p-default p-round p-fill p-bigger ml-3">
+              <input type="radio" name="mod-6w-r3" id="mod-6w-r3-no"/>
+              <div class="state p-info">
+                  <label>No</label>
+              </div>
+            </div>
+          </div>
+          <p style="display: none;" class="m-0 mt-4" id="mod-6w-ccpa-info">
+            The CCPA is applicable to your app.
+          </p>
+          <div class="d-flex flex-row justify-content-start">
+            <button
+              style="display: none;"
+              type="button"
+              class="btn btn-outline-info btn-sm mt-1"
+              id="mod-6w-more">
+              <span>Continue</span>
+            </button>
+          </div>
+          <div style="width: 100%;" class="collapse mt-2" id="mod-6w-collapse">
+            <div class="card card-body" id="mod-6w-content">
+                <div class="d-flex flex-column">
+                  <div class="d-flex flex-row mb-2 justify-content-between">
+                    <h3 class="m-0">
+                        <a onclick="this.click();" href="#collection_sources">Add sources from which you are collecting personal information.</a>
+                        <img class="align-self-center ml-1"
+                             src="img/info.svg"
+                             height="18px"
+                             width="18px"
+                             data-toggle="tooltip"
+                             data-html="true"
+                             title="<p>ProTip:</p>
+                             <p>If you are collecting personal information from other sources outside your app, add those sources here. Include the categories of information you are collecting and their purposes.<sup>*</sup> For example, sources are data brokers, consumer data resellers, governmental record providers, or public record repositories.</p>
+                             <p><sup>*</sup> Source, category, and purpose are required if you are adding a source.</p>"/>
+                    </h3>
+                    <button 
+                      type="button" 
+                      class="btn close pl-2 ml-auto align-self-start"
+                      data-toggle="collapse" 
+                      data-target="#mod-6w-collapse"
+                      >
+                      <div class="close-char">
+                          <span aria-hidden="true">&times;</span>
+                      </div>
+                    </button>
+                  </div>
+                  <div class="d-flex flex-row justify-content-between mt-1">
+                    <h3 class="m-0 mr-1">&rarr;Sources of Personal Information</h3>
+                    <a
+                    href="#"
+                    class="ml-2 badge badge-info badge-pill align-self-center"
+                    id="mod-6w-add-source">+ Add Source
+                    </a>
+                  </div>
+                  <div
+                    style="width: 100%;"
+                    class="d-flex flex-row flex-nowrap overflow-auto pb-1 pt-1 align-items-center"
+                    id="mod-6w-sources">
+                      <button
+                      type="button"
+                      disabled='true' 
+                      class="btn btn-sm text-nowrap btn-outline-secondary-alt">
+                      No Sources Added
+                    </button>
+                  </div>
+                  <div class="collapse" id="mod-6w-collapse-1">
+                    <div class="card card-body shadow-sm" id="mod-6w-content-1">
+                      <!-- Content -->
+                    </div>
+                  </div>
+                  <h3 class="m-0 mt-5">
+                      <a onclick="this.click();" href="#california_sale_and_disclosure">Within the preceding 12 months, have you <em>sold</em> personal information?</a>
+                        <img class="align-self-center ml-1"
+                             src="img/info.svg"
+                             height="18px"
+                             width="18px"
+                             data-toggle="tooltip"
+                             data-html="true"
+                             title="<p>ProTip:</p>
+                             <p>Adjust your practices for selling personal information and their purposes.<sup>*</sup></p>
+                             <p>&quot;Selling&quot; is broadly defined in the CCPA and includes renting, releasing, making available, transferring, or otherwise communicating by electronic means a consumer's personal information for monetary or other valuable consideration. Most notably, &quot;selling&quot; will likely be interpreted to cover sharing of personal information with ad networks to target advertising for ad revenue. Making personal information available to analytics services for purposes other than monetization will likely not be considered a sale in many cases.</p>
+                             <p>If you are selling personal information, the CCPA requires you to notify California residents of their right to opt out of the sale. The law requires a &quot;Do Not Sell My Personal Information&quot; link on your app&apos;s website. The link must lead to a web form that consumers can use to opt out. The web form must contain a link to this privacy policy, and, vice versa, this privacy policy must contain a link to the web form.</p>
+                             <p>
+                              <img
+                              src='img/checkmark-square-2.svg'
+                              height='18px'
+                              width='18px'/>: Category of personal information sold and included in the policy
+                              <br>
+                              <img
+                              src='img/minus-square-outline.svg'
+                              height='18px'
+                              width='18px'/>: Category of personal information not sold and excluded from the policy
+                             </p>
+                             <p><sup>*</sup> Purposes are required.</p>">
+                  </h3>
+                  <div class="d-flex flex-row mt-2">
+                    <div class="pretty p-default p-round p-fill p-bigger">
+                      <input type="radio" name="mod-6w-r4" id="mod-6w-r4-yes" />
+                      <div class="state p-info">
+                        <label>Yes</label>
+                      </div>
+                    </div>
+                    <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                      <input type="radio" name="mod-6w-r4" id="mod-6w-r4-no"/>
+                      <div class="state p-info">
+                        <label>No</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display: none;" id="mod-6w-soldInfo-more">
+                    <div class="d-flex flex-row justify-content-between mt-3">
+                      <h3 class="m-0 mr-1">
+                        &rarr;Categories of Personal Information
+                      </h3>
+                      <a
+                      href="#"
+                      id="mod-6w-collapse-soldInfo-add"
+                      class="ml-2 badge badge-info badge-pill align-self-center">+ Add Category
+                      </a>
+                    </div>
+                    <div
+                      style="width: 100%;"
+                      id="mod-6w-soldInfo"
+                      class="d-flex flex-row flex-nowrap overflow-auto pb-2 pt-1 align-items-center">
+                    </div>
+                    <div class="collapse shadow-sm" id="mod-6w-collapse-soldInfo"></div>
+                    <p
+                    class="m-0 pt-2">Link to 'Do Not Sell' opt out web form.
+                    </p>
+                    <small class="m-0">URL must begin with <em>http://</em> or <em>https://</em></small>
+                    <input
+                    style="width: 100%;"
+                    class="font-weight-bold m-0"
+                    placeholder="Enter URL here"
+                    id="mod-6w-do-not-sell">
+                  </div>
+                  <h3 class="m-0 mt-5">
+                      <a onclick="this.click();" href="#california_sale_and_disclosure">Within the preceding 12 months, have you <em>disclosed</em> personal information for business purposes?</a>
+                        <img class="align-self-center ml-1"
+                             src="img/info.svg"
+                             height="18px"
+                             width="18px"
+                             data-toggle="tooltip"
+                             data-html="true"
+                             title="<p>ProTip:</p>
+                             <p>Adjust your practices for disclosing personal information and their business purposes.<sup>*</sup></p>
+                             <p>&quot;Business purpose&quot; means the use of personal information for your or a service provider&apos;s operational purposes. For example, a business purpose of an ad network integrated into an app is the counting of ad impressions or the verification of the positioning and quality of ad impressions. The disclosure of personal information to an analytics service for purposes of identifying and repairing errors that impair existing intended functionality of your app would be a business purpose as well.</p>
+                             <p>
+                              <img
+                              src='img/checkmark-square-2.svg'
+                              height='18px'
+                              width='18px'/>: Category of personal information disclosed for a business purpose and included in the policy
+                              <br>
+                              <img
+                              src='img/minus-square-outline.svg'
+                              height='18px'
+                              width='18px'/>: Category of personal information not disclosed for a business purpose and excluded from the policy
+                            </p>
+                            <p><sup>*</sup> Purposes are required.</p>">
+                  </h3>
+                  <div class="d-flex flex-row mt-2">
+                    <div class="pretty p-default p-round p-fill p-bigger">
+                      <input type="radio" name="mod-6w-r5" id="mod-6w-r5-yes" />
+                      <div class="state p-info">
+                        <label>Yes</label>
+                      </div>
+                    </div>
+                    <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                      <input type="radio" name="mod-6w-r5" id="mod-6w-r5-no"/>
+                      <div class="state p-info">
+                        <label>No</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display: none;" id="mod-6w-disInfo-more">
+                    <div class="d-flex flex-row justify-content-between mt-3">
+                      <h3 class="m-0 mr-1">
+                        &rarr;Categories of Personal Information
+                      </h3>
+                      <a
+                      href="#"
+                      id="mod-6w-collapse-disInfo-add"
+                      class="ml-2 badge badge-info badge-pill align-self-center">+ Add Category
+                      </a>
+                    </div>
+                    <div
+                      style="width: 100%;"
+                      id="mod-6w-disInfo"
+                      class="d-flex flex-row flex-nowrap overflow-auto pb-2 pt-1 align-items-center">
+                    </div>
+                    <div class="collapse shadow-sm" id="mod-6w-collapse-disInfo"></div>
+                  </div>
+                  <h3 class="m-0 mt-5">
+                        <a onclick="this.click();" href="#california_financial_incentive">Are you offering a financial incentive to consumers for allowing their sale of information?</a>
+                        <img class="align-self-center ml-1"
+                             src="img/info.svg"
+                             height="18px"
+                             width="18px"
+                             data-toggle="tooltip"
+                             data-html="true"
+                             title="<p>ProTip:</p>
+                             <p>You may offer to consumers using your app financial incentives (for example, via a rewards program) for the sale of personal information. You may also charge a different price or offer a different service to consumers who do not want their personal information to be sold. However, the difference in price or service must be directly related to the value provided to the consumer by the consumer&apos;s personal information.</p>
+                             <p>If you want to offer a financial incentive, include a summary of its material terms in the policy. Describe which categories of personal information the incentive relates to, how the consumer can obtain the financial incentive, that the consumer can withdraw at any time, how the withdrawal may be exercised, and an explanation on which basis the incentive is calculated.<sup>*</sup> You will need a consumer's prior opt in consent before enrolling him or her in your incentive program.</p>
+                             <p><sup>*</sup> If you are offering financial incentives, this description is required.</p>">
+                  </h3>
+                  <div class="d-flex flex-row mt-2">
+                    <div class="pretty p-default p-round p-fill p-bigger">
+                      <input type="radio" name="mod-6w-r6" id="mod-6w-r6-yes" />
+                      <div class="state p-info">
+                        <label>Yes</label>
+                      </div>
+                    </div>
+                    <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                      <input type="radio" name="mod-6w-r6" id="mod-6w-r6-no"/>
+                      <div class="state p-info">
+                        <label>No</label>
+                      </div>
+                    </div>
+                  </div>
+                  <p style="display: none;"
+                    id="mod-6w-f"
+                    class="m-0 mr-1 mt-2">
+                    <small>Financial Incentive</small>
+                  </p>
+                  <textarea
+                        rows="1"
+                        style="display: none; overflow: hidden;"
+                        class="font-weight-bold"
+                        placeholder="Description of financial incentive."
+                        id="mod-6w-input-financial"></textarea>
+                  <h3 class="m-0 mt-5">
+                        <a onclick="this.click();" href="#california_statistics">Do you buy, receive, sell, or share for commercial purposes, the personal information of four million or more consumers annually?</a>
+                        <img class="align-self-center ml-1"
+                             src="img/info.svg"
+                             height="18px"
+                             width="18px"
+                             data-toggle="tooltip"
+                             data-html="true"
+                             title="<p>ProTip:</p>
+                             <p>If you are processing the personal information of four million or more consumers annually, you are required to disclose various statistics on the privacy rights that consumers exercised in the previous calendar year. For example, you must disclose how many requests to opt out from the sale of personal information you received, complied with, and denied. The statistics should be included directly in the privacy policy. Alternatively, you can include a link in this policy to a separate document where you disclose these statistics.</p>
+                             <p>It is not clear at this point whether the threshold of four million or more consumers annually only relate to users residing in California or to all users of an app. A conservative approach would be to assume that it relates to all users.
+                             <p>Note that these statistic only need to be published starting in 2021 as they refer to the previous calendar year, and 2020 is the first year in which the CCPA became effective.</p>">
+                  </h3>
+                  <div class="d-flex flex-row mt-2">
+                    <div class="pretty p-default p-round p-fill p-bigger">
+                      <input type="radio" name="mod-6w-r7" id="mod-6w-r7-yes" />
+                      <div class="state p-info">
+                        <label>Yes</label>
+                      </div>
+                    </div>
+                    <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                      <input type="radio" name="mod-6w-r7" id="mod-6w-r7-no"/>
+                      <div class="state p-info">
+                        <label>No</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display: none;" id="mod-6w-annual">
+                      <div class="d-flex flex-column">
+                  <p
+                    class="m-0 mr-1 mt-3">
+                      Requests to know: last year, how many requests from consumers to obtain a <em>copy</em> of their personal information have you (1) received, (2) complied with (in whole or in part), and (3) denied?
+                  </p>
+                  <input
+                  class="font-weight-bold mt-1"
+                  type="text"
+                  placeholder="Ex. (1) Received: 10; (2) Complied with: 9; (3) Denied: 1."
+                  id="mod-6w-input-annual-0">
+                  <p
+                  class="m-0 mr-1 mt-3">
+                      Requests to delete: last year, how many requests from consumers to <em>delete</em> personal information have you (1) received, (2) complied with (in whole or in part), and (3) denied?
+                  </p>
+                  <input
+                  class="font-weight-bold mt-1"
+                  type="text"
+                  placeholder="Ex. (1) Received: 10; (2) Complied with: 9; (3) Denied: 1."
+                  id="mod-6w-input-annual-1">
+                  <p
+                  class="m-0 mr-1 mt-3">
+                      Requests to opt out: last year, how many requests from consumers to <em>opt out</em> from the sale of personal information have you (1) received, (2) complied with (in whole or in part), and (3) denied?
+                  </p>
+                  <input
+                  class="font-weight-bold mt-1"
+                  type="text"
+                  placeholder="Ex. (1) Received: 10; (2) Complied with: 9; (3) Denied: 1."
+                  id="mod-6w-input-annual-2">
+                  <p
+                  class="m-0 mr-1 mt-3">
+                      Last year, what was the median number of days that it took you to <em>substantively respond</em> to requests from consumers to (1) know, (2) delete, and (3) opt out from the sale of their personal information?
+                  </p>
+                  <input
+                  class="font-weight-bold mt-1"
+                  type="text"
+                  placeholder="Ex. (1) Obtain a copy: 10; (2) Delete: 9; (3) Opt out: 11."
+                  id="mod-6w-input-annual-3"> 
+                  </div>
+                </div>
+                <h3 class="m-0 mt-5">
+                    <a onclick="this.click();" href="#california_review_changes">Do you have a process for California residents to review and request changes to their personally identifiable information?</a>
+                    <img class="align-self-center ml-1"
+                         src="img/info.svg"
+                         height="18px"
+                         width="18px"
+                         data-toggle="tooltip"
+                         data-html="true"
+                         title="<p>ProTip:</p>
+                         <p>If you have a process for California residents to review and request changes to their personally identifiable information you collected, CalOPPA requires that you describe it. You do <em>not</em> need to have such process. However, if you do have it, you must describe it here in the policy.</p>
+                         <p>Note that CalOPPA is independent from the CCPA. CalOPPA's definition of personally identifiable information includes e-mail addresses, phone numbers, online identifiers, and any information concerning a user that you keep in personally identifiable form in combination with any of the previous identifiers.</p>">
+                </h3>
+                <div class="d-flex flex-row mt-2">
+                  <div class="pretty p-default p-round p-fill p-bigger">
+                    <input type="radio" name="mod-6w-r8" id="mod-6w-r8-yes" />
+                    <div class="state p-info">
+                      <label>Yes</label>
+                    </div>
+                  </div>
+                  <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                    <input type="radio" name="mod-6w-r8" id="mod-6w-r8-no"/>
+                    <div class="state p-info">
+                      <label>No</label>
+                    </div>
+                  </div>
+                </div>
+                <p style="display: none;"
+                id="mod-6w-process"
+                class="m-0 mr-1 mt-2">
+                <small>Process</small>
+                </p>
+                    <textarea
+                            rows="1"
+                            style="display: none; overflow: hidden;"
+                            class="font-weight-bold"
+                            placeholder="Description of process."
+                            id="mod-6w-input-process"></textarea>
+                <h3 class="m-0 mt-5">
+                    <a onclick="this.click();" href="#california_privacy_rights_disclosure">Describe how California residents can exercise their privacy rights.</a>
+                    <img class="align-self-center ml-1"
+                         src="img/info.svg"
+                         height="18px"
+                         width="18px"
+                         data-toggle="tooltip"
+                         data-html="true"
+                         title="<p>ProTip:</p>
+                         <p>California residents have the rights to request from you a copy of their personal information (right to know), deletion of their personal information (right to delete), and being opted out from the sale of personal information (right to opt out). You have to establish a process for app users to submit such requests. The CCPA regulations advise to set up an online web form for making requests. Include a link in this policy to your web form. An important part of your process is the identity verification of the individual submitting a request.</p>
+                          <p>How you verify the identity of the requester depends on what information you have collected in the first place. If you only have an IDentifier for Advertising (IDFA), you can ask the user to submit this identifier to you. If you have an e-mail address, you can ask the user to submit their request from that e-mail address. Generally, you should not require more information than you already have. Also, the more sensitive the personal information is that you have, the higher your standard for identity verification should be.</p>
+                         <p>For opt out requests, you have to ensure that you and third parties stop collecting personal information in the future. For requests to delete, past information must be removed as well. Many ad networks have established processes for rights requests (e.g., for AdMob see https://support.google.com/admob/answer/9561022?hl=en). Check which processes the third parties your app integrates have set up and follow those. In the absence of any special processes provided, ask them. If they do not have any process, you can pass them the opted out consumers' IDFAs. Take note of the IAB CCPA Framework.</p>">
+                </h3>
+                  <div class="d-flex flex-row mt-1">
+                      <p class="m-0 mr-1"></p>
+                  </div>
+                    <textarea
+                      rows="1"
+                      style="overflow: hidden;"
+                      class="font-weight-bold"
+                      placeholder="In order for us to verify your rights request, please contact us at the contact information <a href='#contact_us'>below</a> and include the identifier you are using in <span class='app-name'></span> (e.g., username or e-mail address)."
+                      id="mod-6w-input-rights"></textarea>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section-7W -->
+      <div class="container mt-5">
+        <div class="row">
+        <h2 id="sec-title-7W">
+            7. Privacy Rights of Users in the European Economic Area
+            <img class="align-self-center ml-1"
+                 src="img/info.svg"
+                 height="18px"
+                 width="18px"
+                 data-toggle="tooltip"
+                 data-html="true"
+                 title="<p>ProTip:</p>
+                 <p>If the General Data Protection Regulation (GDPR) is applicable to your app, users from the European Economic Area (EEA) have subject access request and other rights that must be described in your privacy policy and for which you must implement a process. Generally, you can set up a similar process as for CCPA rights requests.</p>">
+        </h2>
+        </div>
+        <div class="row d-flex flex-column">
+        <p class="m-0 mt-2">
+          <a onclick="this.click();" href="#eea_privacy_rights">(a) Are you or is any of your users in the European Economic Area (EEA)?</a>
+          <img class="align-self-center ml-1"
+               src="img/info.svg"
+               height="18px"
+               width="18px"
+               data-toggle="tooltip"
+               data-html="true"
+               title="<p>ProTip:</p>
+               <p>The EEA covers the European Union member states as well as Iceland, Liechtenstein, and Norway. If you or any of your users is located there, the GDPR is applicable to your app.</p>
+               <p>The GDPR does not only apply to residents in the EEA countries; a user from a non-EEA country on vacation in one of the EEA countries is covered as well. The applicability is different from the CCPA, which requires residency (in California).</p>">
+        </p>
+          <div class="d-flex flex-row mt-2">
+              <div class="pretty p-default p-round p-fill p-bigger">
+                  <input type="radio" name="mod-7w-r0" id="mod-7w-r0-yes"/>
+                  <div class="state p-info">
+                    <label>Yes</label>
+                  </div>
+              </div>
+              <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                <input type="radio" name="mod-7w-r0" id="mod-7w-r0-no"/>
+                <div class="state p-info">
+                  <label>No</label>
+                </div>
+            </div>
+          </div>
+            <p class="m-0 mt-4">
+                <a onclick="this.click();" href="#eea_privacy_rights">(b) Are you processing personal data as defined in the General Data Protection Regulation (GDPR)?</a>
+                <img class="align-self-center ml-1"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                   <p>The GDPR defines personal data as any information relating to an identified or identifiable natural person; an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person.</p>">
+            </p>
+            <div class="d-flex flex-row mt-2">
+                <div class="pretty p-default p-round p-fill p-bigger">
+                    <input type="radio" name="mod-7w-r1" id="mod-7w-r1-yes"/>
+                    <div class="state p-info">
+                      <label>Yes</label>
+                    </div>
+                </div>
+                <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                  <input type="radio" name="mod-7w-r1" id="mod-7w-r1-no"/>
+                  <div class="state p-info">
+                    <label>No</label>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- Section-8W -->
+      <div class="container mt-5">
+        <div class="row">
+            <h2 id="sec-title-8W">
+                8. Children's Personal Information
+                <img class="align-self-center ml-1"
+                     src="img/info.svg"
+                     height="18px"
+                     width="18px"
+                     data-toggle="tooltip"
+                     data-html="true"
+                     title="<p>ProTip:</p>
+                     <p>If the Children's Online Privacy Protection Act (COPPA) is applicable to your app, include a link to this privacy policy on every screen inside your app where a child's personal information is collected. Also, if the CCPA is applicable to your app, it has to satisfy special requirements for selling personal information of minors per Sections 999.330, 999.331, and 999.332 of the CCPA Regulations.</p>">
+            </h2>
+        </div>
+        <div class="row d-flex flex-column">
+          <p class="m-0 mt-2">
+              <a onclick="this.click();" href="#children_personal_information">(a) Is your app <strong>directed</strong> to children under the age of 13?</a>
+              <img class="align-self-center ml-1"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                   <p>The Federal Trade Commission, which is the regulatory agency for enforcing COPPA, provides various factors for determining whether an app is directed to children (i.e., intended for children). These factors include, among others, the use of animated characters or child-oriented activities and incentives, music or other audio content, age of models, and the presence of child celebrities or celebrities who appeal to children.</p>">
+          </p>
+          <div class="d-flex flex-row mt-2">
+              <div class="pretty p-default p-round p-fill p-bigger">
+                  <input type="radio" name="mod-8w-r0" id="mod-8w-r0-yes"/>
+                  <div class="state p-info">
+                    <label>Yes</label>
+                  </div>
+              </div>
+              <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                <input type="radio" name="mod-8w-r0" id="mod-8w-r0-no"/>
+                <div class="state p-info">
+                  <label>No</label>
+                </div>
+            </div>
+          </div>
+          <p class="m-0 mt-4">
+              <a onclick="this.click();" href="#children_personal_information">(b) Do you have <strong>actual knowledge</strong> that your app is used by children under the age of 13?</a>
+              <img class="align-self-center ml-1"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                   <p>For example, you are considered to have actual knowledge that a child is using your app if you implemented an age gate in your app and a user indicates to be under 13. However, if you are operating an app intended for a general audience, the fact that a user is under 13 is not sufficient by itself to constitute actual knowledge.</p>">
+          </p>
+          <div class="d-flex flex-row mt-2">
+              <div class="pretty p-default p-round p-fill p-bigger">
+                  <input type="radio" name="mod-8w-r1" id="mod-8w-r1-yes"/>
+                  <div class="state p-info">
+                    <label>Yes</label>
+                  </div>
+              </div>
+              <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                <input type="radio" name="mod-8w-r1" id="mod-8w-r1-no"/>
+                <div class="state p-info">
+                  <label>No</label>
+                </div>
+            </div>
+          </div>
+            <p class="m-0 mt-4">
+                <a onclick="this.click();" href="#children_personal_information">(c) Are you collecting, using, or sharing personal information from children?</a>
+                <img class="align-self-center ml-1"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                   <p>COPPA defines a child to mean an individual under the age of 13. It further defines personal information as individually identifiable information about an individual collected online. The definition covers online contact information, usernames, phone numbers, IP addresses, device identifiers, location information, and any other information concerning a child or the parents of a child that you collect online from the child and combine with any of the aforementioned.</p>">
+            </p>
+          <div class="d-flex flex-row mt-2">
+            <div class="pretty p-default p-round p-fill p-bigger">
+                <input type="radio" name="mod-8w-r2" id="mod-8w-r2-yes"/>
+                <div class="state p-info">
+                  <label>Yes</label>
+                </div>
+            </div>
+            <div class="pretty p-default p-round p-fill p-bigger ml-3">
+              <input type="radio" name="mod-8w-r2" id="mod-8w-r2-no"/>
+              <div class="state p-info">
+                <label>No</label>
+              </div>
+          </div>
+        </div>
+        <p style="display: none;" class="m-0 mt-3" id="mod-8w-coppa-info">
+          COPPA is applicable to your app.
+        </p>
+          <div class="d-flex flex-row justify-content-start">
+            <button
+              style="display: none;"
+              type="button"
+              class="btn btn-outline-info btn-sm mt-1"
+              id="mod-8w-more">
+              <span>Continue</span>
+            </button>
+          </div>
+          <div style="width: 100%;" class="collapse mt-2" id="mod-8w-collapse">
+            <div class="card card-body">
+              <p class="d-flex flex-column">
+                  <div class="d-flex flex-row mb-2 justify-content-between">
+                    <h3 class="m-0">
+                        <a onclick="this.click();" href="#children-categories">What categories of personal information from children are you collecting and using?</a>
+                        <img class="align-self-center ml-1"
+                             src="img/info.svg"
+                             height="18px"
+                             width="18px"
+                             data-toggle="tooltip"
+                             data-html="true"
+                             title="<p>ProTip:</p>
+                             <p>We have populated the list of categories your app is collecting and using from children according to the automatic analysis shown in Section 1 above. Add or remove categories as necessary. Describe the purposes for why you are collecting personal information from children.<sup>*</sup></p>
+                             <p>
+                              <img
+                              src='img/checkmark-square-2.svg'
+                              height='18px'
+                              width='18px'/>: Category of personal information collected from children and included in the policy
+                              <br>
+                              <img
+                              src='img/minus-square-outline.svg'
+                              height='18px'
+                              width='18px'/>: Category of personal information not collected from children and excluded from the policy
+                             </p>
+                             <p><sup>*</sup> Purposes are required.</p>">
+                    </h3>
+                    <button 
+                      type="button" 
+                      class="btn close pl-2 ml-auto align-self-start"
+                      data-toggle="collapse" 
+                      data-target="#mod-8w-collapse"
+                      >
+                      <div class="close-char">
+                          <span aria-hidden="true">&times;</span>
+                      </div>
+                    </button>
+                  </div>
+                    <div class="d-flex flex-row justify-content-between mt-2">
+                      <h3 class="m-0 mr-1">
+                        &rarr;Categories of Personal Information
+                      </h3>
+                      <a
+                      href="#"
+                      id="mod-8w-collapse-add-fp"
+                      class="ml-2 badge badge-info badge-pill align-self-center">+ Add Category
+                      </a>
+                    </div>
+                    <div
+                      style="width: 100%;"
+                      id="mod-8w-fp"
+                      class="d-flex flex-row flex-nowrap overflow-auto pb-2 pt-1 align-items-center">
+                    </div>
+                    <div class="collapse shadow-sm" id="mod-8w-collapse-fp"></div>
+                    <h3 class="m-0 mt-5">
+                        <a onclick="this.click();" href="#children-third-parties">What categories of personal information from children are you sharing with third parties?</a>
+                        <img class="align-self-center ml-1"
+                             src="img/info.svg"
+                             height="18px"
+                             width="18px"
+                             data-toggle="tooltip"
+                             data-html="true"
+                             title="<p>ProTip:</p>
+                             <p>We have populated the list of categories of personal information from children your app is sharing with third parties according to the automatic analysis shown in Section 2 above. Add or remove categories and third parties as necessary. Describe the purposes for why you are sharing personal information with third parties.<sup>*</sup></p>
+                            <p>
+                              <img
+                              src='img/checkmark-square-2-alt.svg'
+                              height='18px'
+                              width='18px'/>: Third party with whom your app is sharing personal information from children and included in the policy
+                              <br>
+                              <img
+                              src='img/checkmark-square-2.svg'
+                              height='18px'
+                              width='18px'/>: Category of personal information from children shared with a third party and included in the policy
+                              <br>
+                              <img
+                              src='img/minus-square-outline.svg'
+                              height='18px'
+                              width='18px'/>: Third party or category of personal information from children not shared with a third party and excluded from the policy
+                            </p>
+                            <p><sup>*</sup> Purposes are required.</p>">
+                    </h3>
+                    <div id="mod-8w-tpInfo-more">
+                        <div class="d-flex flex-row justify-content-between mt-2">
+                          <h3 class="m-0 mr-1 mt-2">
+                            &rarr;Categories of Personal Information
+                          </h3>
+                          <a
+                          href="#"
+                          id="mod-8w-collapse-tpInfo-add"
+                          class="ml-2 badge badge-info badge-pill align-self-center">+ Add Category
+                          </a>
+                        </div>
+                        <div
+                          style="width: 100%;"
+                          id="mod-8w-tpInfo"
+                          class="d-flex flex-row flex-nowrap overflow-auto pb-2 pt-1 align-items-center">
+                        </div>
+                        <div class="collapse shadow-sm" id="mod-8w-collapse-tpInfo"></div>
+                      </div>
+                      <h3 class="m-0 mt-5">
+                        <a onclick="this.click();" href="#children-disclosure">Are you allowing children to make personal information publicly available?</a>
+                      <img class="align-self-center ml-1"
+                           src="img/info.svg"
+                           height="18px"
+                           width="18px"
+                           data-toggle="tooltip"
+                           data-html="true"
+                           title="<p>ProTip:</p>
+                           <p>For example, are you enabling children to post messages on a publicly available web forum? If so, describe the process and categories of personal information involved.</p>">
+                    </h3>
+                    <div class="d-flex flex-row mt-2">
+                      <div class="pretty p-default p-round p-fill p-bigger">
+                        <input type="radio" name="mod-8w-r3" id="mod-8w-r3-yes" />
+                        <div class="state p-info">
+                          <label>Yes</label>
+                        </div>
+                      </div>
+                      <div class="pretty p-default p-round p-fill p-bigger ml-3">
+                        <input type="radio" name="mod-8w-r3" id="mod-8w-r3-no"/>
+                        <div class="state p-info">
+                          <label>No</label>
+                        </div>
+                      </div>
+                    </div>
+                    <p style="display: none;"
+                       class="m-0 mr-1 mt-2 mod-8w-input-0">
+                       <small>Description</small>
+                    </p>
+                    <textarea
+                            rows="1"
+                            style="display: none; overflow: hidden;"
+                            class="font-weight-bold mod-8w-input-0"
+                            placeholder="Description of process and categories of personal information."
+                            id="mod-8w-input-0"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section-9W -->
+      <div class="container mt-5">
+         <div class="row">
+           <h2 id="mod-9w-title">
+               9. Retention Period
+               <img class="align-self-center ml-1"
+                    src="img/info.svg"
+                    height="18px"
+                    width="18px"
+                    data-toggle="tooltip"
+                    data-html="true"
+                    title="<p>ProTip:</p>
+                    <p>You should keep personal information only as long as it is necessary for the purposes for which you collected such. If the GDPR is applicable to your app, you are required to state the period for which you store personal data, or if that is not possible, the criteria used to determine that period. Ideally, you would give a specific time period as it would be more informative than giving abstract criteria.</p>">
+           </h2>
+         </div>
+         <div class="row d-flex flex-column">
+           <p class="m-0 mt-2">
+             <a onclick="this.click();" href="#personal_information_retention">For how long do you keep personal information?</a>
+           </p>
+           <textarea
+                rows="1"
+                style="overflow: hidden;"
+                class="font-weight-bold"
+                placeholder="Use your own or the default description in the policy."
+                id="mod-9w-input-0"></textarea>
+         </div>
+       </div>
+
+       <!-- Section-10W -->
+       <div class="container mt-5">
+         <div class="row">
+           <h2 id="sec-title-10W">
+               10. Security
+               <img class="align-self-center ml-1"
+                    src="img/info.svg"
+                    height="18px"
+                    width="18px"
+                    data-toggle="tooltip"
+                    data-html="true"
+                    title="<p>ProTip:</p>
+                    <p>Follow current industry-standards for transmitting and storing personal information. In particular, take note of Apple's recommendations for protecting personal information: https://developer.apple.com/security/.</p>">
+           </h2>
+         </div>
+         <div class="row d-flex flex-column">
+          <p class="m-0 mt-2">
+            <a onclick="this.click();" href="#personal_information_protection">How do you protect personal information?</a>
+           </p>
+           <textarea
+                rows="1"
+                style="overflow: hidden;"
+                class="font-weight-bold"
+                placeholder="Use your own or the default description in the policy."
+                id="mod-10w-input"></textarea>
+         </div>
+       </div>
+
+       <!-- Section-11W -->
+       <div class="container mt-5">
+           <div class="row">
+               <h2 id="sec-title-11W">
+                   11. Policy Changes
+                   <img class="align-self-center ml-1"
+                        src="img/info.svg"
+                        height="18px"
+                        width="18px"
+                        data-toggle="tooltip"
+                        data-html="true"
+                        title="<p>ProTip:</p>
+                        <p>Keep your users updated on material policy changes.<sup>*</sup> The CCPA requires that you update your policy at least once every 12 months. If you have your users' e-mail addresses, you can notify them by e-mail summarizing the changes and providing a link to the new policy version.</p>
+                        <p><sup>*</sup> The description of how you notify users of material policy changes is required.</p>">
+               </h2>
+           </div>
+           <div class="row d-flex flex-column">
+               <p class="m-0 mt-2">
+                   <a onclick="this.click();" href="#policy_changes">How do you communicate policy changes?</a>
+               </p>
+               <textarea
+                rows="1"
+                style="overflow: hidden;"
+                class="font-weight-bold"
+                placeholder="Use your own or the default description in the policy."
+                id="mod-11w-input"></textarea>
+           </div>
+       </div>
+
+       <!-- Section-12W -->
+       <div class="container mt-5">
+         <div class="row">
+           <h2 id="sec-title-12W">
+             12. Accessibility
+              <img class="align-self-center ml-1"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                   <p>Your policy should be accessible to consumers with disabilities. In particular, accessibility is a requirement per the CCPA.<sup>*</sup></p>
+                   <p><sup>*</sup> A description of accessibility features is required if the CCPA is applicable to your app.</p>">
+           </h2>
+         </div>
+         <div class="container indent">
+         </div>
+         <div class="row d-flex flex-column">
+             <p class="m-0 mt-2">
+               <a onclick="this.click();" href="#accessibility">Which accessibility measures have you implemented?</a>
+             </p>
+             <textarea
+                rows="1"
+                style="overflow: hidden;"
+                class="font-weight-bold"
+                placeholder="Use your own or the default description in the policy."
+                id="mod-12w-input"></textarea>
+           </div>
+       </div>
+
+      <!-- Section-13W -->
+      <div class="container mt-5">
+        <div class="row">
+          <h2 id="sec-title-13W">
+            13. Contact
+              <img class="align-self-center ml-1"
+                   src="img/info.svg"
+                   height="18px"
+                   width="18px"
+                   data-toggle="tooltip"
+                   data-html="true"
+                   title="<p>ProTip:</p>
+                   <p>The CCPA requires that you provide a contact e-mail address. For the GDPR you need to provide your name (or the name of your company) and a contact e-mail address. If your app is directed at children or if you have actual knowledge that it is used by children, you have to provide your name (or the name of your company), postal address, phone number, and contact e-mail address.</p>">
+          </h2>
+        </div>
+        <div class="row d-flex flex-column">
+            <p class="m-0"><a onclick="this.click();" href="#mod-13p-name">Enter your name or the name of your company.</a></p>
+          <input
+          class="font-weight-bold"
+          type="text"
+          placeholder="Ex. Debbie Developer."
+          id="mod-13w-input-name">
+            <p class="m-0 mt-4"><a onclick="this.click();" href="#mod-13p-email">Enter an email address where users can contact you.</a></p>
+          <input
+          class="font-weight-bold"
+          type="text"
+          placeholder="Ex. debbie@myapp.com."
+          id="mod-13w-input-email">
+        </div>
+      </div>
+
+      <!-- Footer-W -->
+      <div class="container mt-5 extra-margin-bottom">
+        <div class="row">
+            <div class="alert alert-info" role="alert">
+              <strong>Policy revisions:</strong> Once you have exported your policy, you can add, remove, and change its text in the policy file directly. Such revision may be particular useful if you want to include privacy practices that are not covered by PrivacyFlash Pro.
+            </div>
+            <div id="version-number">
+                <a href="https://github.com/privacy-tech-lab/privacyflash-pro" target="_blank">PrivacyFlash Pro on GitHub</a>, v1.0.1
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Policy -->
+    <section style="width: 50%;" class="container p-5 bg-white" id="policy">
+      <!-- Section-0P -->
+      <div id="mod-0p">
+        <h1>
+          Privacy Policy for the<br><span class="app-name"></span> App
+        </h1>
+        <br>
+        <p>
+          <strong>Last updated:</strong> <span id="mod-0p-date"></span>
+          <br>
+          <span id="mod-0p-url"></span>
+        </p>
+        <p>
+          We are the developers of <span class="app-name"></span>. This privacy policy describes how we process your personal information and which privacy rights you have when you are using <span class="app-name"></span>. Please contact us at the contact information <a href="#contact_us">below</a> if you have any questions or comments.
+        </p>
+        <p>
+          <ol id="links">
+            <li><a href="#personal_information_collection">Personal Information Collection and Use</a></li>
+            <li><a href="#personal_information_sharing">Personal Information Sharing</a></li>
+            <li><a href="#tracking_technologies">Tracking Technologies</a></li>
+            <li><a href="#social_login">Social Logins</a></li>
+            <li><a href="#in-app_purchase">In-app Purchase Information</a></li>
+            <li id="mod-6p-link"><a href="#california_privacy_rights">Privacy Rights of California Residents</a></li>
+            <li id="mod-7p-link"><a href="#eea_privacy_rights">Privacy Rights of Users in the European Economic Area</a></li>
+            <li><a href="#children_personal_information">Children's Personal Information</a></li>
+            <li><a href="#personal_information_retention">How Long We Keep Your Personal Information</a></li>
+            <li><a href="#personal_information_protection">How We Protect Your Personal Information</a></li>
+            <li><a href="#policy_changes">Policy Changes</a></li>
+            <li><a href="#accessibility">Accessibility</a></li>
+            <li><a href="#contact_us">Contact Us</a></li>
+          </ol>
+        </p>
+      </div>
+
+      <br>
+
+      <!-- Section-1P -->
+      <div id="mod-1p">
+        <h2 id="personal_information_collection">
+          <span class="num">1</span>. Personal Information Collection and Use
+        </h2>
+        <div id="mod-1p-practices"></div>
+        <div id="mod-1p-practices-alt"></div>
+      </div>
+
+      <!-- Section-2P -->
+      <div id="sec-title-2P">
+        <br>
+        <h2 id="personal_information_sharing">
+          <span class="num">2</span>. Personal Information Sharing
+        </h2>
+        <div id="mod-2p-practices"></div>
+        <div id="mod-2p-practices-alt"></div>
+      </div>
+
+      <!-- Section-3P -->
+      <div id="sec-title-3P">
+        <br>
+        <h2 id="tracking_technologies">
+          <span class="num">3</span>. Tracking Technologies
+        </h2>
+        <div id="mod-3p-content"></div>
+      </div>
+
+      <!-- Section-4P -->
+      <div id="sec-title-4P">
+        <br>
+        <h2 id="social_login">
+          <span class="num">4</span>. Social Logins
+        </h2>
+        <div id="mod-4p-content"></div>
+      </div>
+
+      <!-- Section-5P -->
+      <div id="sec-title-5P">
+        <br>
+        <h2 id="in-app_purchase">
+            <span class="num">5</span>. In-app Purchase Information
+        </h2>
+        <div id="mod-5p-content"></div>
+      </div>
+
+      <!-- Section-6P -->
+      <div class="exclude" id="sec-title-6P">
+        <br>
+        <h2 id="california_privacy_rights">
+            <span class="num">6</span>. Privacy Rights of California Residents
+        </h2>
+        <div id="mod-6p-content">
+          <div class="alert alert-info" role="alert">
+            Based on your selection, this Section will be omitted in the exported privacy policy.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section-7P -->
+      <div class="exclude" id="sec-title-7P">
+        <br>
+        <h2 id="eea_privacy_rights">
+            <span class="num">7</span>. Privacy Rights of Users in the European Economic Area
+        </h2>
+        <div id="mod-7p-content">
+          <div class="alert alert-info" role="alert">
+              Based on your selection, this Section will be omitted in the exported privacy policy.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section-8P -->
+      <div id="sec-title-8P">
+        <br>
+        <h2 id="children_personal_information">
+          <span class="num">8</span>. Children's Personal Information
+        </h2>
+        <div id="mod-8p-content">
+        </div>
+      </div>
+
+      <!-- Section-9P -->
+      <div id="mod-9p-title">
+        <br>
+        <h2 id="personal_information_retention">
+          <span class="num">9</span>. How Long We Keep Your Personal Information
+        </h2>
+        <div id="mod-9p-content">
+          <!-- Content Inflated Here -->
+        </div>
+      </div>
+
+      <!-- Section-10P -->
+      <div id="sec-title-10P">
+        <br>
+        <h2 id="personal_information_protection">
+          <span class="num">10</span>. How We Protect Your Personal Information
+        </h2>
+        <div id="mod-10p-content">
+          <!-- Content Inflated Here -->
+        </div>
+      </div>
+
+      <!-- Section-11P -->
+      <div id="sec-title-11P">
+        <br>
+        <h2 id="policy_changes">
+          <span class="num">11</span>. Policy Changes
+        </h2>
+        <div id="mod-11p-content">
+          <!-- Content Inflated Here -->
+        </div>
+      </div>
+
+      <!-- Section-12P -->
+      <div id="sec-title-12P">
+        <br>
+        <h2 id="accessibility">
+          <span class="num">12</span>. Accessibility
+        </h2>
+        <div id="mod-12p-content">
+          <!-- Content Inflated Here -->
+        </div>
+      </div>
+
+      <!-- Section-13P -->
+      <div id="sec-title-13P" class="extra-margin-bottom">
+        <br>
+        <h2 id="contact_us">
+          <span class="num">13</span>. Contact Us
+        </h2>
+        <p>Please contact us if you have any questions or concerns.</p>
+        <div id="mod-13p-name"></div>
+        <div id="mod-13p-email"></div>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <section class="footer">
+      <div class="custom-control custom-switch m-1 mt-2">
+          <input type="checkbox" class="custom-control-input" id="darkSwitch">
+          <label class="custom-control-label" for="darkSwitch" style="color: white">Dark Mode</label>
+      </div>
+      <div>
+          <button type="button"
+                  style="margin: 5px"
+                  class="btn btn-info btn-sm"
+                  id="mod-0w-back">
+              <span style="font-weight: bold;">New Analysis</span>
+              <img
+              src="img/new-doc-outline-white.svg"
+              height="18px"
+              width="18px"/>
+          </button>
+          <button type="button"
+                  style="margin: 5px"
+                  class="btn btn-info btn-sm"
+                  id="mod-0w-export">
+              <span style="font-weight: bold;">Export Policy</span>
+              <img
+              src="img/download-outline.svg"
+              height="18px"
+              width="18px"/>
+          </button>
+          <button type="button"
+                  style="margin: 5px"
+                  class="btn btn-info btn-sm"
+                  id='mod-0w-laws'>
+              <span style="font-weight: bold;">Privacy Laws</span>
+              <img
+              src="img/section.svg"
+              height="18px"
+              width="18px"/>
+          </button>
+      </div>
+      <div>
+        <img
+        src="img/logo-narrow.svg"
+        height="40px"
+        width="135px"/>
+      </div>
+    </section>
+
+  </section>
+
+  <!-- Additional Usages Modal -->
+  <section>
+    <div
+      class="modal fade"
+      id="mod-1w-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Additional Code Usages</h3>
+              <button type="button" class="btn close" data-dismiss="modal">
+                  <div class="close-char">
+                      <span aria-hidden="true">&times;</span>
+                  </div>
+              </button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex flex-column ml-4" id="mod-1w-usages">
+              <!-- Fill with the rest of usages-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exported Page -->
+  <section style="display: none;" id="exported">
+    <div
+      class="d-flex align-items-center justify-content-center min-vh-100" style="cursor:default;">
+      <div class="container">
+        <div class="row justify-content-center">
+            <h1 style="color:#81c784;">Exported</h1>
+        </div>
+        <div class="row justify-content-center">
+          <small>Check your default download directory for the exported privacy policy.</small>
+        </div>
+        <div class="row justify-content-center mt-4">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary"
+            id="back-to-wizard">
+            <img
+              src="img/arrow-back.svg"
+              height="18px"
+              width="18px"/>
+            Back
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- laws.html will be loaded here -->
+  <section
+    class="container"
+    style="display: none; padding-left: 10%; padding-right: 10%; padding-top: 5%; padding-bottom: 5%;" 
+    id="laws">
+  </section>
+
+  <!-- jQuery, Bootstrap, smoothscroll, and dark-mode Javascript -->
+  <script src="js/libs/jquery-3.4.1.min.js"></script>
+  <script src="js/libs/bootstrap.bundle.min.js"></script>
+  <script src="js/libs/smoothscroll.min.js"></script>
+  <script src="js/libs/smooth-scroll-into-view-if-needed.min.js"></script>
+  <script src="js/libs/dark-mode-switch.min.js"></script>
+
+  <!-- Custom Javascript -->
+  <script type="module" src="js/main.js"></script>
+  <script src="/eel.js"></script>
+
+  </body>
+</html>

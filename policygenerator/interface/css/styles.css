@@ -1,0 +1,384 @@
+/*
+PrivacyFlash Pro is licensed under the MIT License
+Copyright (c) 2019 David Baraka, Rafael Goldstein, Sarah Jin, Sebastian Zimmeck
+ */
+
+
+@font-face {
+font-family: 'Quicksand';
+src:
+url("../fonts/Quicksand-Regular.ttf") format('truetype'),
+url("../fonts/Quicksand-Light.ttf") format('truetype'),
+url("../fonts/Quicksand-Medium.ttf") format('truetype');
+}
+
+#main, html, body{
+  height: 100%;
+  overflow: auto;
+  font-family: 'Quicksand', sans-serif;
+  min-width: 1200px;
+  cursor: default;
+}
+
+#wizard {
+  float: left;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  overflow: auto;
+  display: none;
+  min-width: 600px;
+  cursor: default;
+}
+
+#policy {
+  float: left;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  overflow: auto;
+  right: -50%;
+  cursor: default;
+}
+
+h1 {
+  font-size: 250%;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 115%;
+  font-weight: bold;
+}
+
+[data-toggle="tooltip"]:hover {
+  text-decoration-line: underline;
+}
+
+[data-toggle="popover"]:hover { 
+  text-decoration-line: underline;
+}
+
+input.invalid {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid #dc3545 !important;
+  outline: none !important;
+  display: block;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  cursor:pointer;
+  background-color:transparent !important;
+  box-shadow: none !important;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+
+.invalid:hover {
+  border-bottom: 1px solid #dc3545 !important;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+
+input.focus {
+  border-bottom: 1px solid #17a2b8 !important;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s ;
+}
+
+input, textarea {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid #D3D3D3 !important;
+  outline:none !important;
+  display: block;
+  box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  cursor:pointer;
+  background-color:transparent !important;
+  box-shadow: none !important;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+
+input:hover, textarea:hover {
+  border-bottom: 1px solid #17a2b8 !important;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+
+input.focus {
+  border-bottom: 1px solid #17a2b8 !important;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+
+.badge{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+a{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn-outline-secondary-alt {
+  margin: 5px;
+  color: #868e96;
+  border-color: #868e96 !important;
+  background-color: transparent;
+}
+
+.btn-outline-secondary-alt:hover {
+  box-shadow: 0 0 0 1px #868e96 !important;
+  color: #868e96;
+  background-color: transparent;
+}
+
+.btn-outline-secondary-alt.focus {
+  box-shadow: 0 0 0 3px #868e96 !important;
+  color: #868e96;
+  background-color: transparent;
+}
+
+.btn-outline-info-alt {
+  margin: 5px;
+  color: #17a2b8;
+  border-color:#17a2b8 !important;
+  background-color: transparent;
+}
+
+.btn-outline-info-alt:hover {
+  color: #17a2b8;
+  border-color:#17a2b8 !important;
+  background-color: transparent;
+  box-shadow: 0 0 0 1px #17a2b8 !important;
+
+}
+
+.btn-outline-info-alt.focus {
+  color: #17a2b8;
+  border-color:#17a2b8 !important;
+  background-color: transparent;
+  box-shadow: 0 0 0 3px #17a2b8 !important;
+}
+
+.btn-outline-tp {
+  margin: 5px;
+  color: #7e57c2;
+  border-color:#7e57c2 !important;
+  background-color: transparent;
+}
+
+.btn-outline-tp:hover {
+  color: #7e57c2;
+  border-color:#7e57c2 !important;
+  background-color: transparent;
+  box-shadow: 0 0 0 1px #7e57c2 !important;
+}
+
+.btn-outline-tp.focus {
+  color: #7e57c2;
+  border-color:#7e57c2 !important;
+  background-color: transparent;
+  box-shadow: 0 0 0 3px #7e57c2 !important;
+}
+
+#mod-2w-add:hover {
+  background:#311b92 !important
+}
+
+/* Hide elements from the display */
+.hide, #main {
+  display: none;
+}
+
+/* Remove border and shadow of buttons on Chrome/Safari (more for chrome)
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+ */
+
+/* Unselected <app name> style */
+span.app-name {
+  opacity: .25;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+span {
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+
+/* Disable links */
+a.disabled {
+  opacity: .25;
+  pointer-events: none;
+  cursor: default;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+
+/* Privacy Policy entrance/exit animation */
+.slide{
+  transform: translate(-100%);
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+.slide2{
+  transform: translate(0%);
+  -webkit-transition: all ease 5s;
+  -moz-transition: all ease 5s;
+  -o-transition: all ease 5s;
+  -ms-transition: all ease 5s;
+}
+
+.slide3{
+  transform: translate(0%, 42px);
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  -o-transition: all ease 0.5s;
+  -ms-transition: all ease 0.5s;
+}
+
+.slide4{
+  transform: translate(0%, -42px);
+  -webkit-transition: all ease 0.2s;
+  -moz-transition: all ease 0.2s;
+  -o-transition: all ease 0.2s;
+  -ms-transition: all ease 0.2s;
+
+}
+
+.shadow{
+  box-shadow: -1em 0 1em -1em #333;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s;
+  transition: all ease 0.5s;
+}
+
+/* Success screen style */
+.center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+/*Break up text for potential usage - Modal*/
+.breakText {
+    word-break: break-all;
+    white-space: normal;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+}
+.flexContainer > * {
+  margin: 1px 0;
+}
+.flexContainer .flexLabel {
+  flex-basis: 5px;
+  flex-shrink: 0;
+}
+
+.cursor{
+  cursor:pointer;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 42px;
+  background: #333;
+  border: 1px solid grey;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+  bottom: -42px;
+}
+
+.modal-body {
+  min-height: 350px;
+}
+
+.tooltip {
+  pointer-events: none;
+  right: 50px;
+}
+
+.tooltip-inner {
+  text-align: left;
+  max-width: 500px;
+}
+
+.mb-4 {
+  font-size: small;
+}
+
+.ml-4 {
+  font-size: small;
+}
+
+.mod2-evidence {
+  font-size: small;
+}
+
+div.extra-margin-bottom {
+  margin-bottom: 42px;
+}

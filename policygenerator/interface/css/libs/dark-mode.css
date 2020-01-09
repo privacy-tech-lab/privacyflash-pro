@@ -1,0 +1,67 @@
+[data-theme="dark"] {
+  background-color: #111 !important;
+  color: #eee;
+}
+
+[data-theme="dark"] .bg-light {
+  background-color: #333 !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: #333 !important;
+}
+
+[data-theme="dark"] .bg-black {
+  background-color: #eee !important;
+}
+
+[data-theme='dark'] .font-weight-bold {
+  color: #eee;
+}
+
+[data-theme='dark'] .form-control {
+  color: #eee;
+}
+
+[data-theme='dark'] .modal-header {
+  background-color: #868e96;
+  border-color: #868e96;
+}
+
+[data-theme='dark'] .modal-body {
+  background-color: #333;
+  border-color: #868e96;
+}
+
+[data-theme='dark'] .modal-footer {
+  background-color: #868e96;
+  border-color: #868e96;
+}
+
+[data-theme='dark'] .btn-light {
+  background-color: #333;
+  border-color: #868e96;
+  color: #eee;
+}
+
+[data-theme='dark'] .btn-light:hover{
+  background: #17a2b8;
+}
+
+[data-theme='dark'] .card-body {
+  background-color: #111;
+  border-color: #17a2b8;
+}
+
+[data-theme='dark'] .footer {
+  background-color: #111;
+}
+
+[data-theme='dark'] .close-char {
+  color: #eee;
+}
+
+[data-theme='dark'] .alert-info {
+  color: #eee;
+  background-color: #111;
+}
