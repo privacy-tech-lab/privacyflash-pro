@@ -12,6 +12,8 @@ config.js starts the PrivacyFlash Pro interface; reads and analyzes the project 
 
 import { startWizard } from './wizard.js'
 import { scrollIntoViewIfNeeded } from './utilities.js'
+var displayHidden = false
+var pathPrefix = "."
 
 export function startGUI(){
 
@@ -70,6 +72,16 @@ function inputPath(){
         })
       })
 
+      $('#hiddenDir').click(function(){
+        if (displayHidden) {
+          pathPrefix = "."
+        } else {
+          pathPrefix = ".."
+        }
+        displayHidden = !displayHidden
+        listDir()
+      })
+
       $('#generate').click(function(){
         let val = $('#path').val()
         eel.validate(val)(function(value){
@@ -90,7 +102,7 @@ function listDir() {
 
     //Change i to int!!!
 
-    eel.getDirs(dir)(function(dirList){
+    eel.getDirs(dir, pathPrefix)(function(dirList){
       let html = ""
       $.each(dirList, function(i, v) {
         html += '<button type="button" class="btn btn-light btn-block text-left" id="'+i+'dir"><img src="img/folder-outline.svg" height="18px" width="18px"/>&nbsp;&nbsp'+ v +'</button>'
