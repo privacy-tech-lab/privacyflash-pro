@@ -30,10 +30,10 @@ def updateCWD(path):
     directory = path
 
 @eel.expose
-def getDirs(d):
+def getDirs(d, prefix):
     items = []
     for item in os.listdir(d):
-        if not item.startswith('.') and os.path.isdir(directory + "/" + item):
+        if not item.startswith(prefix) and os.path.isdir(directory + "/" + item):
             items.append(item)
     return sorted(items)
 
