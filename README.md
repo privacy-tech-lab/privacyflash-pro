@@ -83,6 +83,10 @@ The specification for the third party library analysis is contained in `policyge
 
 Note that even if a library is is not contained in `policygenerator/spec/third_parties.yaml`, PrivacyFlash Pro still analyzes its files contained in a project. However, you will have to enter the purpose of the library manually in the privacy policy you are generating.
 
+## Testing
+
+`TODO`
+
 ## Files and Directories in this Repo
 
 - The latest release of PrivacyFlash Pro is contained in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases).
