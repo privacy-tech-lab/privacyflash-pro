@@ -14,9 +14,9 @@ privacy_practices.py loads data from the app project to be analyzed.
 import os
 from os import path
 import yaml
-from constants import Practices
+from policygenerator.constants import Practices
 
-
+ 
 def retrieve_privacy_practice_data():
     """
     Retrieves from privacy_practices.yaml values of plist, entitlement, framework
@@ -98,6 +98,8 @@ def search_root_dir(directory):
                 other_files.append(os.path.join(root, f))
 
     return other_files
+
+# print(search_root_dir("/Users/kubaalicki/COMP424/privacyflash-pro/iOS-sample-projects/AdColony"))
 
 
 def get_pod_loc(directory):
