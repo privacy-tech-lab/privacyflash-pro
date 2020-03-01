@@ -85,13 +85,15 @@ Note that even if a library is is not contained in `policygenerator/spec/third_p
 
 ## Testing
 
-Our test modules for PrivacyFlash Pro have been built on the Python unittest framework. In order to run the built in tests for PrivacyFlash Pro,
+Our test modules for PrivacyFlash Pro have been built on the Python unittest framework. In order to run the built-in tests for PrivacyFlash Pro,
+
+0. Check out the test branch with `git checkout issue-5`.
 
 1. `cd` into your `privacyflash-pro/tests` directory and run `mv test_privacy_practices.py ../` in order to temporarily move your test files from the `tests` folder into the root directory. Substitute `test_privacy_practices.py` for each of the test modules in the `tests` folder.
 
 2. `cd` back out to the `privacyflash-pro` folder.
 
-3. Run `python3 -m unittest` in order to automatically run all of the test modules. 
+3. Run `python3 -m unittest` in order to automatically run all of the test modules.
 
 ## Files and Directories in this Repo
 
