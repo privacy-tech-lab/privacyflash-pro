@@ -10,14 +10,7 @@ import os
 from os import path
 
 from policygenerator.constants import Practices
-from policygenerator.privacy_practices import retrieve_privacy_practice_data
-from policygenerator.privacy_practices import search_root_dir
-from policygenerator.privacy_practices import get_pod_loc
-from policygenerator.privacy_practices import get_cart_loc
-from policygenerator.privacy_practices import grab_third_party_files
-from policygenerator.privacy_practices import load_third_df
-from policygenerator.privacy_practices import locate_entitlements_file
-from policygenerator.privacy_practices import load_data
+from policygenerator.privacy_practices import *
 
 
 class TestPrivacyPractices(unittest.TestCase):
@@ -48,7 +41,7 @@ class TestPrivacyPractices(unittest.TestCase):
 		:search_root_dir() return: list of all files in root directory (list)
 		"""
 		no_files = 25
-		test_app_dir = "tests/testappdir/testapp/"
+		test_app_dir = "testappdir/testapp/"
 		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)  
 
 		res_dir = search_root_dir(path)
@@ -65,7 +58,7 @@ class TestPrivacyPractices(unittest.TestCase):
 		:get_pod_loc() return: list of cocoa pod sk directories (strings)
 		"""
 		no_dir = 2
-		test_app_dir = "tests/testappdir/testapp/"
+		test_app_dir = "testappdir/testapp/"
 		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)  
 
 		res_dir = get_pod_loc(path)
@@ -82,7 +75,7 @@ class TestPrivacyPractices(unittest.TestCase):
 		:get_cart_loc() return: list of Carthage sdk directories (strings)
 		"""
 		no_dir = 5
-		test_app_dir = "tests/testappdir/testapp/"
+		test_app_dir = "testappdir/testapp/"
 		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)
 
 		res_dir = get_cart_loc(path)
@@ -100,7 +93,7 @@ class TestPrivacyPractices(unittest.TestCase):
 										  of sdks as lists (dic)
 		"""
 		no_dir = 6
-		test_app_dir = "tests/testappdir/testapp/sdks/"
+		test_app_dir = "testappdir/testapp/sdks/"
 		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)
 
 		res_dir = grab_third_party_files([path])
@@ -128,8 +121,8 @@ class TestPrivacyPractices(unittest.TestCase):
 		:locate_entitlements_file() return: location of entitlements files (string)
 		"""
 		import_dir = os.path.abspath(os.path.dirname(__file__))
-		test_app_dir = "tests/testappdir/"
-		entitlements_dir = "tests/testappdir/testapp/Clients/Entitlements/testapp.entitlements"
+		test_app_dir = "testappdir/"
+		entitlements_dir = "testappdir/testapp/Clients/Entitlements/testapp.entitlements"
 
 		path = os.path.join(import_dir, test_app_dir)
 		entitlements = os.path.join(import_dir, entitlements_dir)
@@ -148,7 +141,7 @@ class TestPrivacyPractices(unittest.TestCase):
 		:load_data() param: root directory (string)
 		:load_data() return: list of cocoa pod sk directories (strings)
 		"""
-		test_app_dir = "tests/testappdir/testapp/"
+		test_app_dir = "testappdir/testapp/"
 		path_dir = os.path.abspath(os.path.dirname(__file__)) 	# location of '/tests' folder
 		path = os.path.join(path_dir, test_app_dir)				# full root path
 
@@ -158,7 +151,7 @@ class TestPrivacyPractices(unittest.TestCase):
 		self.assertEqual(len(tp_info), 300)				# test_load_third_df
 		self.assertEqual(len(sdk_files), 2 + 5)			# test_grab_third_party_files
 
-		entitlements_dir = "tests/testappdir/testapp/Clients/Entitlements/testapp.entitlements"
+		entitlements_dir = "testappdir/testapp/Clients/Entitlements/testapp.entitlements"
 		self.assertEqual(entitlements, os.path.join(path_dir, entitlements_dir))
 		
 
