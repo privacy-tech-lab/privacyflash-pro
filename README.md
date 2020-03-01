@@ -89,7 +89,7 @@ Our test modules for PrivacyFlash Pro have been built on the Python unittest fra
 
 0. Check out the test branch with `git checkout issue-5`.
 
-1. `cd` into your `privacyflash-pro/tests` directory and run `mv test_privacy_practices.py ../` in order to temporarily move your test files from the `tests` folder into the root directory. Substitute `test_privacy_practices.py` for each of the test modules in the `tests` folder.
+1. `cd` into your `privacyflash-pro/policygenerator` directory and open up `privacy_practices.py` with a text editor. Change line 17 from `from constants import Practices` to `from policygenerator.constants import Practices` and save. (This is so that `privacy_practices.py` can recognize its dependencies when run through `test_privacy_practices.py` as a unittest.)
 
 2. `cd` back out to the `privacyflash-pro` folder.
 
