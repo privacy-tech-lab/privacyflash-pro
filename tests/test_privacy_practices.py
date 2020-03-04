@@ -5,11 +5,6 @@ test_privacy_practices.py is a unittest file for functions from privacy_practice
 """
 
 import unittest
-import sys
-import os
-from os import path
-
-from policygenerator.src.constants import Practices
 from policygenerator.src.privacy_practices import *
 
 
