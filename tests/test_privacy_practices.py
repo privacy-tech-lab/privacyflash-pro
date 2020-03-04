@@ -9,8 +9,8 @@ import sys
 import os
 from os import path
 
-from policygenerator.constants import Practices
-from policygenerator.privacy_practices import *
+from policygenerator.src.constants import Practices
+from policygenerator.src.privacy_practices import *
 
 
 class TestPrivacyPractices(unittest.TestCase):
