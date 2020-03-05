@@ -88,16 +88,16 @@ Note that even if a library is is not contained in `policygenerator/spec/third_p
 - The latest release of PrivacyFlash Pro is contained in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases).
 - `iOS-sample-projects`: Sample projects for PrivacyFlash Pro to analyze and test.
 - `policygenerator/`: Contains the code of PrivacyFlash Pro.
+- `policygenerator/app.py`: Main entry point for generating a privacy policy; parses the command line arguments.
 - `policygenerator/interface`: Contains all code related to the user interface for displaying the policy to the user.
 - `policygenerator/spec`: Third party and privacy practices specifications.
 - `policygenerator/spec/third_parties.yaml`: Contains the specification for ad networks and other third parties.
 - `policygenerator/spec/privacy_practices.yaml`: Contains the specification for detecting privacy practice usage.
-- `policygenerator/analysis.py`: The module for analyzing the project looks for instances of privacy practice usage.
-- `policygenerator/app.py`: Main entry point for generating a privacy policy; parses the command line arguments.
-- `policygenerator/configure_data.py`: Bridge between the Python code and the Javascript code for the UI; configures the results from the generator engine to proper json files/objects to be used for the UI.
-- `policygenerator/constants.py`: The constants class used internally to identify a privacy practice by an index value.
-- `policygenerator/evidence.py`: The evidence class is used for keeping track of privacy practice usages in an app's files.
-- `policygenerator/privacy_practices.py`: Loads data from the app project to be analyzed.
+- `policygenerator/src/analysis.py`: The module for analyzing the project looks for instances of privacy practice usage.
+- `policygenerator/src/configure_data.py`: Bridge between the Python code and the Javascript code for the UI; configures the results from the generator engine to proper json files/objects to be used for the UI.
+- `policygenerator/src/constants.py`: The constants class used internally to identify a privacy practice by an index value.
+- `policygenerator/src/evidence.py`: The evidence class is used for keeping track of privacy practice usages in an app's files.
+- `policygenerator/src/privacy_practices.py`: Loads data from the app project to be analyzed.
 - `policygenerator/requirements.txt`: Dependencies of PrivacyFlash Pro.
 
 ## Third Party Libraries
