@@ -2,8 +2,6 @@
   <img src="./logo.svg" width="200px" height="200px" title="PrivacyFlash Pro logo">
 <p>
 
-Participate in our [user study](https://forms.gle/r8SHNYQJRqX5rSR47)!
-
 # PrivacyFlash Pro
 
 PrivacyFlash Pro analyzes the code of iOS Swift projects to generate a privacy policy. The goals of PrivacyFlash Pro are:
