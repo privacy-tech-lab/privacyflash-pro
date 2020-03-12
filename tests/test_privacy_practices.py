@@ -8,8 +8,21 @@ import unittest
 from policygenerator.src.privacy_practices import *
 
 
+def rm_dsstore_list(list):
+		"""
+		** Intended for macOS users who sorted files in Finder in any special way **
+		Removes the directories (strings) from an input list that contain
+		.DS_Store in the string (therefore removes the directory to .DS_Store files)
+
+		:param: list of directories
+		:return: list of directories without directories to any .DS_Store files
+		"""
+		for directory in list:
+			if ".DS_Store" in directory:
+				list.remove(directory)
+		return list
+
 class TestPrivacyPractices(unittest.TestCase):
-	
 
 	def test_retrieve_privacy_practice_data(self):
 		"""
@@ -35,11 +48,14 @@ class TestPrivacyPractices(unittest.TestCase):
 		:search_root_dir() param: root directory (string)
 		:search_root_dir() return: list of all files in root directory (list)
 		"""
-		no_files = 25
+		no_files = 20
 		test_app_dir = "testappdir/testapp/"
 		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)  
 
 		res_dir = search_root_dir(path)
+
+		rm_dsstore_list(res_dir) # remove .DS_Store files
+
 		self.assertEqual(len(res_dir), no_files) # check length against predetermined count
 
 
@@ -54,7 +70,7 @@ class TestPrivacyPractices(unittest.TestCase):
 		"""
 		no_dir = 2
 		test_app_dir = "testappdir/testapp/"
-		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)  
+		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)
 
 		res_dir = get_pod_loc(path)
 		self.assertEqual(len(res_dir), no_dir) # check length against predetermined count
@@ -87,11 +103,14 @@ class TestPrivacyPractices(unittest.TestCase):
 		:grab_third_party_files() return: dic containing sdks as keys and directories
 										  of sdks as lists (dic)
 		"""
-		no_dir = 6
+		no_dir = 5
 		test_app_dir = "testappdir/testapp/sdks/"
 		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)
 
 		res_dir = grab_third_party_files([path])
+
+		rm_dsstore_list(res_dir[path]) # remove .DS_Store files
+
 		self.assertEqual(len(res_dir[path]), no_dir) # check len against predetermined count
 
 
@@ -141,8 +160,12 @@ class TestPrivacyPractices(unittest.TestCase):
 		path = os.path.join(path_dir, test_app_dir)				# full root path
 
 		(fp_info, fp_files, sdk_files, tp_info, entitlements) = load_data(path)
+
+		# Remove .DS_Store files
+		fp_files = rm_dsstore_list(fp_files)
+
 		self.assertEqual(len(fp_info), len(Practices))	# test_retrieve_privacy_practice_data
-		self.assertEqual(len(fp_files), 25) 			# test_search_root_dir
+		self.assertEqual(len(fp_files), 20) 			# test_search_root_dir
 		self.assertEqual(len(tp_info), 300)				# test_load_third_df
 		self.assertEqual(len(sdk_files), 2 + 5)			# test_grab_third_party_files
 
