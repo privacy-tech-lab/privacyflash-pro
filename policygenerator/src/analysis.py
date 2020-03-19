@@ -17,8 +17,8 @@ import re
 import os
 from six import iteritems
 
-from evidence import Evidence
-from constants import Used, Practices, Classification
+from .evidence import Evidence
+from .constants import Used, Practices, Classification
 
 
 def constructor_search(evidence, prac, first_party):

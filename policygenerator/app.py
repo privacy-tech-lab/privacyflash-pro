@@ -13,9 +13,9 @@ app.py is the entry point to PrivacyFlash Pro.
 
 import os, eel
 
-from analysis import analyze_data
-from privacy_practices import load_data
-from configure_data import configure_data
+from src.analysis import analyze_data
+from src.privacy_practices import load_data
+from src.configure_data import configure_data
 
 directory = os.environ['HOME']
 

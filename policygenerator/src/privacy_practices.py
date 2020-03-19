@@ -14,9 +14,9 @@ privacy_practices.py loads data from the app project to be analyzed.
 import os
 from os import path
 import yaml
-from constants import Practices
+from .constants import Practices
 
-
+ 
 def retrieve_privacy_practice_data():
     """
     Retrieves from privacy_practices.yaml values of plist, entitlement, framework
@@ -46,7 +46,7 @@ def retrieve_privacy_practice_data():
     Objective-C and Swift APIs as evidence for a privacy practice.
     """
     pp = path.join(path.dirname(
-        path.realpath(__file__)), 'spec/privacy_practices.yaml')
+        path.realpath(__file__)), '../spec/privacy_practices.yaml')
     with open(pp, 'r') as evidence:
         privacy_practices = yaml.safe_load(evidence)
 
@@ -179,7 +179,7 @@ def load_third_df():
     :return final_ads: dictionary of every SDK along with their type
     """
     pp = path.join(path.dirname(
-        path.realpath(__file__)), 'spec/third_parties.yaml')
+        path.realpath(__file__)), '../spec/third_parties.yaml')
     with open(pp, 'r') as evidence:
         df = yaml.safe_load(evidence)
 
