@@ -1,7 +1,14 @@
 """
+PrivacyFlash Pro is licensed under the MIT License
+Copyright (c) 2019 Rafael Goldstein, David Baraka, Sarah Jin, Sebastian Zimmeck
+"""
+
+
+"""
 test_privacy_practices.py
 ================================================================================
 test_privacy_practices.py is a unittest file for functions from privacy_practices.py.
+unit tests written by Kuba Alicki
 """
 
 import unittest
@@ -26,10 +33,10 @@ class TestPrivacyPractices(unittest.TestCase):
 
 	def test_retrieve_privacy_practice_data(self):
 		"""
-		Tests that retrieve_privacy_practice_data() correctly creates a dictionary 
+		Tests that retrieve_privacy_practice_data() correctly creates a dictionary
 		from spec/privacy_practices.yaml
-		Compares the output length of the dictrionary to 
-		policygenerator.constants.Practices 
+		Compares the output length of the dictrionary to
+		policygenerator.constants.Practices
 
 		:retrieve_privacy_practice_data() param: none
 		:retrieve_privacy_practice_data() return: dic w/ privacy practices enums as keys
@@ -40,17 +47,17 @@ class TestPrivacyPractices(unittest.TestCase):
 
 	def test_search_root_dir(self):
 		"""
-		Tests that all of the elements not a part of "Pods" or "Carthage" or 
-		third party frameworks are added to the list returned from 
-		search_root_dir() 
+		Tests that all of the elements not a part of "Pods" or "Carthage" or
+		third party frameworks are added to the list returned from
+		search_root_dir()
 		Compares the length of the list to the number of items there are in the directory
-		
+
 		:search_root_dir() param: root directory (string)
 		:search_root_dir() return: list of all files in root directory (list)
 		"""
 		no_files = 20
 		test_app_dir = "testappdir/testapp/"
-		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)  
+		path = os.path.join(os.path.abspath(os.path.dirname(__file__)), test_app_dir)
 
 		res_dir = search_root_dir(path)
 
@@ -61,7 +68,7 @@ class TestPrivacyPractices(unittest.TestCase):
 
 	def test_get_pod_loc(self):
 		"""
-		Tests that get_pod_loc() correctly identifies the number of 
+		Tests that get_pod_loc() correctly identifies the number of
 		cocoa pod sdks that match the specification according to get_pod_loc()
 		Tests length of returned list against the number of items in the directory
 
@@ -78,7 +85,7 @@ class TestPrivacyPractices(unittest.TestCase):
 
 	def test_get_cart_loc(self):
 		"""
-		Tests that get_cart_loc() correctly identifies the number of 
+		Tests that get_cart_loc() correctly identifies the number of
 		Carthage sdks, in accordance with the spec of get_cart_loc()
 		Tests length of returned list against the number of items in the directory
 
@@ -92,7 +99,7 @@ class TestPrivacyPractices(unittest.TestCase):
 		res_dir = get_cart_loc(path)
 		self.assertEqual(len(res_dir), no_dir) # check length against predetermined count
 
-	
+
 	def test_grab_third_party_files(self):
 		"""
 		Tests that grab_third_party_files() grabs the correct number of other sdks
@@ -117,7 +124,7 @@ class TestPrivacyPractices(unittest.TestCase):
 	def test_load_third_df(self):
 		"""
 		Tests that load_third_df() correctly parses the ad networks dataframe
-		Tests length of returned dictionary against number of elements in 
+		Tests length of returned dictionary against number of elements in
 		third_parties.yaml
 
 		:load_third_df() param: none
@@ -147,7 +154,7 @@ class TestPrivacyPractices(unittest.TestCase):
 
 	def test_load_data(self):
 		"""
-		Tests that load_data() correctly accumulates and loads all relavent data 
+		Tests that load_data() correctly accumulates and loads all relavent data
 		utilizing the previous functions in the privacy_practices.py module
 		Essentially calls all previous functions one more to time to ensure that
 		load_data() runs properly
@@ -171,7 +178,7 @@ class TestPrivacyPractices(unittest.TestCase):
 
 		entitlements_dir = "testappdir/testapp/Clients/Entitlements/testapp.entitlements"
 		self.assertEqual(entitlements, os.path.join(path_dir, entitlements_dir))
-		
+
 
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ PrivacyFlash Pro covers provisions of the following laws:
 - Children's Online Privacy Protection (COPPA)
 - General Data Protection Regulation (GDPR).
 
-PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacy-tech-lab.github.io/) at [Wesleyan University](https://www.wesleyan.edu/).
+PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacy-tech-lab.github.io/) at [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
 
 ## Installing and Running PrivacyFlash Pro
 
@@ -83,10 +83,9 @@ Note that even if a library is is not contained in `policygenerator/spec/third_p
 
 ## Testing
 
-Our test modules for PrivacyFlash Pro have been built on the Python unittest framework. In order to run the built-in tests for PrivacyFlash Pro,
+Our unit tests for PrivacyFlash Pro have been built with the Python unittest framework. In order to run the built-in tests for PrivacyFlash Pro,
 
-0. Check out the test branch with `git checkout issue-5`.
-1. Run `python3 -m unittest` in order to automatically run all of the test modules.
+use `python3 -m unittest` from within the root directory of your local copy of this repo.
 
 ## Files and Directories in this Repo
 
