@@ -71,7 +71,7 @@ Also, for some practices, for example, Health, an ENTITLEMENT (e.g., com.apple.d
 
 ### Third Party Library Analysis
 
-The specification for the third party library analysis is contained in `policygenerator/spec/third_parties.yaml`. PrivacyFlash Pro is using this specification for determining the purpose of a library. A library name is given by its name on [CocoaPods](https://cocoapods.org/). For example, `AdColony` has the purpose `Advertising`. PrivacyFlash Pro currently classifies 300 libraries using the following purposes:
+PrivacyFlash Pro identifies any library integrated in the analyzed app. The specification for the third party library analysis is contained in `policygenerator/spec/third_parties.yaml`. PrivacyFlash Pro is using this specification for determining the purpose of a library. A library name is given by its name on [CocoaPods](https://cocoapods.org/). For example, `AdColony` has the purpose `Advertising`. PrivacyFlash Pro currently identifies the purposes of 300 libraries using the following purpose categories:
 - `Authentication`
 - `Advertising`
 - `Analytics`
