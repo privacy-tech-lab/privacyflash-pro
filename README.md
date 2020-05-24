@@ -55,7 +55,7 @@ PrivacyFlash Pro (1.0.1) was tested to run on macOS Catalina (10.15.2) and Mojav
 
 ## Get Involved
 
-PrivacyFlash Pro is from the people for the people. Everyone can contribute. In particular, feel free to open a pull request to add additional privacy practices and third party libraries. If you have other ideas or feedback, let us know your thoughts or open an issue. We are looking forward to hear from you.
+PrivacyFlash Pro is from the people for the people. Everyone can contribute. In particular, feel free to open a pull request to add additional privacy practices and third party libraries. You can also make a feature request by opening a new issue with the `feature request` label. If you have other ideas or feedback, let us know. We are looking forward to hear from you!
 
 ### Privacy Practice Analysis
 
