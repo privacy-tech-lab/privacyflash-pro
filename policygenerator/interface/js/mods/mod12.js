@@ -47,7 +47,7 @@ function updatePolicy() {
 */
 function setContent() {
   let html = `
-  <p>This website conforms to the <a href="https://www.w3.org/TR/WCAG20/" target="_blank">Web Content Accessibility Guidelines (WCAG) 2.0</a>. However, if you are having difficulties obtaining information from it, please contact us at the contact information <a href='#contact_us'>below</a>. We will try to make the information available to you in another format and answer any question that you may have.</p>
+  <p>This website conforms to the <a href="https://www.w3.org/TR/WCAG21/" target="_blank">Web Content Accessibility Guidelines (WCAG) 2.1</a>. However, if you are having difficulties obtaining information from it, please contact us at the contact information <a href='#contact_us'>below</a>. We will try to make the information available to you in another format and answer any question that you may have.</p>
   `
   $('#mod-12p-content').html(html)
 }
