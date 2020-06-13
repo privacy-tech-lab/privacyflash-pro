@@ -11,12 +11,19 @@ privacy_practices.py loads data from the app project to be analyzed.
 """
 
 
-import os
-from os import path
+import os, sys
 import yaml
 from .constants import Practices
 
- 
+def getFilePath(relativePath):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    if getattr(sys, 'frozen', False):
+        application_path = sys._MEIPASS
+        return os.path.join(application_path, relativePath[3:])
+    else:
+        application_path = os.path.dirname(__file__)
+        return os.path.join(application_path, relativePath)
+
 def retrieve_privacy_practice_data():
     """
     Retrieves from privacy_practices.yaml values of plist, entitlement, framework
@@ -45,8 +52,8 @@ def retrieve_privacy_practice_data():
     may contain an empty list or an array specifying parameter(s) for unique
     Objective-C and Swift APIs as evidence for a privacy practice.
     """
-    pp = path.join(path.dirname(
-        path.realpath(__file__)), '../spec/privacy_practices.yaml')
+
+    pp = getFilePath('../spec/privacy_practices.yaml') 
     with open(pp, 'r') as evidence:
         privacy_practices = yaml.safe_load(evidence)
 
@@ -178,8 +185,7 @@ def load_third_df():
     Find ad networks dataframe and parse into a dictionary to be read
     :return final_ads: dictionary of every SDK along with their type
     """
-    pp = path.join(path.dirname(
-        path.realpath(__file__)), '../spec/third_parties.yaml')
+    pp = getFilePath('../spec/third_parties.yaml') 
     with open(pp, 'r') as evidence:
         df = yaml.safe_load(evidence)
 
