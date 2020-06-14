@@ -47,7 +47,7 @@ If your browser does not connect to the localhost, try disabling any antivirus s
 
 PrivacyFlash Pro analyzes iOS app source code in Swift and third party libraries in Swift and Objective-C. The library analysis works for uncompiled and compiled libraries. PrivacyFlash Pro does not analyze iOS app source code in Objective-C.
 
-PrivacyFlash Pro (1.0.1) was tested to run on macOS Catalina (10.15.2) and Mojave (10.14.6). The following browsers (and versions) are supported: Google Chrome (79.0.3945.88 - 64-bit), Safari (13.0.4 - 14608.4.9.1.4), and Firefox (71.0 - 64-bit).
+PrivacyFlash Pro (1.0.2) was tested to run on macOS Catalina (10.15.5) and the Brave Browser (1.9.80, Chromium: 81.0.4044.138 (Official Build) (64-bit)).
 
 ## Demo Video
 
