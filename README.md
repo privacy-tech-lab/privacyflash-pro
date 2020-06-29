@@ -102,6 +102,10 @@ Our unit tests for PrivacyFlash Pro have been built with the Python unittest fra
 - `policygenerator/src/privacy_practices.py`: Loads data from the app project to be analyzed.
 - `policygenerator/requirements.txt`: Dependencies of PrivacyFlash Pro.
 
+## Future Development
+
+In the coming months we plan to extend PrivacyFlash Pro from iOS apps towards Android apps and web apps. At this year's WWDC Apple announced that developers have to identify on the App Store which permissions their apps are using, whether they use tracking, and other privacy practices. We intend that PrivacyFlash Pro generates the description that developers have to provide. We further want to provide support for backend functionality for both traditional backends, such as the LAMP stack, and backends as a service, such as Firebase. In principle the same code analysis techniques can be used, e.g., SQL queries can be used to identify which types of personal information is stored at the backend. Beyond APIs variables and function naming may also reveal what types of data are processed. For web apps, frontend JavaScript code can be analyzed, e.g., labels of form fields. 
+
 ## Third Party Libraries
 
 PrivacyFlash Pro uses the following third party libraries. We thank the developers.
