@@ -15,7 +15,7 @@ PrivacyFlash Pro covers provisions of the following laws:
 - Children's Online Privacy Protection (COPPA)
 - General Data Protection Regulation (GDPR).
 
-PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacy-tech-lab.github.io/) at [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
+PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacytechlab.org/) at [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
 
 ## Installing and Running PrivacyFlash Pro
 
@@ -51,7 +51,7 @@ PrivacyFlash Pro (1.0.2) was tested to run on macOS Catalina (10.15.5) and the B
 
 ## Demo Video
 
-[![Watch the Demo](https://privacy-tech-lab.github.io/images/PrivacyFlash_Pro_Movie.png)](https://privacy-tech-lab.github.io/images/PrivacyFlash_Pro_Movie.mp4)
+[![Watch the Demo](https://privacytechlab.org/images/PrivacyFlash_Pro_Movie.png)](https://privacytechlab.org/images/PrivacyFlash_Pro_Movie.mp4)
 
 ## Get Involved
 
@@ -104,7 +104,7 @@ Our unit tests for PrivacyFlash Pro have been built with the Python unittest fra
 
 ## Future Development
 
-In the coming months we plan to extend PrivacyFlash Pro from iOS apps towards Android apps and web apps. At this year's WWDC Apple announced that developers have to identify on the App Store which permissions their apps are using, whether they use tracking, and other privacy practices. We intend that PrivacyFlash Pro generates the description that developers have to provide. We further want to provide support for backend functionality for both traditional backends, such as the LAMP stack, and backends as a service, such as Firebase. In principle the same code analysis techniques can be used, e.g., SQL queries can be used to identify which types of personal information is stored at the backend. Beyond APIs variables and function naming may also reveal what types of data are processed. For web apps, frontend JavaScript code can be analyzed, e.g., labels of form fields. 
+In the coming months we plan to extend PrivacyFlash Pro from iOS apps towards Android apps and web apps. At this year's WWDC Apple announced that developers have to identify on the App Store which permissions their apps are using, whether they use tracking, and other privacy practices. We intend that PrivacyFlash Pro generates the description that developers have to provide. We further want to provide support for backend functionality for both traditional backends, such as the LAMP stack, and backends as a service, such as Firebase. In principle the same code analysis techniques can be used, e.g., SQL queries can be used to identify which types of personal information is stored at the backend. Beyond APIs variables and function naming may also reveal what types of data are processed. For web apps, frontend JavaScript code can be analyzed, e.g., labels of form fields.
 
 ## Third Party Libraries
 
