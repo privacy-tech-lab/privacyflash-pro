@@ -51,7 +51,7 @@ PrivacyFlash Pro (1.0.2) was tested to run on macOS Catalina (10.15.5) and the B
 
 ## Demo Video
 
-[![Watch the Demo](https://privacytechlab.org/images/PrivacyFlash_Pro_Movie.png)](https://privacytechlab.org/images/PrivacyFlash_Pro_Movie.mp4)
+[![Watch the Demo](https://privacytechlab.org/static/images/PrivacyFlash_Pro_Movie.png)](https://privacytechlab.org/static/images/PrivacyFlash_Pro_Movie.mp4)
 
 ## Get Involved
 
