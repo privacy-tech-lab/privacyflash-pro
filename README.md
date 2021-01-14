@@ -49,6 +49,12 @@ PrivacyFlash Pro analyzes iOS app source code in Swift and third party libraries
 
 PrivacyFlash Pro (1.0.2) was tested to run on macOS Catalina (10.15.5) and the Brave Browser (1.9.80, Chromium: 81.0.4044.138 (Official Build) (64-bit)).
 
+### Packaging
+
+After successfully installing and running from source, run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containg a MacOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
+
+**Note**: If packaging for release, remember to update the version number in `privacyflash-pro/policygenerator/interface/index.html` and `privacyflash-pro/policygenerator/package.py`.
+
 ## Demo Video
 
 [![Watch the Demo](https://privacytechlab.org/static/images/PrivacyFlash_Pro_Movie.png)](https://privacytechlab.org/static/images/PrivacyFlash_Pro_Movie.mp4)
@@ -90,7 +96,8 @@ Our unit tests for PrivacyFlash Pro have been built with the Python unittest fra
 - The latest release of PrivacyFlash Pro is contained in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases).
 - `iOS-sample-projects`: Sample projects for PrivacyFlash Pro to analyze and test.
 - `policygenerator/`: Contains the code of PrivacyFlash Pro.
-- `policygenerator/app.py`: Main entry point for generating a privacy policy; parses the command line arguments.
+- `policygenerator/app.py`: Main entry point for generating a privacy policy.
+- `policygenerator/package.py`: Script to create a distributable package of PrivacyFlash Pro.
 - `policygenerator/interface`: Contains all code related to the user interface for displaying the policy to the user.
 - `policygenerator/spec`: Third party and privacy practices specifications.
 - `policygenerator/spec/third_parties.yaml`: Contains the specification for ad networks and other third parties.
@@ -113,7 +120,7 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 - [Animate.css](https://github.com/daneden/animate.css)
 - [Bootstrap](https://getbootstrap.com)
 - [Dark Mode Switch](https://github.com/coliff/dark-mode-switch)
-- [Eel](https://github.com/samuelhwilliams/Eel)
+- [pywebview](https://github.com/r0x0r/pywebview)
 - [Google Fonts Quicksand](https://fonts.google.com/specimen/Quicksand)
 - [jQuery](https://github.com/jquery/jquery)
 - [PyYAML](https://github.com/yaml/pyyaml)
