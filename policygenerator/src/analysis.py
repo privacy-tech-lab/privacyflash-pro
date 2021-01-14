@@ -505,12 +505,12 @@ def analyze_third_parties(sdk_files, first_party_info):
                 files.append(i)
         for f in files:
             if f.endswith(".swift"):  # analyzing a Swift file
-                with open(f, "r") as fp:
+                with open(f, "r", encoding="utf-8") as fp:
                     swift_text = fp.read()
                 evidence = evidence + analyze_file(first_party_info,
                                                    swift_text, f, False)
             elif f.endswith(".h") or f.endswith(".m"):
-                with open(f, "r") as fp:
+                with open(f, "r", encoding="utf-8") as fp:
                     objc_text = fp.read()
                     evidence = evidence + analyze_file(first_party_info,
                                                        objc_text, f, False)
@@ -745,7 +745,7 @@ def add_entitlement(evidence, e, first_party_info):
     :param: first_party_info - keywords to search through
     :return: updated evidence
     """
-    with open(e, "r") as fp:
+    with open(e, "r", encoding="utf-8") as fp:
         text = fp.read()
         file_lines = text.splitlines()
         counter = 1
@@ -789,7 +789,7 @@ def analyze_data(first_party_info, first_party_files, sdks, third_party_info, en
     for f in first_party_files:
         # analyzing a Swift or Objective-C file
         if f.endswith(".swift") or f.endswith(".h") or f.endswith(".m"):
-            with open(f, "r") as fp:
+            with open(f, "r", encoding="utf-8") as fp:
                 swift_text = fp.read()
             evidence = evidence + analyze_file(first_party_info,
                                                swift_text, f, True)

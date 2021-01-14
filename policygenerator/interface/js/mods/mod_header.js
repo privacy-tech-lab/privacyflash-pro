@@ -100,20 +100,15 @@ function updateVersionURL () {
 * @params (filename, elId, mimeType) - ...
 * @return void
 */
-function downloadInnerHtml(filename, mimeType) {
-  let elHtml = configurePolicy()
-  elHtml = '<html lang="en-US">\n' +
+function downloadInnerHtml() {
+  let html = configurePolicy()
+  html = '<html lang="en-US">\n' +
       '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>\n' +
       '<title>Privacy Policy for the <span class="app-name"></span> Mobile app </title>\n' +
-      elHtml +
+      html +
       '<small>This privacy policy was generated with <a href="https://github.com/privacy-tech-lab/privacyflash-pro" target="_blank">PrivacyFlash Pro</a></small>'+
       '\n</html>'
-  var link = document.createElement('a');
-  mimeType = mimeType || 'text/plain';
-
-  link.setAttribute('download', filename);
-  link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
-  link.click();
+  return html
 }
 
 function configurePolicy() {
@@ -163,15 +158,18 @@ function configurePolicy() {
 */
 function btnExportPolicy() {
   $('#mod-0w-export').off('click')
-  $('#mod-0w-export').click(function() {
+  $('#mod-0w-export').click(async function() {
+    let appName = $('#mod-0w-app').val()
+    let filename = 'Privacy Policy.html';
+    if (appName.length !== 0) filename = appName +' Privacy Policy.html';
+    let data = downloadInnerHtml();
+    let result = await saveFileDialog(filename, data)
+    if (!result) return
     $('#laws').fadeOut('fast')
   setTimeout(function() {
     $('#policy').addClass('slide2').removeClass('slide')}, 150);
   setTimeout(function() {
-    $('#wizard').fadeOut('slow', function(){
-      let appName = $('#mod-0w-app').val()
-      let fileName =  appName+' Privacy Policy.html';
-      downloadInnerHtml(fileName, 'text/html');
+    $('#wizard').fadeOut('slow', async function(){
       $('#exported').fadeIn('slow',)
       })}, 300);
   })

@@ -107,7 +107,7 @@ Copyright (c) 2019 David Baraka, Rafael Goldstein, Sarah Jin, Sebastian Zimmeck 
             class="font-weight-bold"
             type="text"
             placeholder="Click here to select an iOS Swift project directory."
-            readonly data-toggle="modal" data-target="#directory-picker-modal"
+            readonly
             style="width:100%;"
             id="path"/>
         </div>
@@ -133,61 +133,6 @@ Copyright (c) 2019 David Baraka, Rafael Goldstein, Sarah Jin, Sebastian Zimmeck 
               height="18px"
               width="18px"/>
             </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Directory Picker Modal -->
-  <section>
-    <div
-      class="modal fade"
-      id="directory-picker-modal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="directoryPickerModal"
-      aria-hidden="true">
-      <div
-        class="modal-dialog modal-dialog-scrollable modal-lg"
-        role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm delay wrapper-helper" id="enclosingDir"
-                data-toggle="tooltip"
-                data-delay='{ "show": 500, "hide": 0 }'
-                data-placement="left"
-                title="Directory Level Up">
-                <img
-                src="img/chevron-up.svg"
-                height="18px"
-                width="18px"/>
-              </button> &nbsp;&nbsp;
-              <button
-              type="button"
-              class="btn btn-secondary btn-sm delay wrapper-helper" id="hiddenDir"
-              data-toggle="tooltip"
-              data-delay='{ "show": 500, "hide": 0 }'
-              data-placement="left"
-              title="Toggle Hidden Directories">.
-              </button> &nbsp;&nbsp;
-              <div class="flexContainer" id="selectedPath">
-                  <div class="flexLabel"></div>>
-              </div>
-              <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
-                  <div class="close-char">
-                      <span aria-hidden="true">&times;</span>
-                  </div>
-              </button>
-          </div>
-          <div class="modal-body" id="subdirectories">
-            <!-- Sub-directories will be inserted here -->
-          </div>
-          <div class="modal-footer d-flex justify-content-between">
-              <div class="font-weight-bold">Please select an iOS Swift project directory.</div>
-              <button type="button" class="btn btn-info" data-dismiss="modal" id="selectPath">OK</button>
-          </div>
         </div>
       </div>
     </div>
@@ -1530,7 +1475,7 @@ Copyright (c) 2019 David Baraka, Rafael Goldstein, Sarah Jin, Sebastian Zimmeck 
               <strong>Policy revisions:</strong> Once you have exported your policy, you can add, remove, and change its text in the policy file directly. Such revision may be particular useful if you want to include privacy practices that are not covered by PrivacyFlash Pro.
             </div>
             <div id="version-number">
-                <a href="https://github.com/privacy-tech-lab/privacyflash-pro" target="_blank">PrivacyFlash Pro on GitHub</a>, v1.0.2
+                <a href="https://github.com/privacy-tech-lab/privacyflash-pro" target="_blank">PrivacyFlash Pro on GitHub</a>, v1.1.0
             </div>
         </div>
       </div>
@@ -1830,8 +1775,17 @@ Copyright (c) 2019 David Baraka, Rafael Goldstein, Sarah Jin, Sebastian Zimmeck 
   <script src="js/libs/dark-mode-switch.min.js"></script>
 
   <!-- Custom Javascript -->
-  <script type="module" src="js/main.js"></script>
-  <script src="/eel.js"></script>
-
+  <script>
+    window.addEventListener('pywebviewready', async function() {
+        showFolderDialog = pywebview.api.showFolderDialog
+        saveFileDialog = pywebview.api.saveFileDialog
+        readDisclaimer = pywebview.api.readDisclaimer
+        updateDisclaimer = pywebview.api.updateDisclaimer
+        showBootLogo = pywebview.api.showBootLogo
+        validate = pywebview.api.validate
+        main = pywebview.api.main
+        await import('./js/main.js');
+    })
+  </script>
   </body>
 </html>
