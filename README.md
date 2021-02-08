@@ -17,6 +17,8 @@ PrivacyFlash Pro covers provisions of the following laws:
 
 PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacytechlab.org/) at [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
 
+Our [paper](https://sebastianzimmeck.de/zimmeckEtAlPrivacyFlashPro2021.pdf) appears at the Network and Distributed System Security Symposium (NDSS).
+
 ## Installing and Running PrivacyFlash Pro
 
 You can install and run PrivacyFlash Pro from the packaged release or from the source files.
