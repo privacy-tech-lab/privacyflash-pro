@@ -183,7 +183,12 @@ PLIST:
 
   PURCHASES: []
 
-  IDFA: []
+  IDFA:
+    # Description: A message that informs the user why an app is requesting
+    # permission to use data for tracking the user or the device.
+    # Language: Swift
+    # Documentation: https://developer.apple.com/documentation/bundleresources/information_property_list/nsusertrackingusagedescription
+  - NSUserTrackingUsageDescription
 
 FRAMEWORK:
   SWIFT:
@@ -383,6 +388,16 @@ FRAMEWORK:
       # Language: Swift & Objective-C
       # Documentation: https://developer.apple.com/documentation/adsupport
     - AdSupport
+
+      # Description: You must use the AppTrackingTransparency framework if your
+      # app collects data about end users and shares it with other companies
+      # for purposes of tracking across apps and web sites. The
+      # AppTrackingTransparency framework presents an app-tracking
+      # authorization request to the user and provides the tracking
+      # authorization status.
+      # Language: Swift & Objective-C
+      # Documentation:https://developer.apple.com/documentation/apptrackingtransparency
+    - AppTrackingTransparency
 
     GOOGLE:
       # Description: Add Firebase to your iOS project.
@@ -654,6 +669,16 @@ FRAMEWORK:
       # Documentation: https://developer.apple.com/documentation/adsupport
     - AdSupport
 
+      # Description: You must use the AppTrackingTransparency framework if your
+      # app collects data about end users and shares it with other companies
+      # for purposes of tracking across apps and web sites. The
+      # AppTrackingTransparency framework presents an app-tracking
+      # authorization request to the user and provides the tracking
+      # authorization status.
+      # Language: Swift & Objective-C
+      # Documentation:https://developer.apple.com/documentation/apptrackingtransparency
+    - AppTrackingTransparency
+
     GOOGLE:
       # Description: Add Firebase to your iOS project.
       # Language: Swift & Objective-C
@@ -879,6 +904,12 @@ CLASS:
       # Language: Swift & Objective-C
       # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager
     - ASIdentifierManager
+
+      # Description: A class that provides a tracking authorization request and
+      # the tracking authorization status of the app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager
+    - ATTrackingManager
 
     GOOGLE:
       # Description: You can customize the sign-in screens by subclassing
@@ -1173,6 +1204,12 @@ CLASS:
       # Language: Swift & Objective-C
       # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager
     - ASIdentifierManager
+
+      # Description: A class that provides a tracking authorization request and
+      # the tracking authorization status of the app.
+      # Language: Swift & Objective-C
+      # Documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager
+    - ATTrackingManager
 
     GOOGLE:
       # Description: You can customize the sign-in screens by subclassing
@@ -1560,7 +1597,13 @@ AUTHORIZATION_METHOD:
       # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequest
       SKProductsRequest: []
 
-    IDFA: []
+    IDFA:
+      # Description: The request for user authorization to access app-related data.
+      # Language: Swift
+      # Documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/3547037-requesttrackingauthorization
+      requestTrackingAuthorization:
+        - completion
+
 
     GOOGLE:
       didSignInWith: []
@@ -1895,7 +1938,11 @@ AUTHORIZATION_METHOD:
       # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequest
       SKProductsRequest: []
 
-    IDFA: []
+      # Description: The request for user authorization to access app-related data.
+      # Language: Objective-C
+      # Documentation: requestTrackingAuthorizationWithCompletionHandler
+    IDFA:
+      requestTrackingAuthorizationWithCompletionHandler: []
 
     GOOGLE:
       # Description: Then, configure FirebaseUI to use the sign-in methods you
@@ -2481,6 +2528,21 @@ ADDITIONAL_EVIDENCE:
       # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614151-advertisingidentifier
       advertisingIdentifier: []
 
+      # Description: Use the trackingAuthorizationStatus property to check
+      # authorization status.
+      # Language: Swift
+      # Documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/3547038-trackingauthorizationstatus?language=objc
+      trackingAuthorizationStatus: []
+
+      # Description: The status values for app tracking authorization
+      # Language: Swift
+      # Documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus
+      authorizationStatus: []
+
+      # Description:
+      # Language:
+      # Documentation:
+
     GOOGLE:
       # Description: Then, configure FirebaseUI to use the sign-in methods you
       #   want to support.
@@ -3043,6 +3105,11 @@ ADDITIONAL_EVIDENCE:
       # Language: Swift & Objective-C
       # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614151-advertisingidentifier
       advertisingIdentifier: []
+
+      # Description: The status values for app tracking authorization.
+      # Language: Objective-C
+      # Documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanagerauthorizationstatus?language=objc
+      ATTrackingManagerAuthorizationStatus: []
 
     GOOGLE:
       # Description: Then, configure FirebaseUI to use the sign-in methods you
