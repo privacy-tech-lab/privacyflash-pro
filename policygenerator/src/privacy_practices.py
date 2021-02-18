@@ -16,7 +16,11 @@ import yaml
 from .constants import Practices
 
 def getFilePath(relativePath):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
+    """ 
+    Get absolute path to resource, works for dev and for PyInstaller 
+    Note: Files and folders are placed in the root directory when packaged
+          See PyInstaller and package.py for more information - "relativePath[3:]"
+    """
     if getattr(sys, 'frozen', False):
         application_path = sys._MEIPASS
         return os.path.join(application_path, relativePath[3:])
@@ -54,7 +58,7 @@ def retrieve_privacy_practice_data():
     """
 
     pp = getFilePath('../spec/privacy_practices.yaml') 
-    with open(pp, 'r') as evidence:
+    with open(pp, 'r', encoding="utf-8") as evidence:
         privacy_practices = yaml.safe_load(evidence)
 
     practices_data = {}
@@ -186,7 +190,7 @@ def load_third_df():
     :return final_ads: dictionary of every SDK along with their type
     """
     pp = getFilePath('../spec/third_parties.yaml') 
-    with open(pp, 'r') as evidence:
+    with open(pp, 'r', encoding="utf-8") as evidence:
         df = yaml.safe_load(evidence)
 
     return df

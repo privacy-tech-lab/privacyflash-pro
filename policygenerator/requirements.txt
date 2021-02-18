@@ -1,3 +1,4 @@
 PyYAML==5.1
 six==1.11.0
-Eel==0.10.4
+pywebview==3.4
+pyinstaller==4.1

@@ -17,6 +17,8 @@ PrivacyFlash Pro covers provisions of the following laws:
 
 PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacytechlab.org/) at [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
 
+Our [paper](https://sebastianzimmeck.de/zimmeckEtAlPrivacyFlashPro2021.pdf) appears at the Network and Distributed System Security Symposium (NDSS).
+
 ## Installing and Running PrivacyFlash Pro
 
 You can install and run PrivacyFlash Pro from the packaged release or from the source files.
@@ -48,6 +50,12 @@ If your browser does not connect to the localhost, try disabling any antivirus s
 PrivacyFlash Pro analyzes iOS app source code in Swift and third party libraries in Swift and Objective-C. The library analysis works for uncompiled and compiled libraries. PrivacyFlash Pro does not analyze iOS app source code in Objective-C.
 
 PrivacyFlash Pro (1.0.2) was tested to run on macOS Catalina (10.15.5) and the Brave Browser (1.9.80, Chromium: 81.0.4044.138 (Official Build) (64-bit)).
+
+### Packaging
+
+After successfully installing and running from source, run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containg a MacOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
+
+**Note**: If packaging for release, remember to update the version number in `privacyflash-pro/policygenerator/interface/index.html` and `privacyflash-pro/policygenerator/package.py`.
 
 ## Demo Video
 
@@ -90,7 +98,8 @@ Our unit tests for PrivacyFlash Pro have been built with the Python unittest fra
 - The latest release of PrivacyFlash Pro is contained in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases).
 - `iOS-sample-projects`: Sample projects for PrivacyFlash Pro to analyze and test.
 - `policygenerator/`: Contains the code of PrivacyFlash Pro.
-- `policygenerator/app.py`: Main entry point for generating a privacy policy; parses the command line arguments.
+- `policygenerator/app.py`: Main entry point for generating a privacy policy.
+- `policygenerator/package.py`: Script to create a distributable package of PrivacyFlash Pro.
 - `policygenerator/interface`: Contains all code related to the user interface for displaying the policy to the user.
 - `policygenerator/spec`: Third party and privacy practices specifications.
 - `policygenerator/spec/third_parties.yaml`: Contains the specification for ad networks and other third parties.
@@ -113,7 +122,7 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 - [Animate.css](https://github.com/daneden/animate.css)
 - [Bootstrap](https://getbootstrap.com)
 - [Dark Mode Switch](https://github.com/coliff/dark-mode-switch)
-- [Eel](https://github.com/samuelhwilliams/Eel)
+- [pywebview](https://github.com/r0x0r/pywebview)
 - [Google Fonts Quicksand](https://fonts.google.com/specimen/Quicksand)
 - [jQuery](https://github.com/jquery/jquery)
 - [PyYAML](https://github.com/yaml/pyyaml)
@@ -122,5 +131,5 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 - [smooth-scroll-into-view-if-needed](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
 
 <p align="center">
-  <img src="https://github.com/privacy-tech-lab/privacyflash-pro/blob/master/plt_logo.png" width="200px" height="200px" title="privacy-tech-lab logo">
+  <img src="https://github.com/privacy-tech-lab/privacyflash-pro/blob/main/plt_logo.png" width="200px" height="200px" title="privacy-tech-lab logo">
 <p>
