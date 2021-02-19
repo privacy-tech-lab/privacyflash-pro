@@ -55,7 +55,9 @@ PrivacyFlash Pro (1.0.2) was tested to run on macOS Catalina (10.15.5) and the B
 
 After successfully installing and running from source, run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containg a MacOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
 
-**Note**: If packaging for release, remember to update the version number in `privacyflash-pro/policygenerator/interface/index.html` and `privacyflash-pro/policygenerator/package.py`.
+**Note**: If packaging for public distribution, remember to update the version number in `privacyflash-pro/policygenerator/interface/index.html` and `privacyflash-pro/policygenerator/package.py`.
+
+If you experience errors packaging or running the packaged app, try updating the dependency `pyinstaller` by running `pip3 install pyinstaller -U` and then run the packaging script.
 
 ## Demo Video
 
