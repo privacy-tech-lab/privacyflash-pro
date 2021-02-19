@@ -21,7 +21,7 @@ from pathlib import Path
 isPackaged = getattr(sys, 'frozen', False)
 directory = str(Path.home())
 path = os.path.join(str(Path.home()), 'Library/Application Support/PrivacyFlash Pro') 
-database = os.path.join(path, 'shelf.db')
+database = os.path.join(path, 'shelf')
 showBootLogo = True
 
 try:
@@ -93,19 +93,31 @@ class Api():
 
     def updateDisclaimer(self):
         try:
-            db = shelve.open(database)
+            try:
+                db = shelve.open(database)
+            except Exception as e:
+                path = database + '.db' 
+                if os.path.exists(path):
+                    os.remove(path)
+                db = shelve.open(database)
             try:
                 db['disclaimer'] = True
             finally:
                 db.close()
             db = shelve.open(database)
             db.close()
-        except:
+        except Exception as e:
             print('Error: Unable to save user choice')
 
     def readDisclaimer(self):
         try:
-            db = shelve.open(database)
+            try:
+                db = shelve.open(database)
+            except Exception as e:
+                path = database + '.db' 
+                if os.path.exists(path):
+                    os.remove(path)
+                db = shelve.open(database)
             try:
                 if 'disclaimer' in db:
                     value = db['disclaimer']
@@ -115,7 +127,7 @@ class Api():
             finally:
                 db.close()
             return value
-        except:
+        except Exception as e:
             print('Error: Unable to access database')
             return False
     
