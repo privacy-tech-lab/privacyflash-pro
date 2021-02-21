@@ -7,8 +7,6 @@ mod11.js adds and controls functionality of wizard and policy
 */
 
 
-import { updateAppName } from './../utilities.js'
-
 /**
 * @desc "adds text input listener to input field"
 * @params n/a
@@ -39,7 +37,6 @@ function updatePolicy() {
   } else {
     setContent()
   }
-  updateAppName()
 
 }
 
@@ -50,7 +47,7 @@ function updatePolicy() {
 */
 function setContent() {
   let html = `
-  <p>When we make material changes to this privacy policy, for example, due to app updates or changes in the law, we will post the updated policy here. The policy will always apply in the version at the time of your use of <span class="app-name"></span> even if you downloaded <span class="app-name"></span> at a time when a previous policy version was applicable.</p>
+  <p>This website conforms to the <a href="https://www.w3.org/TR/WCAG21/" target="_blank">Web Content Accessibility Guidelines (WCAG) 2.1</a>. However, if you are having difficulties obtaining information from it, please contact us at the contact information <a href='#contact_us'>below</a>. We will try to make the information available to you in another format and answer any question that you may have.</p>
   `
   $('#mod-11p-content').html(html)
 }
@@ -61,7 +58,6 @@ function setContent() {
 * @return void
 */
 export function mod11() {
-    setContent()
-    updateAppName()
-    updateWizard()
+  setContent()
+  updateWizard()
 }

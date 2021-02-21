@@ -21,7 +21,6 @@ import { mod9 } from './mods/mod9.js'
 import { mod10 } from './mods/mod10.js'
 import { mod11 } from './mods/mod11.js'
 import { mod12 } from './mods/mod12.js'
-import { mod13 } from './mods/mod13.js'
 import { modFooter } from './mods/mod_footer.js'
 import { utilities } from './utilities.js'
 
@@ -53,7 +52,6 @@ export function startWizard(p, l, s){
   mod10()
   mod11()
   mod12()
-  mod13()
   modFooter()
   utilities()
   $('#main,html,body').css('overflow', 'hidden');

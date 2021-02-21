@@ -114,20 +114,20 @@ function downloadInnerHtml() {
 function configurePolicy() {
   let count = 1
   let linksDefault = $('#links').html()
+  let mod5pDefault = $('#sec-title-5P').html()
   let mod6pDefault = $('#sec-title-6P').html()
-  let mod7pDefault = $('#sec-title-7P').html()
+  let exclude5p = ""
   let exclude6p = ""
-  let exclude7p = ""
 
+  if ($('#sec-title-5P').hasClass('exclude')) {
+    $('#sec-title-5P').remove()
+    $('#mod-5p-link').remove()
+    exclude5p = "class='exclude'"
+  }
   if ($('#sec-title-6P').hasClass('exclude')) {
     $('#sec-title-6P').remove()
     $('#mod-6p-link').remove()
     exclude6p = "class='exclude'"
-  }
-  if ($('#sec-title-7P').hasClass('exclude')) {
-    $('#sec-title-7P').remove()
-    $('#mod-7p-link').remove()
-    exclude7p = "class='exclude'"
   }
   $('.num').each(function(){
     $(this).html(count)
@@ -135,13 +135,13 @@ function configurePolicy() {
   })
   let html = document.getElementById('policy').innerHTML
   $('#links').html(linksDefault)
+  if (exclude5p != "") {
+    $('<div '+ exclude5p +' id="sec-title-5P">' + mod5pDefault + '</div>').
+    insertAfter('#sec-title-4P')
+  }
   if (exclude6p != "") {
     $('<div '+ exclude6p +' id="sec-title-6P">' + mod6pDefault + '</div>').
     insertAfter('#sec-title-5P')
-  }
-  if (exclude7p != "") {
-    $('<div '+ exclude7p +' id="sec-title-7P">' + mod7pDefault + '</div>').
-    insertAfter('#sec-title-6P')
   }
   count = 1
   $('.num').each(function(){

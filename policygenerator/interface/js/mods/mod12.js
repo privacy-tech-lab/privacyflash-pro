@@ -12,9 +12,27 @@ mod12.js adds and controls functionality of wizard and policy
 * @params n/a
 * @return void
 */
-function updateWizard() {
-  $('#mod-12w-input').on('input', function(){
-    updatePolicy()
+function updateWizard1() {
+  $('#mod-12w-input-name').on('input', function(){
+    updatePolicy1()
+
+    let inputText = $(this).val()
+    if (inputText != "") {
+      $(this).addClass('focus')
+    } else {
+      $(this).removeClass('focus')
+    }
+  })
+}
+
+/**
+* @desc "adds text input listener to input field"
+* @params n/a
+* @return void
+*/
+function updateWizard2() {
+  $('#mod-12w-input-email').on('input', function(){
+    updatePolicy2()
 
     let inputText = $(this).val()
     if (inputText != "") {
@@ -30,12 +48,27 @@ function updateWizard() {
 * @params n/a
 * @return void
 */
-function updatePolicy() {
-  let text = $('#mod-12w-input').val()
+function updatePolicy1() {
+  let text = $('#mod-12w-input-name').val()
   if (text != "") {
-    $('#mod-12p-content').html(`<p>` + text +`</p>`)
+    $('#mod-12p-name').html(`<p>` + text +`</p>`)
   } else {
-    setContent()
+    setContent1()
+  }
+
+}
+
+/**
+* @desc "updates policy based on text input"
+* @params n/a
+* @return void
+*/
+function updatePolicy2() {
+  let text = $('#mod-12w-input-email').val()
+  if (text != "") {
+    $('#mod-12p-email').html(`<p>` + text +`</p>`)
+  } else {
+    setContent2()
   }
 
 }
@@ -45,11 +78,23 @@ function updatePolicy() {
 * @params n/a
 * @return void
 */
-function setContent() {
+function setContent1() {
   let html = `
-  <p>This website conforms to the <a href="https://www.w3.org/TR/WCAG21/" target="_blank">Web Content Accessibility Guidelines (WCAG) 2.1</a>. However, if you are having difficulties obtaining information from it, please contact us at the contact information <a href='#contact_us'>below</a>. We will try to make the information available to you in another format and answer any question that you may have.</p>
+  <p>Name</p>
   `
-  $('#mod-12p-content').html(html)
+  $('#mod-12p-name').html(html)
+}
+
+/**
+* @desc "sets the default content in the policy"
+* @params n/a
+* @return void
+*/
+function setContent2() {
+  let html = `
+  <p>Email address</p>
+  `
+  $('#mod-12p-email').html(html)
 }
 
 /**
@@ -58,6 +103,8 @@ function setContent() {
 * @return void
 */
 export function mod12() {
-  setContent()
-  updateWizard()
+  setContent1()
+  setContent2()
+  updateWizard1()
+  updateWizard2()
 }

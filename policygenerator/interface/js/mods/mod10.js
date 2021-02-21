@@ -7,6 +7,8 @@ mod10.js adds and controls functionality of wizard and policy
 */
 
 
+import { updateAppName } from '../utilities.js'
+
 /**
 * @desc "adds text input listener to input field"
 * @params n/a
@@ -37,6 +39,7 @@ function updatePolicy() {
   } else {
     setContent()
   }
+  updateAppName()
 
 }
 
@@ -47,7 +50,7 @@ function updatePolicy() {
 */
 function setContent() {
   let html = `
-  <p>We use encryption to protect personal information stored and transmitted online. Only personnel who need the personal information to perform a specific function have access to such. The computers and servers on which we store personal information are kept in a secure environment.</p>
+  <p>When we make material changes to this privacy policy, for example, due to app updates or changes in the law, we will post the updated policy here. The policy will always apply in the version at the time of your use of <span class="app-name"></span> even if you downloaded <span class="app-name"></span> at a time when a previous policy version was applicable.</p>
   `
   $('#mod-10p-content').html(html)
 }
@@ -58,6 +61,7 @@ function setContent() {
 * @return void
 */
 export function mod10() {
-  setContent()
-  updateWizard()
+    setContent()
+    updateAppName()
+    updateWizard()
 }

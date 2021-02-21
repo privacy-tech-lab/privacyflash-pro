@@ -9,7 +9,7 @@ utilities.js contains helper functions
 // Technical permission names
 export const permissions = ["LOCATION", "CAMERA", "CONTACTS", "MICROPHONE",
   "PHOTOS", "CALENDAR", "HEALTH", "MUSIC", "BLUETOOTH", "MOTION", "REMINDERS",
-  "SPEECH", "HOMEKIT"]
+  "SPEECH", "HOMEKIT", "IDFA"]
  
 /**
 * @desc get proper name of permission from technical name
@@ -22,7 +22,7 @@ export function decodePermission(permission){
     "CALENDAR": "Calendars", "HEALTH": "Health", "MUSIC": "Media & Apple Music",
     "BLUETOOTH": "Bluetooth", "MOTION": "Motion & Fitness",
     "REMINDERS": "Reminders", "SPEECH": "Speech Recognition",
-    "HOMEKIT": "HomeKit", "IDFA": "IDentifier For Advertising (IDFA)"}
+    "HOMEKIT": "HomeKit", "IDFA": "Identifier For Advertising (IDFA)"}
   if (permission in names) {
     return names[permission]
   } else {

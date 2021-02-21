@@ -13,7 +13,7 @@ mod9.js adds and controls functionality of wizard and policy
 * @return void
 */
 function updateWizard() {
-  $('#mod-9w-input-0').on('input', function(){
+  $('#mod-9w-input').on('input', function(){
     updatePolicy()
 
     let inputText = $(this).val()
@@ -31,7 +31,7 @@ function updateWizard() {
 * @return void
 */
 function updatePolicy() {
-  let text = $('#mod-9w-input-0').val()
+  let text = $('#mod-9w-input').val()
   if (text != "") {
     $('#mod-9p-content').html(`<p>` + text +`</p>`)
   } else {
@@ -47,7 +47,7 @@ function updatePolicy() {
 */
 function setContent() {
   let html = `
-  <p>We will keep the personal information that we collect as long as it is necessary for the purposes for which we collect it.</p>
+  <p>We use encryption to protect personal information stored and transmitted online. Only personnel who need the personal information to perform a specific function have access to such. The computers and servers on which we store personal information are kept in a secure environment.</p>
   `
   $('#mod-9p-content').html(html)
 }
