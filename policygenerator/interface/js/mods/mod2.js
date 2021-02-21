@@ -10,9 +10,8 @@ mod2.js adds and controls functionality of third party permissions in the
 import { sdkPractices, sdks, practices } from './../wizard.js'
 import { scrollHorizontalEnd, decodePermission, updateAppName, permissions, smoothScroll
   } from './../utilities.js'
-import { syncMod3 } from './mod3.js'
-import { syncMod6Alt } from './mod6.js'
-import { syncMod8 } from './mod8.js'
+import { syncMod5Alt } from './mod5.js'
+import { syncMod7 } from './mod7.js'
 
 var additionalPermissions = {} // Storage for additional practices
 
@@ -72,9 +71,8 @@ function setDefaults() {
         $('#mod-2w-collapse-sdks-input').val("")
         scrollHorizontalEnd('mod-2w-sdks')
         updatePolicy()
-        syncMod3()
-        syncMod6Alt()
-        syncMod8()
+        syncMod5Alt()
+        syncMod7()
       } else {
         $('#mod-2w-collapse-sdks-input').attr('placeholder', 'This field is required.')
       }
@@ -316,9 +314,8 @@ function inflateSDKCollapseAlt(sdkTechName) {
     inflateThirdPartyButtons()
     inflatePermissionButtons()
     updatePolicy()
-    syncMod3()
-    syncMod6Alt()
-    syncMod8()
+    syncMod5Alt()
+    syncMod7()
   })
 }
 
