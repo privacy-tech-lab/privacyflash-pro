@@ -25,7 +25,7 @@ You can install and run PrivacyFlash Pro from the packaged release or from the s
 
 ### Installing from the Packaged Release
 
-You will find the releases of PrivacyFlash Pro in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases). Download the latest one [**here**](https://github.com/privacy-tech-lab/privacyflash-pro/releases/download/v1.0.1/privacyflash-pro.zip) (you may need to allow downloading the zip file in your browser settings, e.g., under Google Chrome's Downloads settings). Unzip the file `privacyflash-pro.zip` and then click the PrivacyFlash Pro icon. You will have to agree to open PrivacyFlash Pro in your [macOS security settings](https://support.apple.com/en-us/HT202491). After a few seconds PrivacyFlash Pro should run in your default browser.
+You will find the releases of PrivacyFlash Pro in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases) (you may need to allow downloading the zip file in your browser settings, e.g., under Google Chrome's Downloads settings). Unzip the downloaded `privacyflash-pro.zip` and then click the PrivacyFlash Pro icon. You will have to agree to open PrivacyFlash Pro in your [macOS security settings](https://support.apple.com/en-us/HT202491). After a few seconds PrivacyFlash Pro should run in your default browser.
 
 ### Installing from the Source Files
 
@@ -33,9 +33,9 @@ You will find the releases of PrivacyFlash Pro in the [releases section](https:/
 
 2. Clone this repo by `cd`ing into the directory in which you want to store PrivacyFlash Pro and run `git clone git@github.com:privacy-tech-lab/privacyflash-pro.git`.
 
-3. **Optional** Create and activate a [Python virtual environment](https://docs.python.org/3/library/venv.html#module-venv). Ensure that your Python virtual environment is outside of the `privacyflash-pro` directory to avoid git tracking.
+3. **Strongly Recommended**: Create and activate a [Python virtual environment](https://docs.python.org/3/library/venv.html#module-venv), `pfp-venv`, with `python3 -m venv pfp-venv`, and run it with `source pfp-venv/bin/activate` (assuming that you are using the default shell). Ensure that your virtual environment is outside of the `privacyflash-pro` directory to avoid git tracking.
 
-4. `cd` into the `privacyflash-pro/policygenerator` directory. If you are using a Python virtual environment, run `pip3 install -r requirements.txt`. Otherwise, run `pip3 install --user -r requirements.txt`. If you continue to get errors, run `pip3 install -r requirements.txt`. If you still get errors, run `sudo pip3 install -r requirements.txt`.
+4. `cd` into the `privacyflash-pro/policygenerator` directory. If you are using a Python virtual environment, run `pip3 install -r requirements.txt`. Otherwise, run `pip3 install --user -r requirements.txt`. If you get an error, run `pip3 install -r requirements.txt`. If you still get an error, run `sudo pip3 install -r requirements.txt`.
 
 5. Run PrivacyFlash Pro with `python3 app.py`.
 
