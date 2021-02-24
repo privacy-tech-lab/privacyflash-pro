@@ -1148,7 +1148,7 @@ function updatePolicy(){
       </ul>
       
       <p>
-        You can exercise your privacy rights generally for free. However, in some cases we may charge a reasonable fee as permitted by law to offset our administrative costs for fulfilling your request.
+        You can exercise your privacy rights generally for free. Only in exceptional cases we may charge a reasonable fee as permitted by law to offset our administrative costs for fulfilling your request.
       </p>
 
       <p>
