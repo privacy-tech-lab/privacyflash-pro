@@ -4,10 +4,11 @@
 
 # PrivacyFlash Pro
 
-PrivacyFlash Pro analyzes the code of iOS Swift projects to generate a privacy policy. The goals of PrivacyFlash Pro are:
-- Assisting app developers in understanding the privacy practices used by their apps and third party libraries
-- Creating a privacy policy covering those practices to notify users and help developers achieving privacy compliance
-- Establishing standardized privacy policies in the iOS app ecosystem
+To easily run PrivacyFlash Pro get the [latest packaged release](https://github.com/privacy-tech-lab/privacyflash-pro/releases).
+
+Learn more about PrivacyFlash Pro in our [research paper](https://sebastianzimmeck.de/zimmeckEtAlPrivacyFlashPro2021.pdf).
+
+PrivacyFlash Pro analyzes the code of iOS Swift apps and their libraries to generate privacy policies. With PrivacyFlash Pro we intend to help developers creating privacy policies for their apps and make the apps' privacy practices more transparent to users.
 
 PrivacyFlash Pro covers provisions of the following laws:
 - California Consumer Privacy Act (CCPA)
@@ -15,13 +16,11 @@ PrivacyFlash Pro covers provisions of the following laws:
 - Children's Online Privacy Protection (COPPA)
 - General Data Protection Regulation (GDPR).
 
-PrivacyFlash Pro was written by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) as an academic project of the [privacy-tech-lab](https://privacytechlab.org/) at [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
+PrivacyFlash Pro is an academic research project. It was designed and developed by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) at the [privacy-tech-lab](https://privacytechlab.org/), [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
 
-Our [paper](https://sebastianzimmeck.de/zimmeckEtAlPrivacyFlashPro2021.pdf) appears at the Network and Distributed System Security Symposium (NDSS).
+## Installing, Running, and Packaging PrivacyFlash Pro
 
-## Installing and Running PrivacyFlash Pro
-
-You can install and run PrivacyFlash Pro from the packaged release or from the source files.
+You can install and run PrivacyFlash Pro from the packaged release or from the source files. You can also create a new packaged version of PrivacyFlash Pro.
 
 ### Installing from the Packaged Release
 
@@ -47,13 +46,11 @@ You can test PrivacyFlash Pro on the projects in the [iOS-sample-projects](https
 
 If your browser does not connect to the localhost, try disabling any antivirus software (e.g., [eset](https://www.eset.com/us/)) that you may be running.
 
-PrivacyFlash Pro analyzes iOS app source code in Swift and third party libraries in Swift and Objective-C. The library analysis works for uncompiled and compiled libraries. PrivacyFlash Pro does not analyze iOS app source code in Objective-C.
-
-PrivacyFlash Pro (1.0.2) was tested to run on macOS Catalina (10.15.5) and the Brave Browser (1.9.80, Chromium: 81.0.4044.138 (Official Build) (64-bit)).
+PrivacyFlash Pro analyzes iOS app source code in Swift and its integrated third party libraries in Swift and Objective-C. The library analysis works for uncompiled and compiled libraries. PrivacyFlash Pro does not analyze iOS app source code in Objective-C.
 
 ### Packaging
 
-After successfully installing and running from source, run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containg a MacOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
+You can also create a new packaged version of PrivacyFlash Pro. After successfully installing and running from source, run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containg a MacOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
 
 **Note**: If packaging for public distribution, remember to update the version number in `privacyflash-pro/policygenerator/interface/index.html` and `privacyflash-pro/policygenerator/package.py`.
 
@@ -65,11 +62,11 @@ If you experience errors packaging or running the packaged app, try updating the
 
 ## Get Involved
 
-PrivacyFlash Pro is from the people for the people. Everyone can contribute. In particular, feel free to open a pull request to add additional privacy practices and third party libraries. You can also make a feature request by opening a new issue with the `feature request` label. If you have other ideas or feedback, let us know. We are looking forward to hear from you!
+PrivacyFlash Pro is from the people for the people. Everyone can contribute. In particular, feel free to open a pull request to add additional privacy practices and third party libraries. If you have other ideas or feedback, let us know. We are looking forward to hear from you!
 
 ### Privacy Practice Analysis
 
-The specification for the privacy practice analysis is contained in `policygenerator/spec/privacy_practices.yaml`. PrivacyFlash Pro flags a privacy practice in an app or a third party library if it identifies the use of a relevant API, i.e., all of the following are present for the app or a library:
+The specification for the privacy practice analysis is contained in `policygenerator/spec/privacy_practices.yaml`. PrivacyFlash Pro flags a privacy practice in an app or a library if it identifies the use of a relevant API, i.e., all of the following are present for the app or a library:
 - PLIST value (e.g., `NSLocationWhenInUseUsageDescription`)
 - FRAMEWORK import (e.g., `CoreLocation`)
 - CLASS instantiation (e.g., `CLLocationManager`)
@@ -104,18 +101,14 @@ Our unit tests for PrivacyFlash Pro have been built with the Python unittest fra
 - `policygenerator/package.py`: Script to create a distributable package of PrivacyFlash Pro.
 - `policygenerator/interface`: Contains all code related to the user interface for displaying the policy to the user.
 - `policygenerator/spec`: Third party and privacy practices specifications.
-- `policygenerator/spec/third_parties.yaml`: Contains the specification for ad networks and other third parties.
 - `policygenerator/spec/privacy_practices.yaml`: Contains the specification for detecting privacy practice usage.
+- `policygenerator/spec/third_parties.yaml`: Contains the specification for ad networks and other third party libraries.
 - `policygenerator/src/analysis.py`: The module for analyzing the project looks for instances of privacy practice usage.
 - `policygenerator/src/configure_data.py`: Bridge between the Python code and the Javascript code for the UI; configures the results from the generator engine to proper json files/objects to be used for the UI.
-- `policygenerator/src/constants.py`: The constants class used internally to identify a privacy practice by an index value.
+- `policygenerator/src/constants.py`: The constants class is used internally to identify a privacy practice by an index value.
 - `policygenerator/src/evidence.py`: The evidence class is used for keeping track of privacy practice usages in an app's files.
 - `policygenerator/src/privacy_practices.py`: Loads data from the app project to be analyzed.
 - `policygenerator/requirements.txt`: Dependencies of PrivacyFlash Pro.
-
-## Future Development
-
-In the coming months we plan to extend PrivacyFlash Pro from iOS apps towards Android apps and web apps. At this year's WWDC Apple announced that developers have to identify on the App Store which permissions their apps are using, whether they use tracking, and other privacy practices. We intend that PrivacyFlash Pro generates the description that developers have to provide. We further want to provide support for backend functionality for both traditional backends, such as the LAMP stack, and backends as a service, such as Firebase. In principle the same code analysis techniques can be used, e.g., SQL queries can be used to identify which types of personal information is stored at the backend. Beyond APIs variables and function naming may also reveal what types of data are processed. For web apps, frontend JavaScript code can be analyzed, e.g., labels of form fields.
 
 ## Third Party Libraries
 
