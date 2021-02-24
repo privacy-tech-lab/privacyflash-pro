@@ -45,7 +45,7 @@ class Practices(IntEnum):
     MOTION = 12
     FACEBOOK = 13
     PURCHASES = 14
-    IDFA = 15
+    TRACKING = 15
     GOOGLE = 16
 
     def __str__(self):

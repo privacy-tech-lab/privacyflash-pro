@@ -59,7 +59,7 @@ def createThirdPartyJson(result):
     json = {"LOCATION": {}, "CONTACTS": {}, "CALENDAR": {}, "PHOTOS": {},
         "MICROPHONE": {}, "CAMERA": {}, "HEALTH": {}, "BLUETOOTH": {},
         "REMINDERS": {}, "MUSIC": {}, "HOMEKIT": {}, "SPEECH": {},
-        "MOTION": {}, "FACEBOOK": {}, "PURCHASES": {}, "IDFA": {},
+        "MOTION": {}, "FACEBOOK": {}, "PURCHASES": {}, "TRACKING": {},
         "GOOGLE": {}}
     thirdPartyPractices = {}
     sdks = {}

@@ -183,7 +183,7 @@ PLIST:
 
   PURCHASES: []
 
-  IDFA:
+  TRACKING:
     # Description: A message that informs the user why an app is requesting
     #   permission to use data for tracking the user or the device.
     # Language: Swift & Objective-C
@@ -382,13 +382,7 @@ FRAMEWORK:
       # Documentation: https://developer.apple.com/documentation/storekit
     - StoreKit
 
-    IDFA:
-      # Description: Provide apps with access to an advertising identifier and
-      #   a flag indicating whether a device is using limited ad tracking.
-      # Language: Swift & Objective-C
-      # Documentation: https://developer.apple.com/documentation/adsupport
-    - AdSupport
-
+    TRACKING:
       # Description: You must use the AppTrackingTransparency framework if your
       #   app collects data about end users and shares it with other companies
       #   for purposes of tracking across apps and web sites. The
@@ -662,13 +656,7 @@ FRAMEWORK:
       # Documentation: https://developer.apple.com/documentation/storekit
     - StoreKit
 
-    IDFA:
-      # Description: Provide apps with access to an advertising identifier and
-      #   a flag indicating whether a device is using limited ad tracking.
-      # Language: Swift & Objective-C
-      # Documentation: https://developer.apple.com/documentation/adsupport
-    - AdSupport
-
+    TRACKING:
       # Description: You must use the AppTrackingTransparency framework if your
       #   app collects data about end users and shares it with other companies
       #   for purposes of tracking across apps and web sites. The
@@ -897,14 +885,7 @@ CLASS:
       # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequestdelegate
     - SKProductsRequestDelegate
 
-    IDFA:
-      # Description: An object containing an identifier to be used for serving
-      #   advertisements, and a flag indicating whether a user has limited ad
-      #   tracking.
-      # Language: Swift & Objective-C
-      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager
-    - ASIdentifierManager
-
+    TRACKING:
       # Description: A class that provides a tracking authorization request and
       #   the tracking authorization status of the app.
       # Language: Swift & Objective-C
@@ -1197,14 +1178,7 @@ CLASS:
       # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequestdelegate
     - SKProductsRequestDelegate
 
-    IDFA:
-      # Description: An object containing an identifier to be used for serving
-      #   advertisements, and a flag indicating whether a user has limited ad
-      #   tracking.
-      # Language: Swift & Objective-C
-      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager
-    - ASIdentifierManager
-
+    TRACKING:
       # Description: A class that provides a tracking authorization request and
       #   the tracking authorization status of the app.
       # Language: Swift & Objective-C
@@ -1597,7 +1571,7 @@ AUTHORIZATION_METHOD:
       # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequest
       SKProductsRequest: []
 
-    IDFA:
+    TRACKING:
       # Description: The request for user authorization to access app-related data.
       # Language: Swift
       # Documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/3547037-requesttrackingauthorization
@@ -1937,7 +1911,7 @@ AUTHORIZATION_METHOD:
       # Documentation: https://developer.apple.com/documentation/storekit/skproductsrequest
       SKProductsRequest: []
 
-    IDFA:
+    TRACKING:
       # Description: The request for user authorization to access app-related data.
       #   Language: Objective-C
       # Documentation: https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/3547037-requesttrackingauthorizationwith?language=objc
@@ -2514,19 +2488,7 @@ ADDITIONAL_EVIDENCE:
       # Documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue/1506003-finishtransaction
       finishTransaction: []
 
-    IDFA:
-      # Description: A Boolean value that indicates whether the user has limited
-      #   ad tracking.
-      # Language: Swift Only
-      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614148-isadvertisingtrackingenabled
-      isAdvertisingTrackingEnabled: []
-
-      # Description: An alphanumeric string unique to each device, used only for
-      #   serving advertisements.
-      # Language: Swift & Objective-C
-      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614151-advertisingidentifier
-      advertisingIdentifier: []
-
+    TRACKING:
       # Description: The authorization status that is current for the calling 
       #   application.
       # Language: Swift
@@ -3088,19 +3050,7 @@ ADDITIONAL_EVIDENCE:
       # Documentation: https://developer.apple.com/documentation/storekit/skpaymentqueue/1506003-finishtransaction
       finishTransaction: []
 
-    IDFA:
-      # Description: A Boolean value that indicates whether the user has limited
-      #   ad tracking.
-      # Language: Objective-C Only
-      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614148-advertisingtrackingenabled?language=objc
-      advertisingTrackingEnabled: []
-
-      # Description: An alphanumeric string unique to each device, used only for
-      #   serving advertisements.
-      # Language: Swift & Objective-C
-      # Documentation: https://developer.apple.com/documentation/adsupport/asidentifiermanager/1614151-advertisingidentifier
-      advertisingIdentifier: []
-
+    TRACKING:
       # Description: The authorization status that is current for the calling 
       #   application.
       # Language: Objective-C
@@ -3297,7 +3247,7 @@ ENTITLEMENT:
     # Documentation: https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_in-app-payments
   - com.apple.developer.in-app-payments
 
-  IDFA: []
+  TRACKING: []
 
   GOOGLE: []
 

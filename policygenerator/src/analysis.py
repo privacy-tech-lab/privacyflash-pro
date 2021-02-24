@@ -615,19 +615,19 @@ def check_classifications(evidence, third_party_analysis, first_party, file_name
             if import_search(temp_evidence, practice, True) and \
                     authorize_search(temp_evidence, practice, True) and \
                     constructor_search(temp_evidence, practice, True):
-                    if practice != Practices.IDFA and practice != Practices.FACEBOOK and practice != Practices.GOOGLE:
+                    if practice != Practices.TRACKING and practice != Practices.FACEBOOK and practice != Practices.GOOGLE:
                         evidence.append(Evidence(file_name, practice, Used.UNUSED, Classification.FIRSTPARTY))
 
             # now if authorization is in third party but there are functions in first party then first party is also being used
             elif import_search(temp_evidence, practice, True) and constructor_search(temp_evidence, practice, True) and third_party_auth_search(temp_evidence, practice):
-                if practice != Practices.IDFA and practice != Practices.FACEBOOK and practice != Practices.GOOGLE:
+                if practice != Practices.TRACKING and practice != Practices.FACEBOOK and practice != Practices.GOOGLE:
                     evidence.append(Evidence(file_name, practice, Used.UNUSED, Classification.FIRSTPARTY))
 
-            # This is to check IDFA, Facebook, and Google log in
+            # This is to check TRACKING, Facebook, and Google log in
             if import_search(temp_evidence, practice, True) and \
                     (method_search(temp_evidence, practice, False) or authorize_search(temp_evidence, practice, True)) and \
                     constructor_search(temp_evidence, practice, True):
-                if practice == Practices.IDFA:
+                if practice == Practices.TRACKING:
                     evidence.append(Evidence(file_name, practice, Used.USED, Classification.THIRDPARTY))
                 elif practice == Practices.GOOGLE:
                     evidence.append(Evidence(file_name, practice, Used.USED, Classification.THIRDPARTY))
