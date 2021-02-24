@@ -50,11 +50,13 @@ PrivacyFlash Pro analyzes iOS app source code in Swift and its integrated third 
 
 ### Packaging
 
-You can also create a new packaged version of PrivacyFlash Pro. After successfully installing and running from source, run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containg a MacOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
+You can also create a new packaged version of PrivacyFlash Pro. After successfully installing and running from [source]((https://github.com/privacy-tech-lab/privacyflash-pro#installing-from-the-source-files)), run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containg a macOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
 
-**Note**: If packaging for public distribution, remember to update the version number in `privacyflash-pro/policygenerator/interface/index.html` and `privacyflash-pro/policygenerator/package.py`.
+**Note**: If you are using a Python virtual environment, [as we recommend](https://github.com/privacy-tech-lab/privacyflash-pro#installing-from-the-source-files), run `python3 package.py` after activating the environment.
 
-If you experience errors packaging or running the packaged app, try updating the dependency `pyinstaller` by running `pip3 install pyinstaller -U` and then run the packaging script.
+**Note**: If packaging for public distribution, remember to update the version number in `privacyflash-pro/policygenerator/interface/index.html` and `privacyflash-pro/policygenerator/package.py`. Also, please identify to your users that you packaged the version and that the version is not official.
+
+If you experience errors packaging or running the packaged app, try updating the dependency `pyinstaller` by running `pip3 install pyinstaller -U` and then run the packaging script again.
 
 ## Demo Video
 
