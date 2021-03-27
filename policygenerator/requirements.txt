@@ -1,4 +1,4 @@
-PyYAML==5.1
+PyYAML==5.4
 six==1.11.0
 pywebview==3.4
 pyinstaller
