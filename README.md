@@ -1,5 +1,19 @@
 <p align="center">
-  <img src="./logo.svg" width="200px" height="200px" title="PrivacyFlash Pro logo">
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/privacy-tech-lab/privacyflash-pro">
+  <img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/privacy-tech-lab/privacyflash-pro">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/privacy-tech-lab/privacyflash-pro">
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/privacy-tech-lab/privacyflash-pro">
+  <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/privacy-tech-lab/privacyflash-pro">
+  <img alt="GitHub" src="https://img.shields.io/github/license/privacy-tech-lab/privacyflash-pro">
+  <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/privacy-tech-lab/privacyflash-pro?style=social">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/privacy-tech-lab/privacyflash-pro?style=social">
+  <img alt="GitHub forks" src="https://img.shields.io/github/forks/privacy-tech-lab/privacyflash-pro?style=social">
+</p>
+  
+<br>
+
+<p align="center">
+  <a href="https://github.com/privacy-tech-lab/privacyflash-pro"><img src="./logo.svg" width="200px" height="200px" title="PrivacyFlash Pro logo"></a>
 <p>
 
 # PrivacyFlash Pro
@@ -11,6 +25,7 @@ Learn more about PrivacyFlash Pro in our [research paper](https://sebastianzimme
 PrivacyFlash Pro analyzes the code of iOS Swift apps and their libraries to generate privacy policies. With PrivacyFlash Pro we intend to help developers creating privacy policies for their apps and make the apps' privacy practices more transparent to users.
 
 PrivacyFlash Pro covers provisions of the following laws:
+
 - California Consumer Privacy Act (CCPA)
 - California Online Privacy Protection Act (CalOPPA)
 - Children's Online Privacy Protection (COPPA)
@@ -50,7 +65,7 @@ PrivacyFlash Pro analyzes iOS app source code in Swift and its integrated third 
 
 ### Packaging
 
-You can also create a new packaged version of PrivacyFlash Pro. After successfully installing and running from [source]((https://github.com/privacy-tech-lab/privacyflash-pro#installing-from-the-source-files)), run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containg a macOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
+You can also create a new packaged version of PrivacyFlash Pro. After successfully installing and running from [source]((https://github.com/privacy-tech-lab/privacyflash-pro#installing-from-the-source-files)), run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containing a macOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
 
 **Note**: If you are using a Python virtual environment, [as we recommend](https://github.com/privacy-tech-lab/privacyflash-pro#installing-from-the-source-files), run `python3 package.py` after activating the environment.
 
@@ -69,6 +84,7 @@ PrivacyFlash Pro is from the people for the people. Everyone can contribute. In 
 ### Privacy Practice Analysis
 
 The specification for the privacy practice analysis is contained in `policygenerator/spec/privacy_practices.yaml`. PrivacyFlash Pro flags a privacy practice in an app or a library if it identifies the use of a relevant API, i.e., all of the following are present for the app or a library:
+
 - PLIST value (e.g., `NSLocationWhenInUseUsageDescription`)
 - FRAMEWORK import (e.g., `CoreLocation`)
 - CLASS instantiation (e.g., `CLLocationManager`)
@@ -128,5 +144,5 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 - [smooth-scroll-into-view-if-needed](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
 
 <p align="center">
-  <img src="https://github.com/privacy-tech-lab/privacyflash-pro/blob/main/plt_logo.png" width="200px" height="200px" title="privacy-tech-lab logo">
+  <a href="https://www.privacytechlab.org/"><img src="https://github.com/privacy-tech-lab/privacyflash-pro/blob/main/plt_logo.png" width="200px" height="200px" title="privacy-tech-lab logo"></a>
 <p>
