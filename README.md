@@ -33,7 +33,7 @@ PrivacyFlash Pro covers provisions of the following laws:
 
 PrivacyFlash Pro is an academic research project. It was designed and developed by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) at the [privacy-tech-lab](https://privacytechlab.org/), [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
 
-## Installing, Running, and Packaging PrivacyFlash Pro
+## 1. Installing, Running, and Packaging PrivacyFlash Pro
 
 You can install and run PrivacyFlash Pro from the packaged release or from the source files. You can also create a new packaged version of PrivacyFlash Pro.
 
@@ -73,11 +73,11 @@ You can also create a new packaged version of PrivacyFlash Pro. After successful
 
 If you experience errors packaging or running the packaged app, try updating the dependency `pyinstaller` by running `pip3 install pyinstaller -U` and then run the packaging script again.
 
-## Demo Video
+## 2. Demo Video
 
 [![Watch the Demo](https://privacytechlab.org/static/images/PrivacyFlash_Pro_Movie.png)](https://privacytechlab.org/static/images/PrivacyFlash_Pro_Movie.mp4)
 
-## Get Involved
+## 3. Get Involved
 
 PrivacyFlash Pro is from the people for the people. Everyone can contribute. In particular, feel free to open a pull request to add additional privacy practices and third party libraries. If you have other ideas or feedback, let us know. We are looking forward to hear from you!
 
@@ -107,11 +107,11 @@ PrivacyFlash Pro identifies any library integrated in the analyzed app. The spec
 
 Note that even if a library is is not contained in `policygenerator/spec/third_parties.yaml`, PrivacyFlash Pro still analyzes its files contained in a project. However, you will have to enter the purpose of the library manually in the privacy policy you are generating.
 
-## Testing
+## 4. Testing
 
 Our unit tests for PrivacyFlash Pro have been built with the Python unittest framework. In order to run the built-in tests for PrivacyFlash Pro, use `python3 -m unittest` from within the root directory of your local copy of this repo.
 
-## Files and Directories in this Repo
+## 5. Files and Directories in this Repo
 
 - The latest release of PrivacyFlash Pro is contained in the [releases section](https://github.com/privacy-tech-lab/privacyflash-pro/releases).
 - `iOS-sample-projects`: Sample projects for PrivacyFlash Pro to analyze and test.
@@ -129,7 +129,7 @@ Our unit tests for PrivacyFlash Pro have been built with the Python unittest fra
 - `policygenerator/src/privacy_practices.py`: Loads data from the app project to be analyzed.
 - `policygenerator/requirements.txt`: Dependencies of PrivacyFlash Pro.
 
-## Third Party Libraries
+## 6. Third Party Libraries
 
 PrivacyFlash Pro uses the following third party libraries. We thank the developers.
 
@@ -144,9 +144,7 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 - [Smooth Scroll](https://github.com/iamdustan/smoothscroll)
 - [smooth-scroll-into-view-if-needed](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
 
-<p align="center">
-  <a href="https://www.privacytechlab.org/"><img src="./plt_logo.png" width="200px" height="200px" alt="privacy-tech-lab logo"></a>
-<p>
+## 7. Thank You!
 
 <p align="center"><strong>We would like to thank our financial supporters!</strong></p><br>
 
@@ -159,3 +157,9 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 </p>
 
 <p align="center">Conclusions reached or positions taken are our own and not necessarily those of our financial supporters, its trustees, officers, or staff.</p>
+
+##
+
+<p align="center">
+  <a href="https://www.privacytechlab.org/"><img src="./plt_logo.png" width="200px" height="200px" alt="privacy-tech-lab logo"></a>
+<p>
