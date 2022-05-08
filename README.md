@@ -65,7 +65,7 @@ PrivacyFlash Pro analyzes iOS app source code in Swift and its integrated third 
 
 ### Packaging
 
-You can also create a new packaged version of PrivacyFlash Pro. After successfully installing and running from [source]((https://github.com/privacy-tech-lab/privacyflash-pro#installing-from-the-source-files)), run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containing a macOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
+You can also create a new packaged version of PrivacyFlash Pro. After successfully installing and running from [source](<(https://github.com/privacy-tech-lab/privacyflash-pro#installing-from-the-source-files)>), run `python3 package.py` within the `privacyflash-pro/policygenerator` directory. A zipped file containing a macOS distributable app will be generated in the `privacyflash-pro/policygenerator/dist` directory.
 
 **Note**: If you are using a Python virtual environment, [as we recommend](https://github.com/privacy-tech-lab/privacyflash-pro#installing-from-the-source-files), run `python3 package.py` after activating the environment.
 
@@ -97,6 +97,7 @@ Also, for some practices, for example, Health, an ENTITLEMENT (e.g., com.apple.d
 ### Third Party Library Analysis
 
 PrivacyFlash Pro identifies any library integrated in the analyzed app. The specification for the third party library analysis is contained in `policygenerator/spec/third_parties.yaml`. PrivacyFlash Pro is using this specification for determining the purpose of a library. A library name is given by its name on [CocoaPods](https://cocoapods.org/). For example, `AdColony` has the purpose `Advertising`. PrivacyFlash Pro currently identifies the purposes of 300 libraries using the following purpose categories:
+
 - `Authentication`
 - `Advertising`
 - `Analytics`
@@ -144,5 +145,17 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 - [smooth-scroll-into-view-if-needed](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
 
 <p align="center">
-  <a href="https://www.privacytechlab.org/"><img src="https://github.com/privacy-tech-lab/privacyflash-pro/blob/main/plt_logo.png" width="200px" height="200px" title="privacy-tech-lab logo"></a>
+  <a href="https://www.privacytechlab.org/"><img src="./plt_logo.png" width="200px" height="200px" alt="privacy-tech-lab logo"></a>
 <p>
+
+<p align="center"><strong>We would like to thank our financial supporters!</strong></p><br>
+
+<p align="center">Financial support provided by Wesleyan University and the Anil Fernando Endowment.</p>
+
+<p align="center">
+  <a href="https://www.wesleyan.edu/mathcs/cs/index.html">
+    <img class="img-fluid" src="./wesleyan_shield.png" height="70px" alt="Wesleyan University Logo">
+  </a>
+</p>
+
+<p align="center">Conclusions reached or positions taken are our own and not necessarily those of our financial supporters, its trustees, officers, or staff.</p>
