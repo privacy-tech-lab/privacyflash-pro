@@ -20,7 +20,7 @@
 
 To easily run PrivacyFlash Pro get the [latest packaged release](https://github.com/privacy-tech-lab/privacyflash-pro/releases).
 
-Learn more about PrivacyFlash Pro in our [research paper](https://sebastianzimmeck.de/zimmeckEtAlPrivacyFlashPro2021.pdf).
+Learn more about PrivacyFlash Pro in our [research paper](https://sebastianzimmeck.de/zimmeckEtAlPrivacyFlashPro2021.pdf) ([BiBTeX](https://sebastianzimmeck.de/citations.html#zimmeckEtAlPrivacyFlashPro2021Bibtex)).
 
 PrivacyFlash Pro analyzes the code of iOS Swift apps and their libraries to generate privacy policies. With PrivacyFlash Pro we intend to help developers creating privacy policies for their apps and make the apps' privacy practices more transparent to users.
 
