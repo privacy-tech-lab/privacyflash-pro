@@ -161,5 +161,5 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 ##
 
 <p align="center">
-  <a href="https://www.privacytechlab.org/"><img src="./plt_logo.png" width="200px" height="200px" alt="privacy-tech-lab logo"></a>
+  <a href="https://privacytechlab.org/"><img src="./plt_logo.png" width="200px" height="200px" alt="privacy-tech-lab logo"></a>
 <p>
