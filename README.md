@@ -33,6 +33,14 @@ PrivacyFlash Pro covers provisions of the following laws:
 
 PrivacyFlash Pro is an academic research project. It was designed and developed by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) at the [privacy-tech-lab](https://privacytechlab.org/), [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
 
+[1. Installing, Running, and Packaging PrivacyFlash Pro](#1-installing-running-and-packaging-privacyflash-pro)  
+[2. Demo Video](#2-demo-video)  
+[3. Get Involved](#3-get-involved)  
+[4. Testing](#4-testing)  
+[5. Files and Directories in this Repo](#5-files-and-directories-in-this-repo)  
+[6. Third Party Libraries](#6-third-party-libraries)  
+[7. Thank You!](#7-thank-you)
+
 ## 1. Installing, Running, and Packaging PrivacyFlash Pro
 
 You can install and run PrivacyFlash Pro from the packaged release or from the source files. You can also create a new packaged version of PrivacyFlash Pro.
