@@ -8,6 +8,7 @@
   <a href="https://github.com/privacy-tech-lab/privacyflash-pro/watchers"><img alt="GitHub watchers" src="https://img.shields.io/github/watchers/privacy-tech-lab/privacyflash-pro?style=social"></a>
   <a href="https://github.com/privacy-tech-lab/privacyflash-pro/stargazers"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/privacy-tech-lab/privacyflash-pro?style=social"></a>
   <a href="https://github.com/privacy-tech-lab/privacyflash-pro/network/members"><img alt="GitHub forks" src="https://img.shields.io/github/forks/privacy-tech-lab/privacyflash-pro?style=social"></a>
+  <a href="https://github.com/sponsors/privacy-tech-lab"><img alt="GitHub sponsors" src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86"></a>
 </p>
   
 <br>
