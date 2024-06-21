@@ -32,7 +32,7 @@ PrivacyFlash Pro covers provisions of the following laws:
 - Children's Online Privacy Protection (COPPA)
 - General Data Protection Regulation (GDPR).
 
-PrivacyFlash Pro is an academic research project. It was designed and developed by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) at the [privacy-tech-lab](https://privacytechlab.org/), [Wesleyan University](https://www.wesleyan.edu/). Kuba Alicki (@kalicki1) wrote the unit tests.
+PrivacyFlash Pro is an academic research project. It was designed and developed by David Baraka (@davebaraka), Rafael Goldstein (@rgoldstein01), Sarah Jin (@sj-in), and Sebastian Zimmeck (@SebastianZimmeck) of the [privacy-tech-lab](https://privacytechlab.org/). Kuba Alicki (@kalicki1) wrote the unit tests.
 
 [1. Installing, Running, and Packaging PrivacyFlash Pro](#1-installing-running-and-packaging-privacyflash-pro)  
 [2. Demo Video](#2-demo-video)  
@@ -155,7 +155,7 @@ PrivacyFlash Pro uses the following third party libraries. We thank the develope
 
 ## 7. Thank You!
 
-<p align="center"><strong>We would like to thank our financial supporters!</strong></p><br>
+<p align="center"><strong>We would like to thank our supporters!</strong></p><br>
 
 <p align="center">Financial support provided by Wesleyan University and the Anil Fernando Endowment.</p>
 
